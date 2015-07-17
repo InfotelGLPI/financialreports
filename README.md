@@ -1,2 +1,2 @@
 # financialreports
-Plugin financialreports pour GLPI
+Plugin financialreports pour GLPI 0.90
