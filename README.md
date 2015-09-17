@@ -1,6 +1,12 @@
 # financialreports
 Plugin financialreports pour GLPI 0.90
 
+Ce plugin est sur Transifex - Aidez-nous à le traduire :
+https://www.transifex.com/tsmr/GLPI_financialreports/
+
+This plugin is on Transifex - Help us to translate :
+https://www.transifex.com/tsmr/GLPI_financialreports/
+
 Ce plugin vous permet de générer un arrété du parc à une date donnée.
 > * Dans la configuration, renseignez l'identifiant pour chaque type de matériel de l'inventaire correspondant au numéro d'inventaire. (exemple : Vos pcs portables ont un numéro d'inventaire commençant par PO renseignez donc le plugin avec PO, Serveurs : SE, PC Fixes : PC etc).
 > * Sélectionnez le statut correspondant au rebut et pour le matériel concerné, définissez leur date de rebut.
