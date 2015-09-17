@@ -3,47 +3,48 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# Rafael Ferreira <rafael.f.f1@gmail.com>, 2012-2013
+# Rafael Fontenelle <rffontenelle@gmail.com>, 2012-2013
 msgid ""
 msgstr ""
 "Project-Id-Version: GLPI Project - financialreports plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-14 09:42+0100\n"
-"PO-Revision-Date: 2013-11-20 11:01+0000\n"
-"Last-Translator: Rafael Ferreira <rafael.f.f1@gmail.com>\n"
-"Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/GLPI_financialreports/language/pt_BR/)\n"
+"POT-Creation-Date: 2015-09-17 09:52+0200\n"
+"PO-Revision-Date: 2015-09-17 07:53+0000\n"
+"Last-Translator: Xavier CAILLAUD <tsmr@thetsmr.fr>\n"
+"Language-Team: Portuguese (Brazil) (http://www.transifex.com/tsmr/GLPI_financialreports/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: pt_BR\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: hook.php:152 setup.php:65 inc/financialreport.class.php:38
+#: hook.php:164 setup.php:63 inc/financialreport.class.php:40
+#: inc/profile.class.php:126
 msgid "Asset situation"
 msgid_plural "Asset situations"
 msgstr[0] "Situação do ativo"
 msgstr[1] "Situação dos ativos"
 
-#: hook.php:153 inc/disposalitem.class.php:43
-#: inc/financialreport.class.php:561 inc/pdf.class.php:267
+#: hook.php:165 inc/disposalitem.class.php:43
+#: inc/financialreport.class.php:560 inc/pdf.class.php:267
 msgid "Disposal date"
 msgid_plural "Disposal dates"
 msgstr[0] "Data de descarte"
 msgstr[1] "Datas de descarte"
 
-#: hook.php:179 inc/disposalitem.class.php:168
+#: hook.php:192 inc/disposalitem.class.php:175
 msgid "Indicate the date of disposal"
 msgstr "Indica a data de descarte"
 
-#: setup.php:78
-msgid "This plugin requires GLPI >= 0.84"
-msgstr "Esse plugin requer GLPI >= 0.84"
+#: setup.php:76
+msgid "This plugin requires GLPI >= 0.90"
+msgstr ""
 
-#: front/config.form.php:71
+#: front/config.form.php:70
 msgid "Please activate the plugin"
 msgstr "Por favor, ative o plugin"
 
-#: front/financialreport.php:167
+#: front/financialreport.php:169
 msgid "Report date"
 msgstr "Data do relatório"
 
@@ -51,58 +52,58 @@ msgstr "Data do relatório"
 msgid "Disposal status"
 msgstr "Status de descarte"
 
-#: inc/financialreport.class.php:322 inc/pdf.class.php:223
+#: inc/financialreport.class.php:321 inc/pdf.class.php:223
 msgid "Asset situation ended on"
 msgstr "Situação do ativo terminou em"
 
-#: inc/financialreport.class.php:357 inc/financialreport.class.php:359
+#: inc/financialreport.class.php:356 inc/financialreport.class.php:358
 #: inc/parameter.class.php:51
 msgid "Notebook"
 msgid_plural "Notebooks"
 msgstr[0] "Notebook"
 msgstr[1] "Notebooks"
 
-#: inc/financialreport.class.php:367 inc/financialreport.class.php:369
+#: inc/financialreport.class.php:366 inc/financialreport.class.php:368
 #: inc/parameter.class.php:55
 msgid "Server"
 msgid_plural "Servers"
 msgstr[0] "Servidor"
 msgstr[1] "Servidores"
 
-#: inc/financialreport.class.php:454 inc/financialreport.class.php:456
+#: inc/financialreport.class.php:453 inc/financialreport.class.php:455
 msgid "Element out"
 msgid_plural "Elements out"
 msgstr[0] "Elemento fora"
 msgstr[1] "Elementos fora"
 
-#: inc/financialreport.class.php:478 inc/pdf.class.php:323
+#: inc/financialreport.class.php:477 inc/pdf.class.php:323
 msgid "General Total"
 msgstr "Total geral"
 
-#: inc/financialreport.class.php:479 inc/financialreport.class.php:514
-#: inc/financialreport.class.php:540 inc/financialreport.class.php:564
+#: inc/financialreport.class.php:478 inc/financialreport.class.php:513
+#: inc/financialreport.class.php:539 inc/financialreport.class.php:563
 msgid "Euro"
 msgid_plural "Euros"
 msgstr[0] "Euro"
 msgstr[1] "Euros"
 
-#: inc/financialreport.class.php:526
+#: inc/financialreport.class.php:525
 msgid "Hide"
 msgstr "Esconder"
 
-#: inc/financialreport.class.php:528
+#: inc/financialreport.class.php:527
 msgid "Display"
 msgstr "Exibir"
 
-#: inc/financialreport.class.php:554 inc/pdf.class.php:259
+#: inc/financialreport.class.php:553 inc/pdf.class.php:259
 msgid "User / Group"
 msgstr "Usuário / Grupo"
 
-#: inc/financialreport.class.php:564
+#: inc/financialreport.class.php:563
 msgid "Purchase Price HT in"
 msgstr "Preço de compra HT em"
 
-#: inc/financialreport.class.php:595
+#: inc/financialreport.class.php:594
 msgid "In stock / available"
 msgstr "em estoque / disponível"
 
@@ -113,11 +114,3 @@ msgstr "Parâmetros de identificação do número do inventário"
 #: inc/pdf.class.php:266 inc/pdf.class.php:270
 msgid "HT"
 msgstr "HT"
-
-#: inc/profile.class.php:37 inc/profile.class.php:140
-msgid "Rights management"
-msgstr "Gerenciamento de permissões"
-
-#: inc/profile.class.php:143
-msgid "Generate report"
-msgstr "Gerar relatório"
