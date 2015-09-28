@@ -3,7 +3,7 @@
    <name>Financial Reports</name>
    <key>financialreports</key>
    <state>stable</state>
-   <logo></logo>
+   <logo>https://raw.githubusercontent.com/InfotelGLPI/financialreports/master/financialreports.png</logo>
    <description>
       <short>
          <fr><![CDATA[Rapport financier : Arrété du parc. Ce plugin vous permet de générer un arrété du parc à une date donnée.<br />- Gestion du rebut<br />- Export Csv, Pdf]]></fr>
