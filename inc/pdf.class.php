@@ -31,9 +31,10 @@ if (!defined('GLPI_ROOT')) {
    die("Sorry. You can't access directly to this file");
 }
 
-require_once (GLPI_ROOT."/plugins/financialreports/fpdf/fpdf.php");
-require_once (GLPI_ROOT."/plugins/financialreports/fpdf/font/symbol.php");
-
+if (!defined('FPDF_VERSION')) {
+   require_once (GLPI_ROOT."/plugins/financialreports/fpdf/fpdf.php");
+   require_once (GLPI_ROOT."/plugins/financialreports/fpdf/font/symbol.php");
+}
 class PluginFinancialreportsPdf extends FPDF {
 
    /* Attributs d'un rapport envoyés par l'utilisateur avant la génération. */
