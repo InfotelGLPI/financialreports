@@ -61,7 +61,7 @@ function plugin_version_financialreports() {
 
    return array (
       'name' => __('Asset situation', 'financialreports'),
-      'version' => '2.2.0',
+      'version' => '2.2.1',
       'oldname' => 'state',
       'license' => 'GPLv2+',
       'author'  => "<a href='http://infotel.com/services/expertise-technique/glpi/'>Infotel</a>",
