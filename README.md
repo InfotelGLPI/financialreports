@@ -1,5 +1,5 @@
 # financialreports
-Plugin financialreports pour GLPI 0.90
+Plugin financialreports pour GLPI
 
 Ce plugin est sur Transifex - Aidez-nous à le traduire :
 https://www.transifex.com/tsmr/GLPI_financialreports/
