@@ -122,7 +122,7 @@ class PluginFinancialreportsProfile extends CommonDBTM {
 
    static function getAllRights($all = false) {
       $rights = array(
-          array('rights'  => Profile::getRightsFor('PluginFinancialreportsConfig', 'central'),
+         array('rights'  => array(READ    => __('Read')),
                 'label'     => _n('Asset situation', 'Asset situations', 1, 'financialreports'),
                 'field'     => 'plugin_financialreports'
           ),
