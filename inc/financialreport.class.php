@@ -2,30 +2,31 @@
 /*
  * @version $Id: HEADER 15930 2011-10-30 15:47:55Z tsmr $
  -------------------------------------------------------------------------
- Financialreports plugin for GLPI
- Copyright (C) 2003-2011 by the Financialreports Development Team.
+ financialreports plugin for GLPI
+ Copyright (C) 2009-2016 by the financialreports Development Team.
 
- https://forge.indepnet.net/projects/financialreports
+ https://github.com/InfotelGLPI/financialreports
  -------------------------------------------------------------------------
 
  LICENSE
       
- This file is part of Financialreports.
+ This file is part of financialreports.
 
- Financialreports is free software; you can redistribute it and/or modify
+ financialreports is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
  the Free Software Foundation; either version 2 of the License, or
  (at your option) any later version.
 
- Financialreports is distributed in the hope that it will be useful,
+ financialreports is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU General Public License for more details.
 
  You should have received a copy of the GNU General Public License
- along with Financialreports. If not, see <http://www.gnu.org/licenses/>.
+ along with financialreports. If not, see <http://www.gnu.org/licenses/>.
  --------------------------------------------------------------------------
  */
+
 
 if (!defined('GLPI_ROOT')) {
    die("Sorry. You can't access directly to this file");
@@ -237,9 +238,8 @@ class PluginFinancialreportsFinancialreport extends CommonDBTM {
       $itemtable=getTableForItemType($type);
       
       $query="SELECT `".$itemtable."`.`name` AS ITEM_0, `glpi_locations`.`completename` AS ITEM_1, `".$itemtable."`.`otherserial` AS ITEM_2, `glpi_infocoms`.`buy_date` AS ITEM_3, `glpi_users`.`name` AS ITEM_4, `glpi_users`.`realname` AS ITEM_4_2, `glpi_users`.`id` AS ITEM_4_3, `glpi_users`.`firstname` AS ITEM_4_4,`glpi_groups`.`name` AS ITEM_5,`glpi_groups`.`id` AS ITEM_5_1,`$modeltable`.`name` AS ITEM_6 ";
-      $query.= ", `glpi_manufacturers`.`name` AS ITEM_7, `glpi_infocoms`.`value` AS ITEM_8, `".$itemtable."`.`id` AS id,`".$itemtable."`.`comment` AS ITEM_9, `glpi_plugin_financialreports_disposalitems`.`date_disposal` AS ITEM_10,'$type' AS TYPE
+      $query.= ", `glpi_manufacturers`.`name` AS ITEM_7, `glpi_infocoms`.`value` AS ITEM_8, `".$itemtable."`.`id` AS id,`".$itemtable."`.`comment` AS ITEM_9, `glpi_infocoms`.`decommission_date` AS ITEM_10,'$type' AS TYPE
             FROM `".$itemtable."`
-            LEFT JOIN `glpi_plugin_financialreports_disposalitems` ON (`".$itemtable."`.`id` = `glpi_plugin_financialreports_disposalitems`.`items_id` AND `glpi_plugin_financialreports_disposalitems`.`itemtype` = '".$type."')
             LEFT JOIN `glpi_locations` ON (`".$itemtable."`.`locations_id` = `glpi_locations`.`id`)
             LEFT JOIN `glpi_infocoms` ON (`".$itemtable."`.`id` = `glpi_infocoms`.`items_id` AND `glpi_infocoms`.`itemtype` = '".$type."')
             LEFT JOIN `glpi_users` ON (`".$itemtable."`.`users_id` = `glpi_users`.`id`)
