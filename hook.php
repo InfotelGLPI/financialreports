@@ -112,7 +112,7 @@ function plugin_financialreports_install() {
          }
       }
    }
-   //$migration->dropTable('glpi_plugin_financialreports_disposalitems');
+   $migration->dropTable('glpi_plugin_financialreports_disposalitems');
    return true;
 }
 
