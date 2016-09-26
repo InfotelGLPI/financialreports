@@ -557,7 +557,7 @@ class PluginFinancialreportsFinancialreport extends CommonDBTM {
          echo Search::showHeaderItem($output_type,__('Supplier'),$header_num);
 
          if ($itemtable=='disposal') {
-            echo Search::showHeaderItem($output_type,__('Disposal date', 'financialreports'),$header_num);
+            echo Search::showHeaderItem($output_type,__('Decommission date'),$header_num);
             echo Search::showHeaderItem($output_type,__('Comments'),$header_num);
          } else {
             echo Search::showHeaderItem($output_type,__('Purchase Price HT in', 'financialreports')." "._n('Euro' , 'Euros', 2, 'financialreports'),$header_num);

@@ -255,7 +255,7 @@ class PluginFinancialreportsPdf extends FPDF {
          /* En tete tableau. */
          $this->CellEnTeteTableau(false, 45, Toolbox::decodeFromUtf8(__('Name')),1,'C',1);
          $this->CellEnTeteTableau(false, 35, Toolbox::decodeFromUtf8(__('Inventory number')),1,'C',1);
-         $this->CellEnTeteTableau(false, 20, Toolbox::decodeFromUtf8(__('Date of purchase')),1,'C',1);
+         $this->CellEnTeteTableau(false, 20, Toolbox::decodeFromUtf8(__('Decommission date')),1,'C',1);
          if ($disposal!=1) {
             $this->CellEnTeteTableau(false, 40, Toolbox::decodeFromUtf8(__('User / Group', 'financialreports')),1,'C',1);
             $this->CellEnTeteTableau(false, 40, Toolbox::decodeFromUtf8(__('Location')),1,'C',1);
