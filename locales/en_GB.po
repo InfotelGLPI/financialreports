@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GLPI Project - financialreports plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-17 09:52+0200\n"
-"PO-Revision-Date: 2015-09-17 07:53+0000\n"
+"POT-Creation-Date: 2016-09-26 10:12+0200\n"
+"PO-Revision-Date: 2016-09-26 08:12+0000\n"
 "Last-Translator: Xavier CAILLAUD <tsmr@thetsmr.fr>\n"
 "Language-Team: English (United Kingdom) (http://www.transifex.com/tsmr/GLPI_financialreports/language/en_GB/)\n"
 "MIME-Version: 1.0\n"
@@ -17,41 +17,29 @@ msgstr ""
 "Language: en_GB\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: hook.php:164 setup.php:63 inc/financialreport.class.php:40
-#: inc/profile.class.php:126
+#: setup.php:61 inc/financialreport.class.php:41 inc/profile.class.php:126
 msgid "Asset situation"
 msgid_plural "Asset situations"
 msgstr[0] "Asset situation"
 msgstr[1] "Asset situations"
 
-#: hook.php:165 inc/disposalitem.class.php:43
-#: inc/financialreport.class.php:560 inc/pdf.class.php:267
-msgid "Disposal date"
-msgid_plural "Disposal dates"
-msgstr[0] "Disposal date"
-msgstr[1] "Disposal dates"
+#: setup.php:74
+msgid "This plugin requires GLPI >= 9.1"
+msgstr "This plugin requires GLPI >= 9.1"
 
-#: hook.php:192 inc/disposalitem.class.php:175
-msgid "Indicate the date of disposal"
-msgstr "Indicate the date of disposal"
-
-#: setup.php:76
-msgid "This plugin requires GLPI >= 0.90"
-msgstr "This plugin requires GLPI >= 0.90"
-
-#: front/config.form.php:70
+#: front/config.form.php:71
 msgid "Please activate the plugin"
 msgstr "Please activate the plugin"
 
-#: front/financialreport.php:169
+#: front/financialreport.php:158
 msgid "Report date"
 msgstr "Report date"
 
-#: inc/config.class.php:72 inc/config.class.php:87
+#: inc/config.class.php:73 inc/config.class.php:88
 msgid "Disposal status"
 msgstr "Disposal status"
 
-#: inc/financialreport.class.php:321 inc/pdf.class.php:223
+#: inc/financialreport.class.php:321 inc/pdf.class.php:224
 msgid "Asset situation ended on"
 msgstr "Asset situation ended on"
 
@@ -75,7 +63,7 @@ msgid_plural "Elements out"
 msgstr[0] "Element out"
 msgstr[1] "Elements out"
 
-#: inc/financialreport.class.php:477 inc/pdf.class.php:323
+#: inc/financialreport.class.php:477 inc/pdf.class.php:324
 msgid "General Total"
 msgstr "General Total"
 
@@ -94,7 +82,7 @@ msgstr "Hide"
 msgid "Display"
 msgstr "Display"
 
-#: inc/financialreport.class.php:553 inc/pdf.class.php:259
+#: inc/financialreport.class.php:553 inc/pdf.class.php:260
 msgid "User / Group"
 msgstr "User / Group"
 
@@ -110,6 +98,6 @@ msgstr "In stock / available"
 msgid "Identification parameters of inventory number"
 msgstr "Identification parameters of inventory number"
 
-#: inc/pdf.class.php:266 inc/pdf.class.php:270
+#: inc/pdf.class.php:267 inc/pdf.class.php:271
 msgid "HT"
 msgstr "HT"

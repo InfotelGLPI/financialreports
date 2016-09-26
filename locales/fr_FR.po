@@ -4,13 +4,13 @@
 # 
 # Translators:
 # Xavier CAILLAUD <tsmr@thetsmr.fr>, 2012
-# Xavier CAILLAUD <tsmr@thetsmr.fr>, 2013,2015
+# Xavier CAILLAUD <tsmr@thetsmr.fr>, 2013,2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: GLPI Project - financialreports plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-17 09:52+0200\n"
-"PO-Revision-Date: 2015-09-17 07:54+0000\n"
+"POT-Creation-Date: 2016-09-26 10:12+0200\n"
+"PO-Revision-Date: 2016-09-26 08:12+0000\n"
 "Last-Translator: Xavier CAILLAUD <tsmr@thetsmr.fr>\n"
 "Language-Team: French (France) (http://www.transifex.com/tsmr/GLPI_financialreports/language/fr_FR/)\n"
 "MIME-Version: 1.0\n"
@@ -19,41 +19,29 @@ msgstr ""
 "Language: fr_FR\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: hook.php:164 setup.php:63 inc/financialreport.class.php:40
-#: inc/profile.class.php:126
+#: setup.php:61 inc/financialreport.class.php:41 inc/profile.class.php:126
 msgid "Asset situation"
 msgid_plural "Asset situations"
 msgstr[0] "Arrêté du parc"
 msgstr[1] "Arrêtés du parc"
 
-#: hook.php:165 inc/disposalitem.class.php:43
-#: inc/financialreport.class.php:560 inc/pdf.class.php:267
-msgid "Disposal date"
-msgid_plural "Disposal dates"
-msgstr[0] "Date de rebut"
-msgstr[1] "Dates de rebut"
+#: setup.php:74
+msgid "This plugin requires GLPI >= 9.1"
+msgstr "Ce plugin nécessite GLPI >= 9.1"
 
-#: hook.php:192 inc/disposalitem.class.php:175
-msgid "Indicate the date of disposal"
-msgstr "Indiquez la date de rebut"
-
-#: setup.php:76
-msgid "This plugin requires GLPI >= 0.90"
-msgstr "Ce plugin nécessite GLPI >= 0.90"
-
-#: front/config.form.php:70
+#: front/config.form.php:71
 msgid "Please activate the plugin"
 msgstr "Merci d'activer ce plugin"
 
-#: front/financialreport.php:169
+#: front/financialreport.php:158
 msgid "Report date"
 msgstr "Date rapport"
 
-#: inc/config.class.php:72 inc/config.class.php:87
+#: inc/config.class.php:73 inc/config.class.php:88
 msgid "Disposal status"
 msgstr "Statut de désimmobilisation"
 
-#: inc/financialreport.class.php:321 inc/pdf.class.php:223
+#: inc/financialreport.class.php:321 inc/pdf.class.php:224
 msgid "Asset situation ended on"
 msgstr "Etat du parc arrêté au"
 
@@ -77,7 +65,7 @@ msgid_plural "Elements out"
 msgstr[0] "Elément sorti"
 msgstr[1] "Eléments sortis"
 
-#: inc/financialreport.class.php:477 inc/pdf.class.php:323
+#: inc/financialreport.class.php:477 inc/pdf.class.php:324
 msgid "General Total"
 msgstr "Total général"
 
@@ -96,7 +84,7 @@ msgstr "Cacher"
 msgid "Display"
 msgstr "Afficher"
 
-#: inc/financialreport.class.php:553 inc/pdf.class.php:259
+#: inc/financialreport.class.php:553 inc/pdf.class.php:260
 msgid "User / Group"
 msgstr "Utilisateur / Groupe"
 
@@ -112,6 +100,6 @@ msgstr "En stock / disponible"
 msgid "Identification parameters of inventory number"
 msgstr "Paramètres d'identification du n° d'inventaire"
 
-#: inc/pdf.class.php:266 inc/pdf.class.php:270
+#: inc/pdf.class.php:267 inc/pdf.class.php:271
 msgid "HT"
 msgstr "HT"
