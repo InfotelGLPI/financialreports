@@ -265,7 +265,7 @@ class PluginFinancialreportsPdf extends FPDF {
 
          if ($disposal==1) {
             $this->CellEnTeteTableau(false, 20, Toolbox::decodeFromUtf8(__('HT', 'financialreports')),1,'C',1);
-            $this->CellEnTeteTableau(false, 25, Toolbox::decodeFromUtf8(__('Disposal date', 'financialreports')),1,'C',1);
+            $this->CellEnTeteTableau(false, 25, Toolbox::decodeFromUtf8(__('Decommission date')),1,'C',1);
             $this->CellEnTeteTableau(false, 55, Toolbox::decodeFromUtf8(__('Comments')),1,'C',1);
          } else {
             $this->CellEnTeteTableau(false, 20, Toolbox::decodeFromUtf8(__('HT', 'financialreports')),1,'C',1);

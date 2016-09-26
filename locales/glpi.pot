@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GLPI - Financialreports plugin 2.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-26 09:54+0200\n"
+"POT-Creation-Date: 2016-09-26 09:59+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,7 +25,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: setup.php:74
-msgid "This plugin requires GLPI >= 9.2"
+msgid "This plugin requires GLPI >= 9.1"
 msgstr ""
 
 #: front/config.form.php:71
@@ -87,10 +87,6 @@ msgstr ""
 msgid "User / Group"
 msgstr ""
 
-#: inc/financialreport.class.php:560 inc/pdf.class.php:268
-msgid "Disposal date"
-msgstr ""
-
 #: inc/financialreport.class.php:563
 msgid "Purchase Price HT in"
 msgstr ""
@@ -105,4 +101,8 @@ msgstr ""
 
 #: inc/pdf.class.php:267 inc/pdf.class.php:271
 msgid "HT"
+msgstr ""
+
+#: inc/pdf.class.php:268
+msgid "Disposal date"
 msgstr ""
