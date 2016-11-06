@@ -28,15 +28,15 @@
  */
 
 
-include ('../../../inc/includes.php');
+include('../../../inc/includes.php');
 
 $plugin = new Plugin();
 if ($plugin->isActivated("financialreports")) {
 
-   Session::checkRight("config",UPDATE);
+   Session::checkRight("config", UPDATE);
 
-   $param=new PluginFinancialreportsParameter();
-   $config=new PluginFinancialreportsConfig();
+   $param = new PluginFinancialreportsParameter();
+   $config = new PluginFinancialreportsConfig();
 
    if (isset($_POST["add_state"])) {
 
@@ -44,11 +44,11 @@ if ($plugin->isActivated("financialreports")) {
       Html::back();
 
    } else if (isset($_POST["delete_state"])) {
-      
+
       foreach ($_POST["item"] as $ID => $value) {
-         $config->delete(array("id"=>$ID),1);
+         $config->delete(array("id" => $ID), 1);
       }
-      
+
       Html::back();
 
    } else if (isset($_POST["update_parameters"])) {
@@ -58,19 +58,17 @@ if ($plugin->isActivated("financialreports")) {
 
    } else {
 
-      Html::header(__('Setup'),'',"config","plugins");
+      Html::header(__('Setup'), '', "config", "plugins");
       $param->showForm();
       $config->showForm();
-      
+
    }
 
 } else {
-   Html::header(__('Setup'),'',"config","plugins");
+   Html::header(__('Setup'), '', "config", "plugins");
    echo "<div align='center'><br><br>";
-   echo "<img src=\"".$CFG_GLPI["root_doc"]."/pics/warning.png\" alt=\"warning\"><br><br>";
-   echo "<b>".__('Please activate the plugin', 'financialreports')."</b></div>";
+   echo "<img src=\"" . $CFG_GLPI["root_doc"] . "/pics/warning.png\" alt=\"warning\"><br><br>";
+   echo "<b>" . __('Please activate the plugin', 'financialreports') . "</b></div>";
 }
 
 Html::footer();
-
-?>

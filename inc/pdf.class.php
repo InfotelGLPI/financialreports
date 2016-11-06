@@ -32,73 +32,88 @@ if (!defined('GLPI_ROOT')) {
 }
 
 if (!defined('FPDF_VERSION')) {
-   require_once (GLPI_ROOT."/plugins/financialreports/fpdf/fpdf.php");
-   require_once (GLPI_ROOT."/plugins/financialreports/fpdf/font/symbol.php");
+   require_once(GLPI_ROOT . "/plugins/financialreports/fpdf/fpdf.php");
+   require_once(GLPI_ROOT . "/plugins/financialreports/fpdf/font/symbol.php");
 }
-class PluginFinancialreportsPdf extends FPDF {
 
-   /* Attributs d'un rapport envoyés par l'utilisateur avant la génération. */
+/**
+ * Class PluginFinancialreportsPdf
+ */
+class PluginFinancialreportsPdf extends FPDF
+{
 
-   var $date="";        // Date le l'arreté
+   /* Attributs d'un rapport envoyï¿½s par l'utilisateur avant la gï¿½nï¿½ration. */
 
-   /* Constantes pour paramétrer certaines données. */
+   var $date = "";        // Date le l'arretï¿½
+
+   /* Constantes pour paramï¿½trer certaines donnï¿½es. */
    var $line_height = 5;         // Hauteur d'une ligne simple.
-   var $pol_def = 'Arial';       // Police par défaut;
-   var $tail_pol_def = 9;        // Taille par défaut de la police.
+   var $pol_def = 'Arial';       // Police par dï¿½faut;
+   var $tail_pol_def = 9;        // Taille par dï¿½faut de la police.
    var $tail_titre = 22;         // Taille du titre.
    var $marge_haut = 5;          // Marge du haut.
    var $marge_gauche = 15;       // Marge de gauche et de droite accessoirement.
    var $largeur_grande_cell = 280;  // Largeur d'une cellule qui prend toute la page.
    var $tail_bas_page = 20;      // Hauteur du bas de page.
-   var $nb_carac_ligne = 90;     // Pour le détail des travaux;
+   var $nb_carac_ligne = 90;     // Pour le dï¿½tail des travaux;
 
 
    /* ************************************* */
-   /* Methodes génériques de mise en forme. */
+   /* Methodes gï¿½nï¿½riques de mise en forme. */
    /* ************************************* */
 
-   /** Fonction permettant de dessiner une ligne blanche séparatrice. */
-   function Separateur() {
+   /** Fonction permettant de dessiner une ligne blanche sï¿½paratrice. */
+   function Separateur()
+   {
       $this->Cell($this->largeur_grande_cell, $this->line_height, '', 0, 0, '');
       $this->SetY($this->GetY() + $this->line_height);
    }
 
    /** Positionne la couleur du texte blanc. */
-   function SetTextRouge() {
+   function SetTextRouge()
+   {
       $this->SetTextColor(255, 0, 0);
    }
 
    /** Positionne la couleur du texte blanc. */
-   function SetTextNoir() {
+   function SetTextNoir()
+   {
       $this->SetTextColor(0, 0, 0);
    }
+
    /** Positionne la couleur du texte nbleu. */
-   function SetTextBleu() {
+   function SetTextBleu()
+   {
       $this->SetTextColor(100, 100, 255);
    }
 
    /** Positionne la couleur de fond blanc. */
-   function SetFondBlanc() {
+   function SetFondBlanc()
+   {
       $this->SetFillColor(255, 255, 255);
    }
 
    /** Positionne la couleur de fond en gris clair. */
-   function SetFondClair() {
+   function SetFondClair()
+   {
       $this->SetFillColor(205, 205, 205);
    }
 
    /** Positionne la couleur de fond en gris clair. */
-   function SetFondTresClair() {
+   function SetFondTresClair()
+   {
       $this->SetFillColor(245, 245, 245);
    }
 
    /** Positionne la couleur de fond en gris clair. */
-   function SetFondGrisClair() {
+   function SetFondGrisClair()
+   {
       $this->SetFillColor(230, 230, 230);
    }
 
-   /** Positionne la couleur de fond en gris foncé. */
-   function SetFondFonce() {
+   /** Positionne la couleur de fond en gris foncï¿½. */
+   function SetFondFonce()
+   {
       $this->SetFillColor(85, 85, 85);
    }
 
@@ -106,7 +121,8 @@ class PluginFinancialreportsPdf extends FPDF {
     * Positionne la fonte pour un label.
     * @param $italic Vrai si c'est en italique, faux sinon.
     */
-   function SetFontLabel($italic) {
+   function SetFontLabel($italic)
+   {
       if ($italic) {
          $this->SetFont($this->pol_def, 'BI', $this->tail_pol_def);
       } else {
@@ -115,10 +131,11 @@ class PluginFinancialreportsPdf extends FPDF {
    }
 
    /**
-    * Redéfinit une fonte normale.
-    * @param $souligne Vrai si le texte sera souligné, faux sinon étant la valeur par défaut.
+    * Redï¿½finit une fonte normale.
+    * @param bool|Vrai $souligne Vrai si le texte sera soulignï¿½, faux sinon ï¿½tant la valeur par dï¿½faut.
     */
-   function SetFontNormale($souligne = false) {
+   function SetFontNormale($souligne = false)
+   {
       if ($souligne) {
          $this->SetFont($this->pol_def, 'U', $this->tail_pol_def);
       } else {
@@ -131,13 +148,14 @@ class PluginFinancialreportsPdf extends FPDF {
     * @param $italic Vrai si le label est en italique, faux sinon.
     * @param $w Largeur de la cellule contenant le label.
     * @param $label Valeur du label.
-    * @param $multH Multiplicateur de la hauteur de la cellule, par défaut vaut 1, par augmenté donc.
-    * @param $align Détermine l'alignement du texte dans la cellule.
-    * @param $bordure Détermine les bordures à positionner, par défaut, toutes.
+    * @param int|Multiplicateur $multH Multiplicateur de la hauteur de la cellule, par dï¿½faut vaut 1, par augmentï¿½ donc.
+    * @param D|string $align Dï¿½termine l'alignement du texte dans la cellule.
+    * @param D|int $bordure Dï¿½termine les bordures ï¿½ positionner, par dï¿½faut, toutes.
     */
-   function CellLabel($italic, $w, $label, $multH = 1, $align = '', $bordure = 1) {
+   function CellLabel($italic, $w, $label, $multH = 1, $align = '', $bordure = 1)
+   {
       $this->SetFondClair();
-       $this->SetFontLabel($italic);
+      $this->SetFontLabel($italic);
       $this->Cell($w, $this->line_height * $multH, $label, $bordure, 0, $align, 1);
    }
 
@@ -146,30 +164,32 @@ class PluginFinancialreportsPdf extends FPDF {
     * @param $italic Vrai si le label est en italique, faux sinon.
     * @param $w Largeur de la cellule contenant le label.
     * @param $label Valeur du label.
-    * @param $multH Multiplicateur de la hauteur de la cellule, par défaut vaut 1, par augmenté donc.
-    * @param $align Détermine l'alignement du texte dans la cellule.
-    * @param $bordure Détermine les bordures à positionner, par défaut, toutes.
+    * @param int|Multiplicateur $multH Multiplicateur de la hauteur de la cellule, par dï¿½faut vaut 1, par augmentï¿½ donc.
+    * @param D|string $align Dï¿½termine l'alignement du texte dans la cellule.
+    * @param D|int $bordure Dï¿½termine les bordures ï¿½ positionner, par dï¿½faut, toutes.
     */
-   function CellEnTeteTableau($italic, $w, $label, $multH = 1, $align = '', $bordure = 1) {
+   function CellEnTeteTableau($italic, $w, $label, $multH = 1, $align = '', $bordure = 1)
+   {
       $this->SetFondGrisClair();
-       $this->SetFontLabel($italic);
+      $this->SetFontLabel($italic);
       $this->Cell($w, $this->line_height * $multH, $label, $bordure, 0, $align, 1);
    }
 
-/**
+   /**
     * Permet de dessiner une cellule definissant une ligne de tableau.
     * @param $italic Vrai si le label est en italique, faux sinon.
     * @param $w Largeur de la cellule contenant le label.
     * @param $label Valeur du label.
-    * @param $multH Multiplicateur de la hauteur de la cellule, par défaut vaut 1, par augmenté donc.
-    * @param $align Détermine l'alignement du texte dans la cellule.
-    * @param $bordure Détermine les bordures à positionner, par défaut, toutes.
+    * @param int|Multiplicateur $multH Multiplicateur de la hauteur de la cellule, par dï¿½faut vaut 1, par augmentï¿½ donc.
+    * @param D|string $align Dï¿½termine l'alignement du texte dans la cellule.
+    * @param D|int $bordure Dï¿½termine les bordures ï¿½ positionner, par dï¿½faut, toutes.
     */
-   function CellLigneTableau($italic, $w, $label, $multH = 1, $align = '', $bordure = 1) {
+   function CellLigneTableau($italic, $w, $label, $multH = 1, $align = '', $bordure = 1)
+   {
       //$this->SetFondBlanc();
-       $this->SetFontLabel($italic);
-       $this->SetFont($this->pol_def, '',$this->tail_pol_def - 2);
-       //$this->SetFontSize($this->tail_pol_def - 2);
+      $this->SetFontLabel($italic);
+      $this->SetFont($this->pol_def, '', $this->tail_pol_def - 2);
+      //$this->SetFontSize($this->tail_pol_def - 2);
       $this->Cell($w, $this->line_height * $multH, $label, $bordure, 0, $align, 1);
       //$this->SetFontSize($this->tail_pol_def);
    }
@@ -177,44 +197,45 @@ class PluginFinancialreportsPdf extends FPDF {
    /**
     * Permet de dessiner une cellule dite normale.
     * @param $w Largeur de la cellule contenant la valeur.
-    * @param $valeur Valeur à afficher.
-    * @param $align Détermine l'alignement de la cellule.
-    * @param $multH Multiplicateur de la hauteur de la cellule, par défaut vaut 1, par augmenté donc.
-    * @param $bordure Détermine les bordures à positionner, par défaut, toutes.
-    * @param $souligne Détermine si le contenu de la cellule est souligné.
+    * @param $valeur Valeur ï¿½ afficher.
+    * @param D|string $align Dï¿½termine l'alignement de la cellule.
+    * @param int|Multiplicateur $multH Multiplicateur de la hauteur de la cellule, par dï¿½faut vaut 1, par augmentï¿½ donc.
+    * @param D|int $bordure Dï¿½termine les bordures ï¿½ positionner, par dï¿½faut, toutes.
+    * @param bool|D $souligne Dï¿½termine si le contenu de la cellule est soulignï¿½.
     */
-   function CellValeur($w, $valeur, $align = '', $multH = 1, $bordure = 1, $souligne = false) {
+   function CellValeur($w, $valeur, $align = '', $multH = 1, $bordure = 1, $souligne = false)
+   {
       $this->SetFontNormale($souligne);
       $this->Cell($w, $this->line_height * $multH, $valeur, $bordure, 0, $align);
    }
 
    /**
-    * Permet de dessinner un cellule vide et grisée foncée.
+    * Permet de dessinner un cellule vide et grisï¿½e foncï¿½e.
     * @param $w Largeur de la cellule.
     */
-   function CellVideFoncee($w) {
+   function CellVideFoncee($w)
+   {
       $this->SetFondFonce();
       $this->Cell($w, $this->line_height, '', 1, 0, '', 1);
    }
 
    /* **************************************** */
-   /* Methodes générant le contenu du rapport. */
+   /* Methodes gï¿½nï¿½rant le contenu du rapport. */
    /* **************************************** */
 
    /**
-    * Fonction permettant de dessiner l'entête du rapport.
+    * Fonction permettant de dessiner l'entï¿½te du rapport.
     */
-   function Header() {
-    
-      /* Constantes pour les largeurs de cellules de l'entête (doivent être = $largeur_grande_cell). */
+   function Header()
+   {
+
+      /* Constantes pour les largeurs de cellules de l'entï¿½te (doivent ï¿½tre = $largeur_grande_cell). */
       $largeur_logo = 40;
       $largeur_titre = 200;
       $largeur_date = 40;
       /* On fixe les marge. */
       $this->SetX($this->marge_gauche);
       $this->SetY($this->marge_haut);
-      // Date du jour.
-      $aujour_hui = getdate();
 
       /* Logo. */
       $this->Image('../pics/logo.jpg', 15, 10, 30, 9); // x, y, w, h
@@ -224,109 +245,116 @@ class PluginFinancialreportsPdf extends FPDF {
       $this->Cell($largeur_titre, $this->line_height * 2, Toolbox::decodeFromUtf8(__('Asset situation ended on', 'financialreports')), 'LTR', 0, 'C');
       $this->SetY($this->GetY() + $this->line_height * 2);
       $this->SetX($largeur_logo + 10);
-      $this->Cell($largeur_titre, $this->line_height * 2, Html::convdate($this->date), 'LRB', 0, 'C');
+      $this->Cell($largeur_titre, $this->line_height * 2, Html::convDate($this->date), 'LRB', 0, 'C');
       $this->SetY($this->GetY() - $this->line_height * 2);
       $this->SetX($largeur_titre + $largeur_logo + 10);
       /* Date et heure. */
-      $this->CellValeur($largeur_date, "", 'C', 1, 'LTR', true); // Libellé pour la date.
+      $this->CellValeur($largeur_date, "", 'C', 1, 'LTR', true); // Libellï¿½ pour la date.
       $this->SetY($this->GetY() + $this->line_height);
       $this->SetX($largeur_titre + $largeur_logo + 10);
       $this->CellValeur($largeur_date, "", 'C', 1, 'LR');
       $this->SetY($this->GetY() + $this->line_height);
       $this->SetX($largeur_titre + $largeur_logo + 10);
-      $this->CellValeur($largeur_date,"", 'C', 1, 'LR', true); // Libellé pour l'heure.
+      $this->CellValeur($largeur_date, "", 'C', 1, 'LR', true); // Libellï¿½ pour l'heure.
       $this->SetY($this->GetY() + $this->line_height);
       $this->SetX($largeur_titre + $largeur_logo + 10);
       $this->CellValeur($largeur_date, "", 'C', 1, 'LRB'); // Heure.
-      $this->SetY($this->GetY() + $this->line_height+2);
+      $this->SetY($this->GetY() + $this->line_height + 2);
 
    }
 
    /**
-    * Fonction permettant de dessiner le tableau des informations générales.
-     */
-   function affiche_tableau($total,$items,$deviceType,$disposal=0) {
-      
-       if ($total!=0) {
+    * Fonction permettant de dessiner le tableau des informations gï¿½nï¿½rales.
+    * @param $total
+    * @param $items
+    * @param $deviceType
+    * @param int $disposal
+    */
+   function affiche_tableau($total, $items, $deviceType, $disposal = 0)
+   {
+
+      if ($total != 0) {
          /* en-tete */
-         $this->CellLabel(false, $this->largeur_grande_cell , Toolbox::decodeFromUtf8($deviceType));
+         $this->CellLabel(false, $this->largeur_grande_cell, Toolbox::decodeFromUtf8($deviceType));
          $this->SetY($this->GetY() + $this->line_height);
 
          /* En tete tableau. */
-         $this->CellEnTeteTableau(false, 45, Toolbox::decodeFromUtf8(__('Name')),1,'C',1);
-         $this->CellEnTeteTableau(false, 35, Toolbox::decodeFromUtf8(__('Inventory number')),1,'C',1);
-         $this->CellEnTeteTableau(false, 20, Toolbox::decodeFromUtf8(__('Decommission date')),1,'C',1);
-         if ($disposal!=1) {
-            $this->CellEnTeteTableau(false, 40, Toolbox::decodeFromUtf8(__('User / Group', 'financialreports')),1,'C',1);
-            $this->CellEnTeteTableau(false, 40, Toolbox::decodeFromUtf8(__('Location')),1,'C',1);
+         $this->CellEnTeteTableau(false, 45, Toolbox::decodeFromUtf8(__('Name')), 1, 'C', 1);
+         $this->CellEnTeteTableau(false, 35, Toolbox::decodeFromUtf8(__('Inventory number')), 1, 'C', 1);
+         $this->CellEnTeteTableau(false, 20, Toolbox::decodeFromUtf8(__('Decommission date')), 1, 'C', 1);
+         if ($disposal != 1) {
+            $this->CellEnTeteTableau(false, 40, Toolbox::decodeFromUtf8(__('User / Group', 'financialreports')), 1, 'C', 1);
+            $this->CellEnTeteTableau(false, 40, Toolbox::decodeFromUtf8(__('Location')), 1, 'C', 1);
          }
-         $this->CellEnTeteTableau(false, 40, Toolbox::decodeFromUtf8(__('Model')),1,'C',1);
-         $this->CellEnTeteTableau(false, 40, Toolbox::decodeFromUtf8(__('Supplier')),1,'C',1);
+         $this->CellEnTeteTableau(false, 40, Toolbox::decodeFromUtf8(__('Model')), 1, 'C', 1);
+         $this->CellEnTeteTableau(false, 40, Toolbox::decodeFromUtf8(__('Supplier')), 1, 'C', 1);
 
-         if ($disposal==1) {
-            $this->CellEnTeteTableau(false, 20, Toolbox::decodeFromUtf8(__('HT', 'financialreports')),1,'C',1);
-            $this->CellEnTeteTableau(false, 25, Toolbox::decodeFromUtf8(__('Decommission date')),1,'C',1);
-            $this->CellEnTeteTableau(false, 55, Toolbox::decodeFromUtf8(__('Comments')),1,'C',1);
+         if ($disposal == 1) {
+            $this->CellEnTeteTableau(false, 20, Toolbox::decodeFromUtf8(__('HT', 'financialreports')), 1, 'C', 1);
+            $this->CellEnTeteTableau(false, 25, Toolbox::decodeFromUtf8(__('Decommission date')), 1, 'C', 1);
+            $this->CellEnTeteTableau(false, 55, Toolbox::decodeFromUtf8(__('Comments')), 1, 'C', 1);
          } else {
-            $this->CellEnTeteTableau(false, 20, Toolbox::decodeFromUtf8(__('HT', 'financialreports')),1,'C',1);
+            $this->CellEnTeteTableau(false, 20, Toolbox::decodeFromUtf8(__('HT', 'financialreports')), 1, 'C', 1);
          }
          $this->SetY($this->GetY() + $this->line_height);
          /* ligne. */
-         $i=1;
-            foreach ($items as $data) {
-               $i++;
-               $this->SetFondBlanc();
-               if ($i%2) $this->SetFondTresClair();
-               $this->CellLigneTableau(false, 45, $data["ITEM_0"]);
-               $this->CellLigneTableau(false, 35, $data["ITEM_2"]);
-               $this->CellLigneTableau(false, 20, Html::convdate($data["ITEM_3"]),1,'C',1);
-               $this->SetTextBleu();
-               $this->CellLigneTableau(false, 40, Toolbox::decodeFromUtf8(formatUserName($data["ITEM_4_3"],$data["ITEM_4"],$data["ITEM_4_2"],$data["ITEM_4_4"])));
-               $this->SetTextNoir();
-               if ($disposal!=1) {
-                  $this->CellLigneTableau(false, 40, Toolbox::decodeFromUtf8($data["ITEM_9"]));
-                  $this->CellLigneTableau(false, 40, Toolbox::decodeFromUtf8($data["ITEM_6"]));
-               }
-
-               $this->CellLigneTableau(false, 40, Toolbox::decodeFromUtf8($data["ITEM_7"]));
-
-               if ($disposal==1) {
-                  $this->SetTextRouge();
-                  $this->CellLigneTableau(false, 20, Html::clean(Html::formatNumber($data["ITEM_8"])),1,'R',1);
-                  $this->SetTextNoir();
-                  $this->CellLigneTableau(false, 25, Html::convdate($data["ITEM_10"]),1,'C',1);
-                  $this->CellLigneTableau(false, 55, Toolbox::decodeFromUtf8($data["ITEM_9"]));
-               } else {
-                  $this->SetTextRouge();
-                  $this->CellLigneTableau(false, 20, Html::clean(Html::formatNumber($data["ITEM_8"])),1,'R',1);
-                  $this->SetTextNoir();
-               }
-               $this->SetY($this->GetY() + $this->line_height);
+         $i = 1;
+         foreach ($items as $data) {
+            $i++;
+            $this->SetFondBlanc();
+            if ($i % 2) $this->SetFondTresClair();
+            $this->CellLigneTableau(false, 45, $data["ITEM_0"]);
+            $this->CellLigneTableau(false, 35, $data["ITEM_2"]);
+            $this->CellLigneTableau(false, 20, Html::convDate($data["ITEM_3"]), 1, 'C', 1);
+            $this->SetTextBleu();
+            $this->CellLigneTableau(false, 40, Toolbox::decodeFromUtf8(formatUserName($data["ITEM_4_3"], $data["ITEM_4"], $data["ITEM_4_2"], $data["ITEM_4_4"])));
+            $this->SetTextNoir();
+            if ($disposal != 1) {
+               $this->CellLigneTableau(false, 40, Toolbox::decodeFromUtf8($data["ITEM_9"]));
+               $this->CellLigneTableau(false, 40, Toolbox::decodeFromUtf8($data["ITEM_6"]));
             }
+
+            $this->CellLigneTableau(false, 40, Toolbox::decodeFromUtf8($data["ITEM_7"]));
+
+            if ($disposal == 1) {
+               $this->SetTextRouge();
+               $this->CellLigneTableau(false, 20, Html::clean(Html::formatNumber($data["ITEM_8"])), 1, 'R', 1);
+               $this->SetTextNoir();
+               $this->CellLigneTableau(false, 25, Html::convDate($data["ITEM_10"]), 1, 'C', 1);
+               $this->CellLigneTableau(false, 55, Toolbox::decodeFromUtf8($data["ITEM_9"]));
+            } else {
+               $this->SetTextRouge();
+               $this->CellLigneTableau(false, 20, Html::clean(Html::formatNumber($data["ITEM_8"])), 1, 'R', 1);
+               $this->SetTextNoir();
+            }
+            $this->SetY($this->GetY() + $this->line_height);
+         }
          /* pied */
-         if ($total!=-1) {
-            $this->CellEnTeteTableau(true, $this->largeur_grande_cell-20 , Toolbox::decodeFromUtf8(__('Total')),1,'R',1);
+         if ($total != -1) {
+            $this->CellEnTeteTableau(true, $this->largeur_grande_cell - 20, Toolbox::decodeFromUtf8(__('Total')), 1, 'R', 1);
             $this->SetTextRouge();
-            $this->CellEnTeteTableau(false, 20 , Html::clean(Html::formatNumber($total)),1,'R',1);
+            $this->CellEnTeteTableau(false, 20, Html::clean(Html::formatNumber($total)), 1, 'R', 1);
             $this->SetTextNoir();
             $this->SetY($this->GetY() + $this->line_height);
          }
       }
    }
 
-/**
+   /**
     * Fonction permettant de dessiner le tableau de total.
-     */
-   function affiche_tableau_fin($total) {
-      
+    * @param $total
+    */
+   function affiche_tableau_fin($total)
+   {
+
       $this->SetY($this->GetY() + $this->line_height);
       /* en-tete */
-      $this->CellLabel(false, $this->largeur_grande_cell ,Toolbox::decodeFromUtf8(__('General Total', 'financialreports')));
+      $this->CellLabel(false, $this->largeur_grande_cell, Toolbox::decodeFromUtf8(__('General Total', 'financialreports')));
       $this->SetY($this->GetY() + $this->line_height);
 
-      $this->CellEnTeteTableau(true, $this->largeur_grande_cell-25 , Toolbox::decodeFromUtf8(__('Total')),1,'R',1);
+      $this->CellEnTeteTableau(true, $this->largeur_grande_cell - 25, Toolbox::decodeFromUtf8(__('Total')), 1, 'R', 1);
       $this->SetTextRouge();
-      $this->CellEnTeteTableau(false, 25 , Html::clean(Html::formatNumber($total)),1,'R',1);
+      $this->CellEnTeteTableau(false, 25, Html::clean(Html::formatNumber($total)), 1, 'R', 1);
       $this->SetTextNoir();
       $this->SetY($this->GetY() + $this->line_height);
    }
@@ -335,14 +363,15 @@ class PluginFinancialreportsPdf extends FPDF {
    /**
     * Fonction permettant de dessiner le pied de page du rapport.
     */
-   function Footer() {
-      
+   function Footer()
+   {
+
       // Positionnement par rapport au bas de la page.
       $this->SetY(-$this->tail_bas_page);
-      /* Numéro de page. */
+      /* Numï¿½ro de page. */
       $this->SetFont($this->pol_def, '', 9);
       $this->Cell(
-         0, $this->tail_bas_page / 2, Toolbox::decodeFromUtf8("").' '.$this->PageNo().' '.Toolbox::decodeFromUtf8("").' ', 0, 0, 'C');
+         0, $this->tail_bas_page / 2, Toolbox::decodeFromUtf8("") . ' ' . $this->PageNo() . ' ' . Toolbox::decodeFromUtf8("") . ' ', 0, 0, 'C');
       $this->Ln(10);
       /* Infos ODAXYS. */
       $this->SetFont($this->pol_def, 'I', 9);
@@ -353,39 +382,42 @@ class PluginFinancialreportsPdf extends FPDF {
 
 
    /* **************** */
-   /* Autres méthodes. */
+   /* Autres mï¿½thodes. */
    /* **************** */
 
    /**
-    * Retourne une date donnée formatée dd/mm/yyyy.
-    * @param $une_date Date à formater.
-    * @return La date donnée au format dd/mm/yyyy.
+    * Retourne une date donnï¿½e formatï¿½e dd/mm/yyyy.
+    * @param $une_date Date ï¿½ formater.
+    * @return La date donnï¿½e au format dd/mm/yyyy.
     */
-   function GetDateFormatee($une_date) {
+   function GetDateFormatee($une_date)
+   {
 
-      return $this->CompleterAvec0($une_date['mday'], 2)."/".$this->CompleterAvec0($une_date['mon'], 2)."/". $une_date['year'];
+      return $this->CompleterAvec0($une_date['mday'], 2) . "/" . $this->CompleterAvec0($une_date['mon'], 2) . "/" . $une_date['year'];
    }
 
    /**
-    * Retourne une heure donnée au format hh:mm.
-    * @param $une_date Date à formater.
-    * @return L'heure donnée au format hh:mm.
+    * Retourne une heure donnï¿½e au format hh:mm.
+    * @param $une_date Date ï¿½ formater.
+    * @return L'heure donnï¿½e au format hh:mm.
     */
-   function GetHeureFormatee($une_date) {
+   function GetHeureFormatee($une_date)
+   {
 
-      return $this->CompleterAvec0($une_date['hours'], 2).":".$this->CompleterAvec0($une_date['minutes'], 2);
+      return $this->CompleterAvec0($une_date['hours'], 2) . ":" . $this->CompleterAvec0($une_date['minutes'], 2);
    }
 
    /**
-    * Complète une chaîne donnée avec des '0' suivant la longueur donnée et voulue de la chaîne.
-    * @param $une_chaine Chaîne à compléter.
-    * @param $lg Longueur finale souhaitée de la chaîne donnée.
-    * @return La chaîne complétée.
+    * Complï¿½te une chaï¿½ne donnï¿½e avec des '0' suivant la longueur donnï¿½e et voulue de la chaï¿½ne.
+    * @param $une_chaine Chaï¿½ne ï¿½ complï¿½ter.
+    * @param $lg Longueur finale souhaitï¿½e de la chaï¿½ne donnï¿½e.
+    * @return La chaï¿½ne complï¿½tï¿½e.
     */
-   function CompleterAvec0($une_chaine, $lg) {
+   function CompleterAvec0($une_chaine, $lg)
+   {
 
       while (strlen($une_chaine) != $lg) {
-         $une_chaine = "0".$une_chaine;
+         $une_chaine = "0" . $une_chaine;
       }
 
       return $une_chaine;
@@ -395,8 +427,11 @@ class PluginFinancialreportsPdf extends FPDF {
    /* Getteurs et setteurs. */
    /* ********************* */
 
-   function setDate($date) {
+   /**
+    * @param $date
+    */
+   function setDate($date)
+   {
       $this->date = $date;
    }
 }
-?>

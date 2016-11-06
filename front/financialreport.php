@@ -27,9 +27,9 @@
  --------------------------------------------------------------------------
  */
 
-include ('../../../inc/includes.php');
+include('../../../inc/includes.php');
 
-Html::header(PluginFinancialreportsFinancialreport::getTypeName(),'',"utils","report");
+Html::header(PluginFinancialreportsFinancialreport::getTypeName(), '', "utils", "report");
 
 Session::checkCentralAccess();
 
@@ -40,9 +40,9 @@ if (!isset($_SESSION["displaypc"])) {
 //Changing the pc mode
 if (isset($_GET["displaypc"])) {
    if ($_GET["displaypc"] == "false") {
-      $_SESSION["displaypc"]=false;
+      $_SESSION["displaypc"] = false;
    } else {
-      $_SESSION["displaypc"]=true;
+      $_SESSION["displaypc"] = true;
    }
 }
 //First time this screen is displayed : set the notebook mode to 'all'
@@ -52,9 +52,9 @@ if (!isset($_SESSION["displaynotebook"])) {
 //Changing the notebook mode
 if (isset($_GET["displaynotebook"])) {
    if ($_GET["displaynotebook"] == "false") {
-      $_SESSION["displaynotebook"]=false;
+      $_SESSION["displaynotebook"] = false;
    } else {
-      $_SESSION["displaynotebook"]=true;
+      $_SESSION["displaynotebook"] = true;
    }
 }
 //First time this screen is displayed : set the server mode to 'all'
@@ -64,9 +64,9 @@ if (!isset($_SESSION["displayserver"])) {
 //Changing the server mode
 if (isset($_GET["displayserver"])) {
    if ($_GET["displayserver"] == "false") {
-      $_SESSION["displayserver"]=false;
+      $_SESSION["displayserver"] = false;
    } else {
-      $_SESSION["displayserver"]=true;
+      $_SESSION["displayserver"] = true;
    }
 }
 //First time this screen is displayed : set the monitor mode to 'all'
@@ -76,9 +76,9 @@ if (!isset($_SESSION["displaymonitor"])) {
 //Changing the monitor mode
 if (isset($_GET["displaymonitor"])) {
    if ($_GET["displaymonitor"] == "false") {
-      $_SESSION["displaymonitor"]=false;
+      $_SESSION["displaymonitor"] = false;
    } else {
-      $_SESSION["displaymonitor"]=true;
+      $_SESSION["displaymonitor"] = true;
    }
 }
 //First time this screen is displayed : set the printer mode to 'all'
@@ -88,9 +88,9 @@ if (!isset($_SESSION["displayprinter"])) {
 //Changing the printer mode
 if (isset($_GET["displayprinter"])) {
    if ($_GET["displayprinter"] == "false") {
-      $_SESSION["displayprinter"]=false;
+      $_SESSION["displayprinter"] = false;
    } else {
-      $_SESSION["displayprinter"]=true;
+      $_SESSION["displayprinter"] = true;
    }
 }
 //First time this screen is displayed : set the networking mode to 'all'
@@ -100,9 +100,9 @@ if (!isset($_SESSION["displaynetworking"])) {
 //Changing the networking mode
 if (isset($_GET["displaynetworking"])) {
    if ($_GET["displaynetworking"] == "false") {
-      $_SESSION["displaynetworking"]=false;
+      $_SESSION["displaynetworking"] = false;
    } else {
-      $_SESSION["displaynetworking"]=true;
+      $_SESSION["displaynetworking"] = true;
    }
 }
 //First time this screen is displayed : set the peripheral mode to 'all'
@@ -112,9 +112,9 @@ if (!isset($_SESSION["displayperipheral"])) {
 //Changing the peripheral mode
 if (isset($_GET["displayperipheral"])) {
    if ($_GET["displayperipheral"] == "false") {
-      $_SESSION["displayperipheral"]=false;
+      $_SESSION["displayperipheral"] = false;
    } else {
-      $_SESSION["displayperipheral"]=true;
+      $_SESSION["displayperipheral"] = true;
    }
 }
 //First time this screen is displayed : set the phone mode to 'all'
@@ -124,9 +124,9 @@ if (!isset($_SESSION["displayphone"])) {
 //Changing the phone mode
 if (isset($_GET["displayphone"])) {
    if ($_GET["displayphone"] == "false") {
-      $_SESSION["displayphone"]=false;
+      $_SESSION["displayphone"] = false;
    } else {
-      $_SESSION["displayphone"]=true;
+      $_SESSION["displayphone"] = true;
    }
 }
 //First time this screen is displayed : set the rebus mode to 'all'
@@ -136,52 +136,52 @@ if (!isset($_SESSION["displaydisposal"])) {
 //Changing the rebus mode
 if (isset($_GET["displaydisposal"])) {
    if ($_GET["displaydisposal"] == "false") {
-      $_SESSION["displaydisposal"]=false;
+      $_SESSION["displaydisposal"] = false;
    } else {
-      $_SESSION["displaydisposal"]=true;
+      $_SESSION["displaydisposal"] = true;
    }
 }
 
-$report= new PluginFinancialreportsFinancialreport();
+$report = new PluginFinancialreportsFinancialreport();
 
-if ($report->canView() || Session::haveRight("config",UPDATE)) {
-   
+if ($report->canView() || Session::haveRight("config", UPDATE)) {
+
    Report::title();
 
-   if(empty($_GET["date"])) $_GET["date"] = date("Y-m-d");
-   if(empty($_GET["locations_id"])) $_GET["locations_id"] = 0;
-   if(!isset($_POST["date"])) $_POST["date"]= $_GET["date"];
-   if(!isset($_POST["locations_id"])) $_POST["locations_id"]= $_GET["locations_id"];
+   if (empty($_GET["date"])) $_GET["date"] = date("Y-m-d");
+   if (empty($_GET["locations_id"])) $_GET["locations_id"] = 0;
+   if (!isset($_POST["date"])) $_POST["date"] = $_GET["date"];
+   if (!isset($_POST["locations_id"])) $_POST["locations_id"] = $_GET["locations_id"];
 
    echo "<div align='center'><form action=\"./financialreport.php\" method=\"post\">";
    echo "<table class='tab_cadre_fixe'><tr class='tab_bg_2'>";
-   echo "<td class='right'>".__('Report date', 'financialreports')." :</td>";
+   echo "<td class='right'>" . __('Report date', 'financialreports') . " :</td>";
    echo "<td>";
-   Html::showDateFormItem("date",$_POST["date"],true,true);
+   Html::showDateFormItem("date", $_POST["date"], true, true);
    echo "</td>";
    echo "<td width='60%'>";
    Dropdown::show('Location', array('name' => "locations_id",
-                                    'value' => $_POST["locations_id"],
-                                     'entity' => $_SESSION["glpiactive_entity"]));
+      'value' => $_POST["locations_id"],
+      'entity' => $_SESSION["glpiactive_entity"]));
    echo "</td>";
    echo "<td rowspan='2' class='center'>";
-   echo "<input type=\"submit\" class='submit' name=\"choice_date\" value='". _sx('button', 'Post')."' />";
+   echo "<input type=\"submit\" class='submit' name=\"choice_date\" value='" . _sx('button', 'Post') . "' />";
    echo "</td></tr>";
    echo "</table>";
    Html::closeForm();
    echo "</div>";
    echo "<div align='center'>";
    $display = array('displaypc' => $_SESSION["displaypc"],
-                     'displaynotebook' => $_SESSION["displaynotebook"],
-                     'displayserver' => $_SESSION["displayserver"],
-                     'displaymonitor' => $_SESSION["displaymonitor"],
-                     'displayprinter' => $_SESSION["displayprinter"],
-                     'displaynetworking' => $_SESSION["displaynetworking"],
-                     'displayperipheral' => $_SESSION["displayperipheral"],
-                     'displayphone' => $_SESSION["displayphone"],
-                     'displaydisposal' => $_SESSION["displaydisposal"]);
+      'displaynotebook' => $_SESSION["displaynotebook"],
+      'displayserver' => $_SESSION["displayserver"],
+      'displaymonitor' => $_SESSION["displaymonitor"],
+      'displayprinter' => $_SESSION["displayprinter"],
+      'displaynetworking' => $_SESSION["displaynetworking"],
+      'displayperipheral' => $_SESSION["displayperipheral"],
+      'displayphone' => $_SESSION["displayphone"],
+      'displaydisposal' => $_SESSION["displaydisposal"]);
 
-   $report->displayReport($_POST,$display);
+   $report->displayReport($_POST, $display);
    echo "</div>";
 
 } else {
@@ -189,5 +189,3 @@ if ($report->canView() || Session::haveRight("config",UPDATE)) {
 }
 
 Html::footer();
-
-?>

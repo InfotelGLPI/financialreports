@@ -28,7 +28,7 @@
  */
 
 
-include ('../../../inc/includes.php');
+include('../../../inc/includes.php');
 
 Session::checkCentralAccess();
 
@@ -36,24 +36,22 @@ if (!isset($_POST["start"])) $_POST["start"] = 0;
 if (!isset($_POST["is_deleted"])) $_POST["is_deleted"] = "0";
 if (isset($_POST["display_type"])) {
 
-   if ($_POST["display_type"]<0) {
-      $_POST["display_type"]=-$_POST["display_type"];
-      $_POST["export_all"]=1;
+   if ($_POST["display_type"] < 0) {
+      $_POST["display_type"] = -$_POST["display_type"];
+      $_POST["export_all"] = 1;
    }
-  
-  $display = array('displaypc' => $_SESSION["displaypc"],
-                     'displaynotebook' => $_SESSION["displaynotebook"],
-                     'displayserver' => $_SESSION["displayserver"],
-                     'displaymonitor' => $_SESSION["displaymonitor"],
-                     'displayprinter' => $_SESSION["displayprinter"],
-                     'displaynetworking' => $_SESSION["displaynetworking"],
-                     'displayperipheral' => $_SESSION["displayperipheral"],
-                     'displayphone' => $_SESSION["displayphone"],
-                     'displaydisposal' => $_SESSION["displaydisposal"]);
-                     
-  $report= new PluginFinancialreportsFinancialreport();
-  $report->displayReport($_POST,$display);
-   
-}
 
-?>
+   $display = array('displaypc' => $_SESSION["displaypc"],
+      'displaynotebook' => $_SESSION["displaynotebook"],
+      'displayserver' => $_SESSION["displayserver"],
+      'displaymonitor' => $_SESSION["displaymonitor"],
+      'displayprinter' => $_SESSION["displayprinter"],
+      'displaynetworking' => $_SESSION["displaynetworking"],
+      'displayperipheral' => $_SESSION["displayperipheral"],
+      'displayphone' => $_SESSION["displayphone"],
+      'displaydisposal' => $_SESSION["displaydisposal"]);
+
+   $report = new PluginFinancialreportsFinancialreport();
+   $report->displayReport($_POST, $display);
+
+}
