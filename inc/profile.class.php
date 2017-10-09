@@ -34,18 +34,17 @@ if (!defined('GLPI_ROOT')) {
 /**
  * Class PluginFinancialreportsProfile
  */
-class PluginFinancialreportsProfile extends CommonDBTM
-{
+class PluginFinancialreportsProfile extends CommonDBTM {
 
    static $rightname = "profile";
 
    /**
     * @param CommonGLPI $item
-    * @param int $withtemplate
+    * @param int        $withtemplate
+    *
     * @return string|translated
     */
-   function getTabNameForItem(CommonGLPI $item, $withtemplate = 0)
-   {
+   function getTabNameForItem(CommonGLPI $item, $withtemplate = 0) {
 
       if ($item->getType() == 'Profile' && $item->getField('interface') != 'helpdesk') {
          return PluginFinancialreportsFinancialreport::getTypeName();
@@ -56,46 +55,44 @@ class PluginFinancialreportsProfile extends CommonDBTM
 
    /**
     * @param CommonGLPI $item
-    * @param int $tabnum
-    * @param int $withtemplate
+    * @param int        $tabnum
+    * @param int        $withtemplate
+    *
     * @return bool
     */
-   static function displayTabContentForItem(CommonGLPI $item, $tabnum = 1, $withtemplate = 0)
-   {
+   static function displayTabContentForItem(CommonGLPI $item, $tabnum = 1, $withtemplate = 0) {
 
       if ($item->getType() == 'Profile') {
-         $ID = $item->getID();
+         $ID   = $item->getID();
          $prof = new self();
 
          self::addDefaultProfileInfos($ID,
-            array('plugin_financialreports' => 0));
+                                      array('plugin_financialreports' => 0));
          $prof->showForm($ID);
       }
       return true;
    }
 
    /**
-    * @param $profiles_id
-    * @param $rights
+    * @param      $profiles_id
+    * @param      $rights
     * @param bool $drop_existing
+    *
     * @internal param $profile
     */
-   static function addDefaultProfileInfos($profiles_id, $rights, $drop_existing = false)
-   {
-
+   static function addDefaultProfileInfos($profiles_id, $rights, $drop_existing = false) {
+      $dbu          = new DbUtils();
       $profileRight = new ProfileRight();
       foreach ($rights as $right => $value) {
-         if (countElementsInTable('glpi_profilerights',
-               "`profiles_id`='$profiles_id' AND `name`='$right'") && $drop_existing
-         ) {
+         if ($dbu->countElementsInTable('glpi_profilerights',
+                                  "`profiles_id`='$profiles_id' AND `name`='$right'") && $drop_existing) {
             $profileRight->deleteByCriteria(array('profiles_id' => $profiles_id, 'name' => $right));
          }
-         if (!countElementsInTable('glpi_profilerights',
-            "`profiles_id`='$profiles_id' AND `name`='$right'")
-         ) {
+         if (!$dbu->countElementsInTable('glpi_profilerights',
+                                   "`profiles_id`='$profiles_id' AND `name`='$right'")) {
             $myright['profiles_id'] = $profiles_id;
-            $myright['name'] = $right;
-            $myright['rights'] = $value;
+            $myright['name']        = $right;
+            $myright['rights']      = $value;
             $profileRight->add($myright);
 
             //Add right to the current session
@@ -107,20 +104,19 @@ class PluginFinancialreportsProfile extends CommonDBTM
    /**
     * Show profile form
     *
-    * @param int $profiles_id
+    * @param int  $profiles_id
     * @param bool $openform
     * @param bool $closeform
+    *
     * @return nothing
     * @internal param int $items_id id of the profile
     * @internal param value $target url of target
     */
-   function showForm($profiles_id = 0, $openform = TRUE, $closeform = TRUE)
-   {
+   function showForm($profiles_id = 0, $openform = TRUE, $closeform = TRUE) {
 
       echo "<div class='firstbloc'>";
       if (($canedit = Session::haveRightsOr(self::$rightname, array(CREATE, UPDATE, PURGE)))
-         && $openform
-      ) {
+          && $openform) {
          $profile = new Profile();
          echo "<form method='post' action='" . $profile->getFormURL() . "'>";
       }
@@ -129,14 +125,13 @@ class PluginFinancialreportsProfile extends CommonDBTM
       $profile->getFromDB($profiles_id);
       if ($profile->getField('interface') == 'central') {
          $rights = $this->getAllRights();
-         $profile->displayRightsChoiceMatrix($rights, array('canedit' => $canedit,
-            'default_class' => 'tab_bg_2',
-            'title' => __('General')));
+         $profile->displayRightsChoiceMatrix($rights, array('canedit'       => $canedit,
+                                                            'default_class' => 'tab_bg_2',
+                                                            'title'         => __('General')));
       }
 
       if ($canedit
-         && $closeform
-      ) {
+          && $closeform) {
          echo "<div class='center'>";
          echo Html::hidden('id', array('value' => $profiles_id));
          echo Html::submit(_sx('button', 'Save'), array('name' => 'update'));
@@ -148,14 +143,14 @@ class PluginFinancialreportsProfile extends CommonDBTM
 
    /**
     * @param bool $all
+    *
     * @return array
     */
-   static function getAllRights($all = false)
-   {
+   static function getAllRights($all = false) {
       $rights = array(
          array('rights' => array(READ => __('Read')),
-            'label' => _n('Asset situation', 'Asset situations', 1, 'financialreports'),
-            'field' => 'plugin_financialreports'
+               'label'  => _n('Asset situation', 'Asset situations', 1, 'financialreports'),
+               'field'  => 'plugin_financialreports'
          ),
       );
 
@@ -166,11 +161,11 @@ class PluginFinancialreportsProfile extends CommonDBTM
     * Init profiles
     *
     * @param $old_right
+    *
     * @return int
     */
 
-   static function translateARight($old_right)
-   {
+   static function translateARight($old_right) {
       switch ($old_right) {
          case '':
             return 0;
@@ -190,21 +185,22 @@ class PluginFinancialreportsProfile extends CommonDBTM
    /**
     * @since 0.85
     * Migration rights from old system to the new one for one profile
+    *
     * @param $profiles_id the profile ID
+    *
     * @return bool
     */
-   static function migrateOneProfile($profiles_id)
-   {
+   static function migrateOneProfile($profiles_id) {
       global $DB;
       //Cannot launch migration if there's nothing to migrate...
-      if (!TableExists('glpi_plugin_financialreports_profiles')) {
+      if (!$DB->tableExists('glpi_plugin_financialreports_profiles')) {
          return true;
       }
 
       foreach ($DB->request('glpi_plugin_financialreports_profiles',
-         "`profiles_id`='$profiles_id'") as $profile_data) {
+                            "`profiles_id`='$profiles_id'") as $profile_data) {
 
-         $matching = array('financialreports' => 'plugin_financialreports');
+         $matching       = array('financialreports' => 'plugin_financialreports');
          $current_rights = ProfileRight::getProfileRights($profiles_id, array_values($matching));
          foreach ($matching as $old => $new) {
             if (!isset($current_rights[$old])) {
@@ -220,16 +216,14 @@ class PluginFinancialreportsProfile extends CommonDBTM
    /**
     * Initialize profiles, and migrate it necessary
     */
-   static function initProfile()
-   {
+   static function initProfile() {
       global $DB;
       $profile = new self();
-
+      $dbu     = new DbUtils();
       //Add new rights in glpi_profilerights table
       foreach ($profile->getAllRights(true) as $data) {
-         if (countElementsInTable("glpi_profilerights",
-               "`name` = '" . $data['field'] . "'") == 0
-         ) {
+         if ($dbu->countElementsInTable("glpi_profilerights",
+                                  "`name` = '" . $data['field'] . "'") == 0) {
             ProfileRight::addProfileRights(array($data['field']));
          }
       }
@@ -249,15 +243,13 @@ class PluginFinancialreportsProfile extends CommonDBTM
    /**
     * @param $profiles_id
     */
-   static function createFirstAccess($profiles_id)
-   {
+   static function createFirstAccess($profiles_id) {
       self::addDefaultProfileInfos($profiles_id,
-         array('plugin_financialreports' => READ), true);
+                                   array('plugin_financialreports' => READ), true);
 
    }
 
-   static function removeRightsFromSession()
-   {
+   static function removeRightsFromSession() {
       foreach (self::getAllRights(true) as $right) {
          if (isset($_SESSION['glpiactiveprofile'][$right['field']])) {
             unset($_SESSION['glpiactiveprofile'][$right['field']]);

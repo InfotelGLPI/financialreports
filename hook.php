@@ -30,37 +30,33 @@
 /**
  * @return bool
  */
-function plugin_financialreports_install()
-{
+function plugin_financialreports_install() {
    global $DB;
 
    include_once(GLPI_ROOT . "/plugins/financialreports/inc/profile.class.php");
 
    $update = false;
-   if (!TableExists("glpi_plugin_state_profiles")
-      && !TableExists("glpi_plugin_financialreports_configs")
-   ) {
+   if (!$DB->tableExists("glpi_plugin_state_profiles")
+       && !$DB->tableExists("glpi_plugin_financialreports_configs")) {
 
       $DB->runFile(GLPI_ROOT . "/plugins/financialreports/sql/empty-2.3.0.sql");
 
-   } else if (TableExists("glpi_plugin_state_parameters")
-      && !FieldExists("glpi_plugin_state_parameters", "monitor")
-   ) {
+   } else if ($DB->tableExists("glpi_plugin_state_parameters")
+              && !$DB->fieldExists("glpi_plugin_state_parameters", "monitor")) {
 
       $update = true;
       $DB->runFile(GLPI_ROOT . "/plugins/financialreports/sql/update-1.5.sql");
       $DB->runFile(GLPI_ROOT . "/plugins/financialreports/sql/update-1.6.0.sql");
       $DB->runFile(GLPI_ROOT . "/plugins/financialreports/sql/update-1.7.0.sql");
 
-   } else if (TableExists("glpi_plugin_state_profiles")
-      && FieldExists("glpi_plugin_state_profiles", "interface")
-   ) {
+   } else if ($DB->tableExists("glpi_plugin_state_profiles")
+              && $DB->fieldExists("glpi_plugin_state_profiles", "interface")) {
 
       $update = true;
       $DB->runFile(GLPI_ROOT . "/plugins/financialreports/sql/update-1.6.0.sql");
       $DB->runFile(GLPI_ROOT . "/plugins/financialreports/sql/update-1.7.0.sql");
 
-   } else if (!TableExists("glpi_plugin_financialreports_configs")) {
+   } else if (!$DB->tableExists("glpi_plugin_financialreports_configs")) {
 
       $update = true;
       $DB->runFile(GLPI_ROOT . "/plugins/financialreports/sql/update-1.7.0.sql");
@@ -70,7 +66,7 @@ function plugin_financialreports_install()
    if ($update) {
 
       //Do One time on 0.78
-      $query_ = "SELECT *
+      $query_  = "SELECT *
             FROM `glpi_plugin_financialreports_profiles` ";
       $result_ = $DB->query($query_);
       if ($DB->numrows($result_) > 0) {
@@ -90,8 +86,8 @@ function plugin_financialreports_install()
 
       Plugin::migrateItemType(
          array(3450 => 'PluginFinancialreportsDisposalItem'),
-         array("glpi_bookmarks", "glpi_bookmarks_users", "glpi_displaypreferences",
-            "glpi_documents_items", "glpi_infocoms", "glpi_logs", "glpi_tickets"),
+         array("glpi_savedsearches", "glpi_savedsearches_users", "glpi_displaypreferences",
+               "glpi_documents_items", "glpi_infocoms", "glpi_logs", "glpi_tickets"),
          array("glpi_plugin_financialreports_disposalitems"));
    }
 
@@ -103,8 +99,8 @@ function plugin_financialreports_install()
    $migration->dropTable('glpi_plugin_financialreports_profiles');
 
    //2.3.0
-   if (TableExists("glpi_plugin_financialreports_disposalitems")) {
-      $query_ = "SELECT *
+   if ($DB->tableExists("glpi_plugin_financialreports_disposalitems")) {
+      $query_  = "SELECT *
             FROM `glpi_plugin_financialreports_disposalitems` ";
       $result_ = $DB->query($query_);
       if ($DB->numrows($result_) > 0) {
@@ -126,22 +122,21 @@ function plugin_financialreports_install()
 /**
  * @return bool
  */
-function plugin_financialreports_uninstall()
-{
+function plugin_financialreports_uninstall() {
    global $DB;
 
    $tables = array("glpi_plugin_financialreports_configs",
-      "glpi_plugin_financialreports_parameters");
+                   "glpi_plugin_financialreports_parameters");
 
    foreach ($tables as $table)
       $DB->query("DROP TABLE IF EXISTS `$table`;");
 
    //old versions	
    $tables = array("glpi_plugin_financialreports_profiles",
-      "glpi_plugin_state_profiles",
-      "glpi_plugin_state_config",
-      "glpi_plugin_state_parameters",
-      "glpi_plugin_state_repelled");
+                   "glpi_plugin_state_profiles",
+                   "glpi_plugin_state_config",
+                   "glpi_plugin_state_parameters",
+                   "glpi_plugin_state_repelled");
 
    foreach ($tables as $table)
       $DB->query("DROP TABLE IF EXISTS `$table`;");
@@ -162,8 +157,7 @@ function plugin_financialreports_uninstall()
 /**
  * @return array
  */
-function plugin_financialreports_getDatabaseRelations()
-{
+function plugin_financialreports_getDatabaseRelations() {
 
    $plugin = new Plugin();
 

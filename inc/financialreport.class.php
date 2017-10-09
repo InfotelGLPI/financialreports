@@ -35,17 +35,16 @@ if (!defined('GLPI_ROOT')) {
 /**
  * Class PluginFinancialreportsFinancialreport
  */
-class PluginFinancialreportsFinancialreport extends CommonDBTM
-{
+class PluginFinancialreportsFinancialreport extends CommonDBTM {
 
    static $rightname = "plugin_financialreports";
 
    /**
     * @param int $nb
+    *
     * @return translated
     */
-   static function getTypeName($nb = 0)
-   {
+   static function getTypeName($nb = 0) {
 
       return _n('Asset situation', 'Asset situations', $nb, 'financialreports');
    }
@@ -59,10 +58,10 @@ class PluginFinancialreportsFinancialreport extends CommonDBTM
     * @param $total
     * @param $items
     * @param $locations_id
+    *
     * @return int
     */
-   function getItemsTotal($itemtype, $PluginFinancialreportsParameter, $type, $date, $total, $items, $locations_id)
-   {
+   function getItemsTotal($itemtype, $PluginFinancialreportsParameter, $type, $date, $total, $items, $locations_id) {
       $total += $this->QueryItemsTotalValue($itemtype, $PluginFinancialreportsParameter, $type, $date, $locations_id);
 
       return $total;
@@ -76,10 +75,10 @@ class PluginFinancialreportsFinancialreport extends CommonDBTM
     * @param $total
     * @param $items
     * @param $locations_id
+    *
     * @return array|string
     */
-   function getItems($itemtype, $PluginFinancialreportsParameter, $type, $date, $total, $items, $locations_id)
-   {
+   function getItems($itemtype, $PluginFinancialreportsParameter, $type, $date, $total, $items, $locations_id) {
       if ($items == "") {
          $items = $this->queryItems($itemtype, $PluginFinancialreportsParameter, $type, $date, $locations_id);
       } else {
@@ -94,23 +93,27 @@ class PluginFinancialreportsFinancialreport extends CommonDBTM
     * @param $type
     * @param $date
     * @param $locations_id
+    *
     * @return array|string
     */
-   function queryItems($itemtype, $PluginFinancialreportsParameter, $type, $date, $locations_id)
-   {
+   function queryItems($itemtype, $PluginFinancialreportsParameter, $type, $date, $locations_id) {
       global $DB;
 
-      $itemtable = getTableForItemType($itemtype);
+      $itemtable  = getTableForItemType($itemtype);
       $modeltable = getTableForItemType($itemtype . "Model");
       $modelfield = getForeignKeyFieldForTable(getTableForItemType($itemtype . "Model"));
-      $typetable = getTableForItemType($itemtype . "Type");
-      $typefield = getForeignKeyFieldForTable(getTableForItemType($itemtype . "Type"));
-      $deleted = 0;
-      $first = true;
-      $items = "";
+      $typetable  = getTableForItemType($itemtype . "Type");
+      $typefield  = getForeignKeyFieldForTable(getTableForItemType($itemtype . "Type"));
+      $deleted    = 0;
+      $first      = true;
+      $items      = "";
 
-      $query = "SELECT `$itemtable`.`name` AS ITEM_0, `glpi_locations`.`completename` AS ITEM_1, `$itemtable`.`otherserial` AS ITEM_2, `glpi_infocoms`.`buy_date` AS ITEM_3, `glpi_users`.`name` AS ITEM_4, `glpi_users`.`realname` AS ITEM_4_2, `glpi_users`.`id` AS ITEM_4_3, `glpi_users`.`firstname` AS ITEM_4_4,`glpi_groups`.`name` AS ITEM_5,`glpi_groups`.`id` AS ITEM_5_1,`$modeltable`.`name` AS ITEM_6 ";
-      $query .= ", `glpi_manufacturers`.`name` AS ITEM_7, `glpi_infocoms`.`value` AS ITEM_8, `$itemtable`.`id` AS id, `glpi_locations`.`completename` AS ITEM_9,'$itemtype' AS TYPE
+      $query = "SELECT `$itemtable`.`name` AS ITEM_0, `glpi_locations`.`completename` AS ITEM_1, `$itemtable`.`otherserial` AS ITEM_2, 
+      `glpi_infocoms`.`buy_date` AS ITEM_3, `glpi_users`.`name` AS ITEM_4, `glpi_users`.`realname` AS ITEM_4_2, 
+      `glpi_users`.`id` AS ITEM_4_3, `glpi_users`.`firstname` AS ITEM_4_4,`glpi_groups`.`name` AS ITEM_5,`glpi_groups`.`id` AS ITEM_5_1,
+      `$modeltable`.`name` AS ITEM_6 ";
+      $query .= ", `glpi_manufacturers`.`name` AS ITEM_7, `glpi_infocoms`.`value` AS ITEM_8, `$itemtable`.`id` AS id, 
+      `glpi_locations`.`completename` AS ITEM_9,'$itemtype' AS TYPE
                FROM `$itemtable`
                LEFT JOIN `glpi_locations` ON (`$itemtable`.`locations_id` = `glpi_locations`.`id`)
                LEFT JOIN `glpi_infocoms` ON (`$itemtable`.`id` = `glpi_infocoms`.`items_id` AND `glpi_infocoms`.`itemtype` = '" . $itemtype . "')
@@ -128,7 +131,7 @@ class PluginFinancialreportsFinancialreport extends CommonDBTM
       if ($item->maybeDeleted()) {
          $LINK = " ";
          if ($first) {
-            $LINK = " ";
+            $LINK  = " ";
             $first = false;
          }
          $query .= $LINK . "`" . $itemtable . "`.`is_deleted` = '$deleted' ";
@@ -137,7 +140,7 @@ class PluginFinancialreportsFinancialreport extends CommonDBTM
       if ($item->maybeTemplate()) {
          $LINK = " AND ";
          if ($first) {
-            $LINK = " ";
+            $LINK  = " ";
             $first = false;
          }
          $query .= $LINK . "`" . $itemtable . "`.`is_template` = '0' ";
@@ -147,13 +150,13 @@ class PluginFinancialreportsFinancialreport extends CommonDBTM
       if ($item->isEntityAssign()) {
          $LINK = " AND ";
          if ($first) {
-            $LINK = " ";
+            $LINK  = " ";
             $first = false;
          }
 
          $query .= getEntitiesRestrictRequest($LINK, $itemtable);
       }
-      $query_state = "SELECT `states_id`
+      $query_state  = "SELECT `states_id`
                   FROM `glpi_plugin_financialreports_configs`";
       $result_state = $DB->query($query_state);
       if ($DB->numrows($result_state) > 0) {
@@ -190,17 +193,17 @@ class PluginFinancialreportsFinancialreport extends CommonDBTM
     * @param $type
     * @param $date
     * @param $locations_id
+    *
     * @return int
     */
-   function QueryItemsTotalValue($itemtype, $PluginFinancialreportsParameter, $type, $date, $locations_id)
-   {
+   function QueryItemsTotalValue($itemtype, $PluginFinancialreportsParameter, $type, $date, $locations_id) {
       global $DB;
 
-      $deleted = 0;
-      $first = true;
-      $itemtable = getTableForItemType($itemtype);
-      $item = new $itemtype();
-      $somme = 0;
+      $deleted     = 0;
+      $first       = true;
+      $itemtable   = getTableForItemType($itemtype);
+      $item        = new $itemtype();
+      $somme       = 0;
       $query_value = "SELECT SUM(`glpi_infocoms`.`value`) AS Total_value
                   FROM `glpi_infocoms`,`$itemtable`
                   LEFT JOIN `glpi_states` ON (`$itemtable`.`states_id` = `glpi_states`.`id`) ";
@@ -211,7 +214,7 @@ class PluginFinancialreportsFinancialreport extends CommonDBTM
          $LINK = " AND ";
          $query_value .= $LINK . "`" . $itemtable . "`.`is_deleted` = '$deleted' ";
          if ($first) {
-            $LINK = " ";
+            $LINK  = " ";
             $first = false;
          }
       }
@@ -219,7 +222,7 @@ class PluginFinancialreportsFinancialreport extends CommonDBTM
       if ($item->maybeTemplate()) {
          $LINK = " AND ";
          if ($first) {
-            $LINK = " ";
+            $LINK  = " ";
             $first = false;
          }
          $query_value .= $LINK . "`" . $itemtable . "`.`is_template` = '0' ";
@@ -228,14 +231,14 @@ class PluginFinancialreportsFinancialreport extends CommonDBTM
       if ($item->isEntityAssign()) {
          $LINK = " AND ";
          if ($first) {
-            $LINK = " ";
+            $LINK  = " ";
             $first = false;
          }
 
          $query_value .= getEntitiesRestrictRequest($LINK, $itemtable);
       }
 
-      $query_state = "SELECT `states_id`
+      $query_state  = "SELECT `states_id`
                   FROM `glpi_plugin_financialreports_configs`";
       $result_state = $DB->query($query_state);
       if ($DB->numrows($result_state) > 0) {
@@ -264,10 +267,10 @@ class PluginFinancialreportsFinancialreport extends CommonDBTM
 
    /**
     * @param $locations_id
+    *
     * @return array
     */
-   function selectItemsForDisposalQuery($locations_id)
-   {
+   function selectItemsForDisposalQuery($locations_id) {
       global $DB;
 
       $items = array();
@@ -298,20 +301,24 @@ class PluginFinancialreportsFinancialreport extends CommonDBTM
    /**
     * @param $type
     * @param $locations_id
+    *
     * @return string
     */
-   function queryDisposalItems($type, $locations_id)
-   {
+   function queryDisposalItems($type, $locations_id) {
       global $DB;
 
-      $first = true;
-      $deleted = 0;
+      $first      = true;
+      $deleted    = 0;
       $modeltable = getTableForItemType($type . "Model");
       $modelfield = getForeignKeyFieldForTable(getTableForItemType($type . "Model"));
-      $itemtable = getTableForItemType($type);
+      $itemtable  = getTableForItemType($type);
 
-      $query = "SELECT `" . $itemtable . "`.`name` AS ITEM_0, `glpi_locations`.`completename` AS ITEM_1, `" . $itemtable . "`.`otherserial` AS ITEM_2, `glpi_infocoms`.`buy_date` AS ITEM_3, `glpi_users`.`name` AS ITEM_4, `glpi_users`.`realname` AS ITEM_4_2, `glpi_users`.`id` AS ITEM_4_3, `glpi_users`.`firstname` AS ITEM_4_4,`glpi_groups`.`name` AS ITEM_5,`glpi_groups`.`id` AS ITEM_5_1,`$modeltable`.`name` AS ITEM_6 ";
-      $query .= ", `glpi_manufacturers`.`name` AS ITEM_7, `glpi_infocoms`.`value` AS ITEM_8, `" . $itemtable . "`.`id` AS id,`" . $itemtable . "`.`comment` AS ITEM_9, `glpi_infocoms`.`decommission_date` AS ITEM_10,'$type' AS TYPE
+      $query = "SELECT `" . $itemtable . "`.`name` AS ITEM_0, `glpi_locations`.`completename` AS ITEM_1, 
+      `" . $itemtable . "`.`otherserial` AS ITEM_2, `glpi_infocoms`.`buy_date` AS ITEM_3, `glpi_users`.`name` AS ITEM_4, 
+      `glpi_users`.`realname` AS ITEM_4_2, `glpi_users`.`id` AS ITEM_4_3, `glpi_users`.`firstname` AS ITEM_4_4,
+      `glpi_groups`.`name` AS ITEM_5,`glpi_groups`.`id` AS ITEM_5_1,`$modeltable`.`name` AS ITEM_6 ";
+      $query .= ", `glpi_manufacturers`.`name` AS ITEM_7, `glpi_infocoms`.`value` AS ITEM_8, `" . $itemtable . "`.`id` AS id,
+      `" . $itemtable . "`.`comment` AS ITEM_9, `glpi_infocoms`.`decommission_date` AS ITEM_10,'$type' AS TYPE
             FROM `" . $itemtable . "`
             LEFT JOIN `glpi_locations` ON (`" . $itemtable . "`.`locations_id` = `glpi_locations`.`id`)
             LEFT JOIN `glpi_infocoms` ON (`" . $itemtable . "`.`id` = `glpi_infocoms`.`items_id` AND `glpi_infocoms`.`itemtype` = '" . $type . "')
@@ -327,7 +334,7 @@ class PluginFinancialreportsFinancialreport extends CommonDBTM
       if ($item->maybeDeleted()) {
          $LINK = " ";
          if ($first) {
-            $LINK = " ";
+            $LINK  = " ";
             $first = false;
          }
          $query .= $LINK . "`" . $itemtable . "`.`is_deleted` = '$deleted' ";
@@ -336,7 +343,7 @@ class PluginFinancialreportsFinancialreport extends CommonDBTM
       if ($item->maybeTemplate()) {
          $LINK = " AND ";
          if ($first) {
-            $LINK = " ";
+            $LINK  = " ";
             $first = false;
          }
          $query .= $LINK . "`" . $itemtable . "`.`is_template` = '0' ";
@@ -345,13 +352,13 @@ class PluginFinancialreportsFinancialreport extends CommonDBTM
       if ($item->isEntityAssign()) {
          $LINK = " AND ";
          if ($first) {
-            $LINK = " ";
+            $LINK  = " ";
             $first = false;
          }
 
          $query .= getEntitiesRestrictRequest($LINK, $itemtable);
       }
-      $query_state = "SELECT `states_id`
+      $query_state  = "SELECT `states_id`
                   FROM `glpi_plugin_financialreports_configs`";
       $result_state = $DB->query($query_state);
       if ($DB->numrows($result_state) > 0) {
@@ -373,15 +380,13 @@ class PluginFinancialreportsFinancialreport extends CommonDBTM
     * @param $values
     * @param $display
     */
-   function displayReport($values, $display)
-   {
-      global $PDF;
+   function displayReport($values, $display) {
 
-      $default_values["date"] = date("Y-m-d");
+      $default_values["date"]         = date("Y-m-d");
       $default_values["locations_id"] = 0;
-      $default_values["start"] = 0;
-      $default_values["id"] = 0;
-      $default_values["export"] = false;
+      $default_values["start"]        = 0;
+      $default_values["id"]           = 0;
+      $default_values["export"]       = false;
 
       foreach ($default_values as $key => $val) {
          if (isset($values[$key])) {
@@ -402,15 +407,15 @@ class PluginFinancialreportsFinancialreport extends CommonDBTM
       $param = new PluginFinancialreportsParameter();
       $param->getFromDB('1');
 
-      $first = false;
-      $deleted = 0;
+      $first        = false;
+      $deleted      = 0;
       $master_total = 0;
       $title_report = __('Asset situation ended on', 'financialreports') . " " . Html::convDate($date);
-      $start = 0;
-      $numrows = 0;
-      $end_display = $start + $_SESSION["glpilist_limit"];
-      $nbcols = 7;
-      $parameters = "date=" . $date . "&amp;locations_id=" . $locations_id;
+      $start        = 0;
+      $numrows      = 0;
+      $end_display  = $start + $_SESSION["glpilist_limit"];
+      $nbcols       = 7;
+      $parameters   = "date=" . $date . "&amp;locations_id=" . $locations_id;
 
       foreach ($display as $key => $val) {
          $$key = $key;
@@ -430,9 +435,9 @@ class PluginFinancialreportsFinancialreport extends CommonDBTM
          $items = $this->getItems('Computer', $param, "computers_otherserial", $date, 0, "", $locations_id);
          $master_total += $total;
          if ($output_type == Search::PDF_OUTPUT_LANDSCAPE) {
-            $PDF->affiche_tableau($total, $items, _n('Computer', 'Computers', 2));
+            $PDF->display_table($total, $items, _n('Computer', 'Computers', 2));
          } else {
-            $this->afficheTableau($date, $displaypc, $output_type, $itemtable, $end_display, $start, $nbcols, _n('Computer', 'Computers', 2), $total, $items, $locations_id);
+            $this->displayTable($date, $displaypc, $output_type, $itemtable, $end_display, $start, $nbcols, _n('Computer', 'Computers', 2), $total, $items, $locations_id);
          }
          if ($total != 0 && $output_type == Search::PDF_OUTPUT_LANDSCAPE) $PDF->AddPage();
          //////////////////////PORTABLES///////////////
@@ -440,9 +445,9 @@ class PluginFinancialreportsFinancialreport extends CommonDBTM
          $items = $this->getItems('Computer', $param, "notebooks_otherserial", $date, 0, "", $locations_id);
          $master_total += $total;
          if ($output_type == Search::PDF_OUTPUT_LANDSCAPE) {
-            $PDF->affiche_tableau($total, $items, _n('Notebook', 'Notebooks', 2, 'financialreports'));
+            $PDF->display_table($total, $items, _n('Notebook', 'Notebooks', 2, 'financialreports'));
          } else {
-            $this->afficheTableau($date, $displaynotebook, $output_type, $itemtable, $end_display, $start, $nbcols, _n('Notebook', 'Notebooks', 2, 'financialreports'), $total, $items, $locations_id);
+            $this->displayTable($date, $displaynotebook, $output_type, $itemtable, $end_display, $start, $nbcols, _n('Notebook', 'Notebooks', 2, 'financialreports'), $total, $items, $locations_id);
          }
          if ($total != 0 && $output_type == Search::PDF_OUTPUT_LANDSCAPE) $PDF->AddPage();
          //////////////////////SERVERS///////////////
@@ -450,9 +455,9 @@ class PluginFinancialreportsFinancialreport extends CommonDBTM
          $items = $this->getItems('Computer', $param, "servers_otherserial", $date, 0, "", $locations_id);
          $master_total += $total;
          if ($output_type == Search::PDF_OUTPUT_LANDSCAPE) {
-            $PDF->affiche_tableau($total, $items, _n('Server', 'Servers', 2, 'financialreports'));
+            $PDF->display_table($total, $items, _n('Server', 'Servers', 2, 'financialreports'));
          } else {
-            $this->afficheTableau($date, $displayserver, $output_type, $itemtable, $end_display, $start, $nbcols, _n('Server', 'Servers', 2, 'financialreports'), $total, $items, $locations_id);
+            $this->displayTable($date, $displayserver, $output_type, $itemtable, $end_display, $start, $nbcols, _n('Server', 'Servers', 2, 'financialreports'), $total, $items, $locations_id);
          }
          if ($total != 0 && $output_type == Search::PDF_OUTPUT_LANDSCAPE) $PDF->AddPage();
          //No config
@@ -464,9 +469,9 @@ class PluginFinancialreportsFinancialreport extends CommonDBTM
          $master_total += $total;
          if ($total > 1) {
             if ($output_type == Search::PDF_OUTPUT_LANDSCAPE) {
-               $PDF->affiche_tableau($total, $items, _n('Computer', 'Computers', 2));
+               $PDF->display_table($total, $items, _n('Computer', 'Computers', 2));
             } else {
-               $this->afficheTableau($date, $displaypc, $output_type, $itemtable, $end_display, $start, $nbcols, _n('Computer', 'Computers', 2), $total, $items, $locations_id);
+               $this->displayTable($date, $displaypc, $output_type, $itemtable, $end_display, $start, $nbcols, _n('Computer', 'Computers', 2), $total, $items, $locations_id);
             }
          }
          if ($total != 0 && $output_type == Search::PDF_OUTPUT_LANDSCAPE) $PDF->AddPage();
@@ -474,61 +479,61 @@ class PluginFinancialreportsFinancialreport extends CommonDBTM
 
       //////////////////////MONITORS///////////////
       $itemtable = getTableForItemType('Monitor');
-      $total = $this->getItemsTotal('Monitor', $param, "monitors_otherserial", $date, 0, "", $locations_id);
-      $items = $this->getItems('Monitor', $param, "monitors_otherserial", $date, 0, "", $locations_id);
+      $total     = $this->getItemsTotal('Monitor', $param, "monitors_otherserial", $date, 0, "", $locations_id);
+      $items     = $this->getItems('Monitor', $param, "monitors_otherserial", $date, 0, "", $locations_id);
       $master_total += $total;
       if ($output_type == Search::PDF_OUTPUT_LANDSCAPE) {
-         $PDF->affiche_tableau($total, $items, _n('Monitor', 'Monitors', 2));
+         $PDF->display_table($total, $items, _n('Monitor', 'Monitors', 2));
       } else {
-         $this->afficheTableau($date, $displaymonitor, $output_type, $itemtable, $end_display, $start, $nbcols, _n('Monitor', 'Monitors', 2), $total, $items, $locations_id);
+         $this->displayTable($date, $displaymonitor, $output_type, $itemtable, $end_display, $start, $nbcols, _n('Monitor', 'Monitors', 2), $total, $items, $locations_id);
       }
       if ($total != 0 && $output_type == Search::PDF_OUTPUT_LANDSCAPE) $PDF->AddPage();
 
       //////////////////////PRINTERS///////////////
       $itemtable = getTableForItemType('Printer');
-      $total = $this->getItemsTotal('Printer', $param, "printers_otherserial", $date, 0, "", $locations_id);
-      $items = $this->getItems('Printer', $param, "printers_otherserial", $date, 0, "", $locations_id);
+      $total     = $this->getItemsTotal('Printer', $param, "printers_otherserial", $date, 0, "", $locations_id);
+      $items     = $this->getItems('Printer', $param, "printers_otherserial", $date, 0, "", $locations_id);
       $master_total += $total;
       if ($output_type == Search::PDF_OUTPUT_LANDSCAPE) {
-         $PDF->affiche_tableau($total, $items, _n('Printer', 'Printers', 2));
+         $PDF->display_table($total, $items, _n('Printer', 'Printers', 2));
       } else {
-         $this->afficheTableau($date, $displayprinter, $output_type, $itemtable, $end_display, $start, $nbcols, _n('Printer', 'Printers', 2), $total, $items, $locations_id);
+         $this->displayTable($date, $displayprinter, $output_type, $itemtable, $end_display, $start, $nbcols, _n('Printer', 'Printers', 2), $total, $items, $locations_id);
       }
       if ($total != 0 && $output_type == Search::PDF_OUTPUT_LANDSCAPE) $PDF->AddPage();
 
       //////////////////////NETWORK///////////////
       $itemtable = getTableForItemType('NetworkEquipment');
-      $total = $this->getItemsTotal('NetworkEquipment', $param, "networkequipments_otherserial", $date, 0, "", $locations_id);
-      $items = $this->getItems('NetworkEquipment', $param, "networkequipments_otherserial", $date, 0, "", $locations_id);
+      $total     = $this->getItemsTotal('NetworkEquipment', $param, "networkequipments_otherserial", $date, 0, "", $locations_id);
+      $items     = $this->getItems('NetworkEquipment', $param, "networkequipments_otherserial", $date, 0, "", $locations_id);
       $master_total += $total;
       if ($output_type == Search::PDF_OUTPUT_LANDSCAPE) {
-         $PDF->affiche_tableau($total, $items, _n('Network device', 'Network devices', 2));
+         $PDF->display_table($total, $items, _n('Network device', 'Network devices', 2));
       } else {
-         $this->afficheTableau($date, $displaynetworking, $output_type, $itemtable, $end_display, $start, $nbcols, _n('Network device', 'Network devices', 2), $total, $items, $locations_id);
+         $this->displayTable($date, $displaynetworking, $output_type, $itemtable, $end_display, $start, $nbcols, _n('Network device', 'Network devices', 2), $total, $items, $locations_id);
       }
       if ($total != 0 && $output_type == Search::PDF_OUTPUT_LANDSCAPE) $PDF->AddPage();
 
       //////////////////////PERIPHERIQUES///////////////
       $itemtable = getTableForItemType('Peripheral');
-      $total = $this->getItemsTotal('Peripheral', $param, "peripherals_otherserial", $date, 0, "", $locations_id);
-      $items = $this->getItems('Peripheral', $param, "peripherals_otherserial", $date, 0, "", $locations_id);
+      $total     = $this->getItemsTotal('Peripheral', $param, "peripherals_otherserial", $date, 0, "", $locations_id);
+      $items     = $this->getItems('Peripheral', $param, "peripherals_otherserial", $date, 0, "", $locations_id);
       $master_total += $total;
       if ($output_type == Search::PDF_OUTPUT_LANDSCAPE) {
-         $PDF->affiche_tableau($total, $items, _n('Device', 'Devices', 2));
+         $PDF->display_table($total, $items, _n('Device', 'Devices', 2));
       } else {
-         $this->afficheTableau($date, $displayperipheral, $output_type, $itemtable, $end_display, $start, $nbcols, _n('Device', 'Devices', 2), $total, $items, $locations_id);
+         $this->displayTable($date, $displayperipheral, $output_type, $itemtable, $end_display, $start, $nbcols, _n('Device', 'Devices', 2), $total, $items, $locations_id);
       }
       if ($total != 0 && $output_type == Search::PDF_OUTPUT_LANDSCAPE) $PDF->AddPage();
 
       //////////////////////PHONES///////////////
       $itemtable = getTableForItemType('Phone');
-      $total = $this->getItemsTotal('Phone', $param, "phones_otherserial", $date, 0, "", $locations_id);
-      $items = $this->getItems('Phone', $param, "phones_otherserial", $date, 0, "", $locations_id);
+      $total     = $this->getItemsTotal('Phone', $param, "phones_otherserial", $date, 0, "", $locations_id);
+      $items     = $this->getItems('Phone', $param, "phones_otherserial", $date, 0, "", $locations_id);
       $master_total += $total;
       if ($output_type == Search::PDF_OUTPUT_LANDSCAPE) {
-         $PDF->affiche_tableau($total, $items, _n('Phone', 'Phones', 2));
+         $PDF->display_table($total, $items, _n('Phone', 'Phones', 2));
       } else {
-         $this->afficheTableau($date, $displayphone, $output_type, $itemtable, $end_display, $start, $nbcols, _n('Phone', 'Phones', 2), $total, $items, $locations_id);
+         $this->displayTable($date, $displayphone, $output_type, $itemtable, $end_display, $start, $nbcols, _n('Phone', 'Phones', 2), $total, $items, $locations_id);
       }
       if ($total != 0 && $output_type == Search::PDF_OUTPUT_LANDSCAPE) $PDF->AddPage();
       //////////////////////SORTIS///////////////
@@ -537,9 +542,9 @@ class PluginFinancialreportsFinancialreport extends CommonDBTM
       $items = $this->selectItemsForDisposalQuery($locations_id);
 
       if ($output_type == Search::PDF_OUTPUT_LANDSCAPE) {
-         $PDF->affiche_tableau($total, $items, _n('Element out', 'Elements out', 2, 'financialreports'), 1);
+         $PDF->display_table($total, $items, _n('Element out', 'Elements out', 2, 'financialreports'), 1);
       } else {
-         $this->afficheTableau($date, $displaydisposal, $output_type, "disposal", $end_display, $start, $nbcols, _n('Element out', 'Elements out', 2, 'financialreports'), $total, $items, $locations_id);
+         $this->displayTable($date, $displaydisposal, $output_type, "disposal", $end_display, $start, $nbcols, _n('Element out', 'Elements out', 2, 'financialreports'), $total, $items, $locations_id);
       }
       if ($total != 0 && $output_type == Search::PDF_OUTPUT_LANDSCAPE) $PDF->AddPage();
 
@@ -547,7 +552,7 @@ class PluginFinancialreportsFinancialreport extends CommonDBTM
 
       if ($output_type == Search::PDF_OUTPUT_LANDSCAPE) {
          //////////Total general////////////////
-         $PDF->affiche_tableau_fin($master_total);
+         $PDF->display_table_fin($master_total);
          //////////END////////////////
          $PDF->Output();
       }
@@ -558,7 +563,7 @@ class PluginFinancialreportsFinancialreport extends CommonDBTM
          echo Search::showNewLine($output_type);
          echo Search::showEndLine($output_type);
       }
-      $row_num = 6000;
+      $row_num  = 6000;
       $item_num = 1;
       echo Search::showNewLine($output_type, $row_num % 2);
       echo Search::showItem($output_type, __('General Total', 'financialreports'), $item_num, $row_num);
@@ -588,14 +593,14 @@ class PluginFinancialreportsFinancialreport extends CommonDBTM
     * @param $total
     * @param $items
     * @param $locations_id
+    *
     * @return int
     */
-   function afficheTableau($date, $display, $output_type, $itemtable, $end_display, $start, $nbcols, $titre, $total, $items, $locations_id)
-   {
+   function displayTable($date, $display, $output_type, $itemtable, $end_display, $start, $nbcols, $titre, $total, $items, $locations_id) {
       global $CFG_GLPI;
 
-      $first = true;
-      $deleted = 0;
+      $first        = true;
+      $deleted      = 0;
       $master_total = 0;
 
       $master_total += $total;
@@ -612,7 +617,7 @@ class PluginFinancialreportsFinancialreport extends CommonDBTM
          if ($output_type == Search::HTML_OUTPUT) {
             if ($total != -1) {
                echo "<th>" . $titre . "</th><th><span class='red'>"
-                  . Html::formatNumber($total) . " " . _n('Euro', 'Euros', 2, 'financialreports') . "</span></th><th>";
+                    . Html::formatNumber($total) . " " . _n('Euro', 'Euros', 2, 'financialreports') . "</span></th><th>";
             } else {
                echo "<th>" . $titre . "</th><th></th><th>";
             }
@@ -622,7 +627,7 @@ class PluginFinancialreportsFinancialreport extends CommonDBTM
                $status = "true";
 
             echo "<a href='" . $CFG_GLPI["root_doc"] . "/plugins/financialreports/front/financialreport.php?"
-               . $display . "=" . $status . "&date=" . $date . "&locations_id=" . $locations_id . "'>";
+                 . $display . "=" . $status . "&date=" . $date . "&locations_id=" . $locations_id . "'>";
             if ($_SESSION[$display])
                echo __('Hide', 'financialreports');
             else
@@ -676,7 +681,7 @@ class PluginFinancialreportsFinancialreport extends CommonDBTM
 
                echo Search::showNewLine($output_type, $row_num % 2);
                //name
-               $link = Toolbox::getItemTypeFormURL($data["TYPE"]);
+               $link         = Toolbox::getItemTypeFormURL($data["TYPE"]);
                $output_iddev = "<a href='" . $link . "?id=" . $data["id"] . "'>" . $data["ITEM_0"] . ($_SESSION["glpiis_ids_visible"] ? " (" . $data["id"] . ")" : "") . "</a>";
                echo Search::showItem($output_type, $output_iddev, $item_num, $row_num);
                //otherserial
@@ -687,7 +692,7 @@ class PluginFinancialreportsFinancialreport extends CommonDBTM
                if ($itemtable != 'disposal') {
                   //user
                   $username_computer = formatUserName($data["ITEM_4_3"], $data["ITEM_4"], $data["ITEM_4_2"], $data["ITEM_4_4"]);
-                  $output_iduser = "<a href='" . $CFG_GLPI["root_doc"] . "/front/user.form.php?id=" . $data["ITEM_4_3"] . "'>" . $username_computer . "</a>";
+                  $output_iduser     = "<a href='" . $CFG_GLPI["root_doc"] . "/front/user.form.php?id=" . $data["ITEM_4_3"] . "'>" . $username_computer . "</a>";
                   if ($data["ITEM_4_3"] && $data["ITEM_5"]) {
                      $output_iduser .= " / <a href='" . $CFG_GLPI["root_doc"] . "/front/group.form.php?id=" . $data["ITEM_5_1"] . "'>" . $data["ITEM_5"] . ($_SESSION["glpiis_ids_visible"] ? " (" . $data["ITEM_5_1"] . ")" : "") . "</a>";
                   } else if (!isset($data["ITEM_4_3"]) && $data["ITEM_5"]) {
@@ -728,15 +733,14 @@ class PluginFinancialreportsFinancialreport extends CommonDBTM
    }
 
    /**
-    * @param $start
-    * @param $numrows
-    * @param $target
-    * @param $parameters
+    * @param     $start
+    * @param     $numrows
+    * @param     $target
+    * @param     $parameters
     * @param int $item_type_output
     * @param int $item_type_output_param
     */
-   static function printPager($start, $numrows, $target, $parameters, $item_type_output = 0, $item_type_output_param = 0)
-   {
+   static function printPager($start, $numrows, $target, $parameters, $item_type_output = 0, $item_type_output_param = 0) {
       global $CFG_GLPI;
 
       $list_limit = $_SESSION['glpilist_limit'];
@@ -765,30 +769,30 @@ class PluginFinancialreportsFinancialreport extends CommonDBTM
       // Print it
 
       echo "<form method='POST' action=\"" . $CFG_GLPI["root_doc"] .
-         "/plugins/financialreports/front/report.dynamic.php\" target='_blank'>\n";
+           "/plugins/financialreports/front/report.dynamic.php\" target='_blank'>\n";
 
       echo "<table class='tab_cadre_pager'>\n";
       echo "<tr>\n";
 
       if (isset($_SESSION["glpiactiveprofile"])
-         && $_SESSION["glpiactiveprofile"]["interface"] == "central"
+          && $_SESSION["glpiactiveprofile"]["interface"] == "central"
       ) {
          echo "<td class='tab_bg_2' width='30%'>";
 
          echo "<input type='hidden' name='item_type' value='$item_type_output'>";
          if ($item_type_output_param != 0)
             echo "<input type='hidden' name='item_type_param' value='" .
-               serialize($item_type_output_param) . "'>";
+                 serialize($item_type_output_param) . "'>";
          $explode = explode("&amp;", $parameters);
          for ($i = 0; $i < count($explode); $i++) {
             $pos = strpos($explode[$i], '=');
             echo "<input type='hidden' name=\"" . substr($explode[$i], 0, $pos) . "\" value=\"" .
-               substr($explode[$i], $pos + 1) . "\">";
+                 substr($explode[$i], $pos + 1) . "\">";
          }
          echo "<select name='display_type'>";
          echo "<option value='" . Search::CSV_OUTPUT . "'>" . __('All pages in CSV') . "</option>";
          echo "<option value='-" . Search::PDF_OUTPUT_LANDSCAPE . "'>" . __('All pages in landscape PDF') .
-            "</option>";
+              "</option>";
          echo "</select>&nbsp;";
          echo "<input type='image' onClick=\"window.location.reload()\" name='export'  src='" . $CFG_GLPI["root_doc"] . "/pics/greenbutton.png'
                 title=\"" . __s('Export') . "\" value=\"" . __s('Export') . "\">";
@@ -803,10 +807,10 @@ class PluginFinancialreportsFinancialreport extends CommonDBTM
 
    /**
     * @param string $interface
+    *
     * @return array
     */
-   function getRights($interface = 'central')
-   {
+   function getRights($interface = 'central') {
 
       $values = parent::getRights();
 

@@ -157,7 +157,7 @@ if ($report->canView() || Session::haveRight("config", UPDATE)) {
    echo "<table class='tab_cadre_fixe'><tr class='tab_bg_2'>";
    echo "<td class='right'>" . __('Report date', 'financialreports') . " :</td>";
    echo "<td>";
-   Html::showDateFormItem("date", $_POST["date"], true, true);
+   Html::showDateField("date", ['value' => $_POST["date"]]);
    echo "</td>";
    echo "<td width='60%'>";
    Dropdown::show('Location', array('name' => "locations_id",

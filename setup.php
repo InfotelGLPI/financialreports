@@ -28,8 +28,7 @@
  */
 
 // Init the hooks of the plugins -Needed
-function plugin_init_financialreports()
-{
+function plugin_init_financialreports() {
    global $PLUGIN_HOOKS;
 
    $PLUGIN_HOOKS['csrf_compliant']['financialreports'] = true;
@@ -39,11 +38,11 @@ function plugin_init_financialreports()
    if (Session::getLoginUserID()) {
 
       Plugin::registerClass('PluginFinancialreportsProfile',
-         array('addtabon' => 'Profile'));
+                            array('addtabon' => 'Profile'));
 
       if (Session::haveRight("plugin_financialreports", READ)) {
 
-         $PLUGIN_HOOKS['reports']['financialreports'] =
+         $PLUGIN_HOOKS['reports']['financialreports']            =
             array('front/financialreport.php' => __('Report'));
          $PLUGIN_HOOKS['use_massive_action']['financialreports'] = 1;
 
@@ -60,17 +59,16 @@ function plugin_init_financialreports()
 /**
  * @return array
  */
-function plugin_version_financialreports()
-{
+function plugin_version_financialreports() {
 
    return array(
-      'name' => __('Asset situation', 'financialreports'),
-      'version' => '2.3.0',
-      'oldname' => 'state',
-      'license' => 'GPLv2+',
-      'author' => "<a href='http://infotel.com/services/expertise-technique/glpi/'>Infotel</a>",
-      'homepage' => 'https://github.com/InfotelGLPI/financialreports',
-      'minGlpiVersion' => '9.1',// For compatibility
+      'name'           => __('Asset situation', 'financialreports'),
+      'version'        => '2.4.0',
+      'oldname'        => 'state',
+      'license'        => 'GPLv2+',
+      'author'         => "<a href='http://infotel.com/services/expertise-technique/glpi/'>Infotel</a>",
+      'homepage'       => 'https://github.com/InfotelGLPI/financialreports',
+      'minGlpiVersion' => '9.2',// For compatibility
    );
 }
 
@@ -78,10 +76,9 @@ function plugin_version_financialreports()
 /**
  * @return bool
  */
-function plugin_financialreports_check_prerequisites()
-{
-   if (version_compare(GLPI_VERSION, '0.90', 'lt') || version_compare(GLPI_VERSION, '9.2', 'ge')) {
-      _e('This plugin requires GLPI >= 9.1', 'financialreports');
+function plugin_financialreports_check_prerequisites() {
+   if (version_compare(GLPI_VERSION, '9.2', 'lt') || version_compare(GLPI_VERSION, '9.3', 'ge')) {
+      echo __('This plugin requires GLPI >= 9.2');
       return false;
    }
    return true;
@@ -92,7 +89,6 @@ function plugin_financialreports_check_prerequisites()
 /**
  * @return bool
  */
-function plugin_financialreports_check_config()
-{
+function plugin_financialreports_check_config() {
    return true;
 }
