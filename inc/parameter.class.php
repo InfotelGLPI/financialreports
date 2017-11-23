@@ -34,11 +34,9 @@ if (!defined('GLPI_ROOT')) {
 /**
  * Class PluginFinancialreportsParameter
  */
-class PluginFinancialreportsParameter extends CommonDBTM
-{
+class PluginFinancialreportsParameter extends CommonDBTM {
 
-   function showForm()
-   {
+   function showForm() {
 
       $this->getFromDB('1');
       echo "<div align='center'>";

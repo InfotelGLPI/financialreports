@@ -35,49 +35,63 @@ if (!defined('GLPI_ROOT')) {
 /**
  * Class PluginFinancialreportsConfig
  */
-class PluginFinancialreportsConfig extends CommonDBTM
-{
+class PluginFinancialreportsConfig extends CommonDBTM {
 
-   function showForm()
-   {
+   public static $rightname = 'plugin_financialreports';
+
+   static function canPurge() {
+      return Session::haveRight(self::$rightname, READ);
+   }
+
+   function showForm() {
       global $DB;
 
       $query = "SELECT * FROM
                `" . $this->getTable() . "`
                ORDER BY `states_id` ASC";
+
+      $used = array();
+
       if ($result = $DB->query($query)) {
          $number = $DB->numrows($result);
          if ($number != 0) {
 
-            echo "<form method='post' name='massiveaction_form' id='massiveaction_form' action='" . $this->getFormURL() . "'>";
+            $rand = mt_rand();
             echo "<div align='center'>";
+            Html::openMassiveActionsForm('mass' . __CLASS__ . $rand);
+            $massiveactionparams = ['item'             => __CLASS__,
+                                    'specific_actions' => ['purge' => _x('button', 'Delete permanently')],
+                                    'container'        => 'mass' . __CLASS__ . $rand];
+            Html::showMassiveActions($massiveactionparams);
+
             echo "<table class='tab_cadre_fixe' cellpadding='5'>";
             echo "<tr>";
-            echo "<th>" . __('Status') . "</th><th></th>";
+            echo "<th>" . Html::getCheckAllAsCheckbox('mass' . __CLASS__ . $rand) . "</th>";
+            echo "<th>" . __('Status') . "</th>";
             echo "</tr>";
             while ($ligne = $DB->fetch_array($result)) {
-               $ID = $ligne["id"];
+               $used[$ligne["states_id"]] = $ligne["states_id"];
+
                echo "<tr class='tab_bg_1'>";
                echo "<td width='10'>";
-               echo "<input type='checkbox' name='item[$ID]'";
-               if (isset($_POST['check']) && $_POST['check'] == 'all')
-                  echo " checked ";
-               echo ">";
+               echo Html::showMassiveActionCheckBox(__CLASS__, $ligne["id"]);
                echo "</td>";
                echo "<td>" . Dropdown::getDropdownName("glpi_states", $ligne["states_id"]) . "</td>";
                echo "</tr>";
             }
             echo "</table></div>";
 
-            Html::openArrowMassives("massiveaction_form", true);
-            Html::closeArrowMassives(array('delete_state' => _sx('button', 'Delete permanently')));
+            $massiveactionparams['ontop'] = false;
+            Html::showMassiveActions($massiveactionparams);
             Html::closeForm();
 
             echo "<div align='center'><form method='post' action='" . $this->getFormURL() . "'>";
             echo "<table class='tab_cadre_fixe' cellpadding='5'><tr ><th colspan='2'>";
             echo __('Disposal status', 'financialreports') . " : </th></tr>";
             echo "<tr class='tab_bg_1'><td>";
-            Dropdown::show('State', array('name' => "states_id", 'value' => $ligne["states_id"]));
+            Dropdown::show('State', array('name'  => "states_id",
+                                          'used'  => $used,
+                                          'value' => $ligne["states_id"]));
             echo "</td>";
             echo "<td>";
             echo "<div align='center'>";
@@ -105,16 +119,4 @@ class PluginFinancialreportsConfig extends CommonDBTM
       }
    }
 
-   /**
-    * @param string $interface
-    * @return array
-    */
-   function getRights($interface = 'central')
-   {
-
-      $values = parent::getRights();
-
-      unset($values[CREATE], $values[UPDATE], $values[DELETE], $values[PURGE]);
-      return $values;
-   }
 }
