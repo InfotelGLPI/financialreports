@@ -106,7 +106,7 @@ class PluginFinancialreportsFinancialreport extends CommonDBTM {
       $typefield  = getForeignKeyFieldForTable(getTableForItemType($itemtype . "Type"));
       $deleted    = 0;
       $first      = true;
-      $items      = "";
+      $items      = [];
 
       $query = "SELECT `$itemtable`.`name` AS ITEM_0, `glpi_locations`.`completename` AS ITEM_1, `$itemtable`.`otherserial` AS ITEM_2, 
       `glpi_infocoms`.`buy_date` AS ITEM_3, `glpi_users`.`name` AS ITEM_4, `glpi_users`.`realname` AS ITEM_4_2, 
