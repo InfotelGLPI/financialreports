@@ -1,6 +1,6 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Financialreports Development Team
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the GLPI - Financialreports plugin package.
 # 
 # Translators:
 # Rafael Fontenelle <rffontenelle@gmail.com>, 2012-2013
@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GLPI Project - financialreports plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-26 10:12+0200\n"
-"PO-Revision-Date: 2016-09-26 08:12+0000\n"
-"Last-Translator: Xavier CAILLAUD <tsmr@thetsmr.fr>\n"
+"POT-Creation-Date: 2018-05-29 15:31+0200\n"
+"PO-Revision-Date: 2018-05-29 13:32+0000\n"
+"Last-Translator: Amandine Manceau\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/tsmr/GLPI_financialreports/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,15 +18,11 @@ msgstr ""
 "Language: pt_BR\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: setup.php:61 inc/financialreport.class.php:41 inc/profile.class.php:126
+#: setup.php:65 inc/financialreport.class.php:49 inc/profile.class.php:152
 msgid "Asset situation"
 msgid_plural "Asset situations"
 msgstr[0] "Situação do ativo"
 msgstr[1] "Situação dos ativos"
-
-#: setup.php:74
-msgid "This plugin requires GLPI >= 9.1"
-msgstr ""
 
 #: front/config.form.php:71
 msgid "Please activate the plugin"
@@ -36,69 +32,69 @@ msgstr "Por favor, ative o plugin"
 msgid "Report date"
 msgstr "Data do relatório"
 
-#: inc/config.class.php:73 inc/config.class.php:88
+#: inc/config.class.php:90 inc/config.class.php:107
 msgid "Disposal status"
 msgstr "Status de descarte"
 
-#: inc/financialreport.class.php:321 inc/pdf.class.php:224
+#: inc/financialreport.class.php:413 inc/pdf.class.php:210
 msgid "Asset situation ended on"
 msgstr "Situação do ativo terminou em"
 
-#: inc/financialreport.class.php:356 inc/financialreport.class.php:358
-#: inc/parameter.class.php:51
+#: inc/financialreport.class.php:448 inc/financialreport.class.php:450
+#: inc/parameter.class.php:54
 msgid "Notebook"
 msgid_plural "Notebooks"
 msgstr[0] "Notebook"
 msgstr[1] "Notebooks"
 
-#: inc/financialreport.class.php:366 inc/financialreport.class.php:368
-#: inc/parameter.class.php:55
+#: inc/financialreport.class.php:458 inc/financialreport.class.php:460
+#: inc/parameter.class.php:58
 msgid "Server"
 msgid_plural "Servers"
 msgstr[0] "Servidor"
 msgstr[1] "Servidores"
 
-#: inc/financialreport.class.php:453 inc/financialreport.class.php:455
+#: inc/financialreport.class.php:545 inc/financialreport.class.php:547
 msgid "Element out"
 msgid_plural "Elements out"
 msgstr[0] "Elemento fora"
 msgstr[1] "Elementos fora"
 
-#: inc/financialreport.class.php:477 inc/pdf.class.php:324
+#: inc/financialreport.class.php:569 inc/pdf.class.php:318
 msgid "General Total"
 msgstr "Total geral"
 
-#: inc/financialreport.class.php:478 inc/financialreport.class.php:513
-#: inc/financialreport.class.php:539 inc/financialreport.class.php:563
+#: inc/financialreport.class.php:570 inc/financialreport.class.php:620
+#: inc/financialreport.class.php:646 inc/financialreport.class.php:670
 msgid "Euro"
 msgid_plural "Euros"
 msgstr[0] "Euro"
 msgstr[1] "Euros"
 
-#: inc/financialreport.class.php:525
+#: inc/financialreport.class.php:632
 msgid "Hide"
 msgstr "Esconder"
 
-#: inc/financialreport.class.php:527
+#: inc/financialreport.class.php:634
 msgid "Display"
 msgstr "Exibir"
 
-#: inc/financialreport.class.php:553 inc/pdf.class.php:260
+#: inc/financialreport.class.php:660 inc/pdf.class.php:252
 msgid "User / Group"
 msgstr "Usuário / Grupo"
 
-#: inc/financialreport.class.php:563
+#: inc/financialreport.class.php:670
 msgid "Purchase Price HT in"
 msgstr "Preço de compra HT em"
 
-#: inc/financialreport.class.php:594
+#: inc/financialreport.class.php:701
 msgid "In stock / available"
 msgstr "em estoque / disponível"
 
-#: inc/parameter.class.php:43
+#: inc/parameter.class.php:46
 msgid "Identification parameters of inventory number"
 msgstr "Parâmetros de identificação do número do inventário"
 
-#: inc/pdf.class.php:267 inc/pdf.class.php:271
+#: inc/pdf.class.php:259 inc/pdf.class.php:263
 msgid "HT"
 msgstr "HT"

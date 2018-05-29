@@ -3,6 +3,8 @@
 # This file is distributed under the same license as the GLPI - Financialreports plugin package.
 # 
 # Translators:
+# David Stepan <stepand@tiscali.cz>, 2015-2016
+# Pavel Borecki <pavel.borecki@gmail.com>, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: GLPI Project - financialreports plugin\n"
@@ -10,89 +12,99 @@ msgstr ""
 "POT-Creation-Date: 2018-05-29 15:31+0200\n"
 "PO-Revision-Date: 2018-05-29 13:32+0000\n"
 "Last-Translator: Amandine Manceau\n"
-"Language-Team: English (United Kingdom) (http://www.transifex.com/tsmr/GLPI_financialreports/language/en_GB/)\n"
+"Language-Team: Czech (Czech Republic) (http://www.transifex.com/tsmr/GLPI_financialreports/language/cs_CZ/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: en_GB\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: cs_CZ\n"
+"Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n <= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;\n"
 
 #: setup.php:65 inc/financialreport.class.php:49 inc/profile.class.php:152
 msgid "Asset situation"
 msgid_plural "Asset situations"
-msgstr[0] "Asset situation"
-msgstr[1] "Asset situations"
+msgstr[0] "Stav majetku"
+msgstr[1] "Stavy majetku"
+msgstr[2] "Stavů majetku"
+msgstr[3] "Stavů majetku"
 
 #: front/config.form.php:71
 msgid "Please activate the plugin"
-msgstr "Please activate the plugin"
+msgstr "Zapněte zásuvný modul"
 
 #: front/financialreport.php:158
 msgid "Report date"
-msgstr "Report date"
+msgstr "Datum hlášení"
 
 #: inc/config.class.php:90 inc/config.class.php:107
 msgid "Disposal status"
-msgstr "Disposal status"
+msgstr "Stav vyřazení"
 
 #: inc/financialreport.class.php:413 inc/pdf.class.php:210
 msgid "Asset situation ended on"
-msgstr "Asset situation ended on"
+msgstr "Kdy byla situace majetku ukončena"
 
 #: inc/financialreport.class.php:448 inc/financialreport.class.php:450
 #: inc/parameter.class.php:54
 msgid "Notebook"
 msgid_plural "Notebooks"
 msgstr[0] "Notebook"
-msgstr[1] "Notebooks"
+msgstr[1] "Notebooky"
+msgstr[2] "Notebooků"
+msgstr[3] "Notebooků"
 
 #: inc/financialreport.class.php:458 inc/financialreport.class.php:460
 #: inc/parameter.class.php:58
 msgid "Server"
 msgid_plural "Servers"
 msgstr[0] "Server"
-msgstr[1] "Servers"
+msgstr[1] "Servery"
+msgstr[2] "Serverů"
+msgstr[3] "Serverů"
 
 #: inc/financialreport.class.php:545 inc/financialreport.class.php:547
 msgid "Element out"
 msgid_plural "Elements out"
-msgstr[0] "Element out"
-msgstr[1] "Elements out"
+msgstr[0] "Prvek ukončen"
+msgstr[1] "Prvky ukončeny"
+msgstr[2] "Prvků ukončeno"
+msgstr[3] "Prvků ukončeno"
 
 #: inc/financialreport.class.php:569 inc/pdf.class.php:318
 msgid "General Total"
-msgstr "General Total"
+msgstr "Všeobecně celkem"
 
 #: inc/financialreport.class.php:570 inc/financialreport.class.php:620
 #: inc/financialreport.class.php:646 inc/financialreport.class.php:670
 msgid "Euro"
 msgid_plural "Euros"
-msgstr[0] "Euro"
-msgstr[1] "Euros"
+msgstr[0] "Kč"
+msgstr[1] "Kč"
+msgstr[2] "Kč"
+msgstr[3] "Kč"
 
 #: inc/financialreport.class.php:632
 msgid "Hide"
-msgstr "Hide"
+msgstr "Skrýt"
 
 #: inc/financialreport.class.php:634
 msgid "Display"
-msgstr "Display"
+msgstr "Zobrazit"
 
 #: inc/financialreport.class.php:660 inc/pdf.class.php:252
 msgid "User / Group"
-msgstr "User / Group"
+msgstr "Uživatel/skupina"
 
 #: inc/financialreport.class.php:670
 msgid "Purchase Price HT in"
-msgstr "Purchase Price HT in"
+msgstr "Kupní cena HT v "
 
 #: inc/financialreport.class.php:701
 msgid "In stock / available"
-msgstr "In stock / available"
+msgstr "Skladem / k dispozici"
 
 #: inc/parameter.class.php:46
 msgid "Identification parameters of inventory number"
-msgstr "Identification parameters of inventory number"
+msgstr "Identifikační parametry inventárního čísla"
 
 #: inc/pdf.class.php:259 inc/pdf.class.php:263
 msgid "HT"
