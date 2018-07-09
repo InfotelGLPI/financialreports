@@ -63,7 +63,7 @@ function plugin_version_financialreports() {
 
    return array(
       'name'           => __('Asset situation', 'financialreports'),
-      'version'        => '2.4.1',
+      'version'        => '2.5.0',
       'oldname'        => 'state',
       'license'        => 'GPLv2+',
       'author'         => "<a href='http://infotel.com/services/expertise-technique/glpi/'>Infotel</a>",
@@ -77,8 +77,9 @@ function plugin_version_financialreports() {
  * @return bool
  */
 function plugin_financialreports_check_prerequisites() {
-   if (version_compare(GLPI_VERSION, '9.2', 'lt') || version_compare(GLPI_VERSION, '9.3', 'ge')) {
-      echo __('This plugin requires GLPI >= 9.2');
+   if (version_compare(GLPI_VERSION, '9.3', 'lt')
+         || version_compare(GLPI_VERSION, '9.4', 'ge')) {
+      echo __('This plugin requires GLPI >= 9.3');
       return false;
    }
    return true;
