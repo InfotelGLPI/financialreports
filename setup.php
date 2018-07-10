@@ -68,7 +68,7 @@ function plugin_version_financialreports() {
       'license'        => 'GPLv2+',
       'author'         => "<a href='http://infotel.com/services/expertise-technique/glpi/'>Infotel</a>",
       'homepage'       => 'https://github.com/InfotelGLPI/financialreports',
-      'minGlpiVersion' => '9.2',// For compatibility
+      'minGlpiVersion' => '9.3',// For compatibility
    );
 }
 
