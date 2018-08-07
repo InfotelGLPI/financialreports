@@ -99,11 +99,13 @@ class PluginFinancialreportsFinancialreport extends CommonDBTM {
    function queryItems($itemtype, $PluginFinancialreportsParameter, $type, $date, $locations_id) {
       global $DB;
 
-      $itemtable  = getTableForItemType($itemtype);
-      $modeltable = getTableForItemType($itemtype . "Model");
-      $modelfield = getForeignKeyFieldForTable(getTableForItemType($itemtype . "Model"));
-      $typetable  = getTableForItemType($itemtype . "Type");
-      $typefield  = getForeignKeyFieldForTable(getTableForItemType($itemtype . "Type"));
+      $dbu = new DbUtils();
+
+      $itemtable  = $dbu->getTableForItemType($itemtype);
+      $modeltable = $dbu->getTableForItemType($itemtype . "Model");
+      $modelfield = $dbu->getForeignKeyFieldForTable($dbu->getTableForItemType($itemtype . "Model"));
+      $typetable  = $dbu->getTableForItemType($itemtype . "Type");
+      $typefield  = $dbu->getForeignKeyFieldForTable($dbu->getTableForItemType($itemtype . "Type"));
       $deleted    = 0;
       $first      = true;
       $items      = [];
@@ -154,7 +156,7 @@ class PluginFinancialreportsFinancialreport extends CommonDBTM {
             $first = false;
          }
 
-         $query .= getEntitiesRestrictRequest($LINK, $itemtable);
+         $query .= $dbu->getEntitiesRestrictRequest($LINK, $itemtable);
       }
       $query_state  = "SELECT `states_id`
                   FROM `glpi_plugin_financialreports_configs`";
@@ -173,7 +175,7 @@ class PluginFinancialreportsFinancialreport extends CommonDBTM {
       $query .= " AND (`glpi_infocoms`.`buy_date` < '" . $date . "') ";
 
       if (!empty($locations_id)) {
-         $query .= " AND " . getRealQueryForTreeItem('glpi_locations', $locations_id, "`$itemtable`.`locations_id`");
+         $query .= " AND " . $dbu->getRealQueryForTreeItem('glpi_locations', $locations_id, "`$itemtable`.`locations_id`");
       }
 
       $query .= "ORDER BY ITEM_3,ITEM_0 ASC";
@@ -199,9 +201,10 @@ class PluginFinancialreportsFinancialreport extends CommonDBTM {
    function QueryItemsTotalValue($itemtype, $PluginFinancialreportsParameter, $type, $date, $locations_id) {
       global $DB;
 
+      $dbu         = new DbUtils();
       $deleted     = 0;
       $first       = true;
-      $itemtable   = getTableForItemType($itemtype);
+      $itemtable   = $dbu->getTableForItemType($itemtype);
       $item        = new $itemtype();
       $somme       = 0;
       $query_value = "SELECT SUM(`glpi_infocoms`.`value`) AS Total_value
@@ -235,7 +238,7 @@ class PluginFinancialreportsFinancialreport extends CommonDBTM {
             $first = false;
          }
 
-         $query_value .= getEntitiesRestrictRequest($LINK, $itemtable);
+         $query_value .= $dbu->getEntitiesRestrictRequest($LINK, $itemtable);
       }
 
       $query_state  = "SELECT `states_id`
@@ -255,7 +258,7 @@ class PluginFinancialreportsFinancialreport extends CommonDBTM {
       $query_value .= " AND (`glpi_infocoms`.`buy_date` < '" . $date . "') ";
 
       if (!empty($locations_id)) {
-         $query_value .= " AND " . getRealQueryForTreeItem('glpi_locations', $locations_id, "`$itemtable`.`locations_id`");
+         $query_value .= " AND " . $dbu->getRealQueryForTreeItem('glpi_locations', $locations_id, "`$itemtable`.`locations_id`");
       }
 
       $result_value = $DB->query($query_value);
@@ -307,11 +310,12 @@ class PluginFinancialreportsFinancialreport extends CommonDBTM {
    function queryDisposalItems($type, $locations_id) {
       global $DB;
 
+      $dbu        = new DbUtils();
       $first      = true;
       $deleted    = 0;
-      $modeltable = getTableForItemType($type . "Model");
-      $modelfield = getForeignKeyFieldForTable(getTableForItemType($type . "Model"));
-      $itemtable  = getTableForItemType($type);
+      $modeltable = $dbu->getTableForItemType($type . "Model");
+      $modelfield = $dbu->getForeignKeyFieldForTable($dbu->getTableForItemType($type . "Model"));
+      $itemtable  = $dbu->getTableForItemType($type);
 
       $query = "SELECT `" . $itemtable . "`.`name` AS ITEM_0, `glpi_locations`.`completename` AS ITEM_1, 
       `" . $itemtable . "`.`otherserial` AS ITEM_2, `glpi_infocoms`.`buy_date` AS ITEM_3, `glpi_users`.`name` AS ITEM_4, 
@@ -356,7 +360,7 @@ class PluginFinancialreportsFinancialreport extends CommonDBTM {
             $first = false;
          }
 
-         $query .= getEntitiesRestrictRequest($LINK, $itemtable);
+         $query .= $dbu->getEntitiesRestrictRequest($LINK, $itemtable);
       }
       $query_state  = "SELECT `states_id`
                   FROM `glpi_plugin_financialreports_configs`";
@@ -370,7 +374,7 @@ class PluginFinancialreportsFinancialreport extends CommonDBTM {
          $query .= ") ";
       }
       if (!empty($locations_id)) {
-         $query .= " AND " . getRealQueryForTreeItem('glpi_locations', $locations_id, "`$itemtable`.`locations_id`");
+         $query .= " AND " . $dbu->getRealQueryForTreeItem('glpi_locations', $locations_id, "`$itemtable`.`locations_id`");
       }
 
       return $query;
@@ -393,6 +397,8 @@ class PluginFinancialreportsFinancialreport extends CommonDBTM {
             $$key = $values[$key];
          }
       }
+
+      $dbu = new DbUtils();
 
       $output_type = Search::HTML_OUTPUT;
 
@@ -429,7 +435,7 @@ class PluginFinancialreportsFinancialreport extends CommonDBTM {
       echo Search::showHeader($output_type, $end_display - $start + 1, $nbcols, 1); //table + div
 
       if (!empty($param->fields["computers_otherserial"]) || !empty($param->fields["notebooks_otherserial"]) || !empty($param->fields["servers_otherserial"])) {
-         $itemtable = getTableForItemType('Computer');
+         $itemtable = $dbu->getTableForItemType('Computer');
          //////////////////////COMPUTERS///////////////
          $total = $this->getItemsTotal('Computer', $param, "computers_otherserial", $date, 0, "", $locations_id);
          $items = $this->getItems('Computer', $param, "computers_otherserial", $date, 0, "", $locations_id);
@@ -462,7 +468,7 @@ class PluginFinancialreportsFinancialreport extends CommonDBTM {
          if ($total != 0 && $output_type == Search::PDF_OUTPUT_LANDSCAPE) $PDF->AddPage();
          //No config
       } else {
-         $itemtable = getTableForItemType('Computer');
+         $itemtable = $dbu->getTableForItemType('Computer');
          //////////////////////ALL COMPUTERS///////////////
          $total = $this->getItemsTotal('Computer', $param, "no_value", $date, 0, "", $locations_id);
          $items = $this->getItems('Computer', $param, "no_value", $date, 0, "", $locations_id);
@@ -478,7 +484,7 @@ class PluginFinancialreportsFinancialreport extends CommonDBTM {
       }
 
       //////////////////////MONITORS///////////////
-      $itemtable = getTableForItemType('Monitor');
+      $itemtable = $dbu->getTableForItemType('Monitor');
       $total     = $this->getItemsTotal('Monitor', $param, "monitors_otherserial", $date, 0, "", $locations_id);
       $items     = $this->getItems('Monitor', $param, "monitors_otherserial", $date, 0, "", $locations_id);
       $master_total += $total;
@@ -490,7 +496,7 @@ class PluginFinancialreportsFinancialreport extends CommonDBTM {
       if ($total != 0 && $output_type == Search::PDF_OUTPUT_LANDSCAPE) $PDF->AddPage();
 
       //////////////////////PRINTERS///////////////
-      $itemtable = getTableForItemType('Printer');
+      $itemtable = $dbu->getTableForItemType('Printer');
       $total     = $this->getItemsTotal('Printer', $param, "printers_otherserial", $date, 0, "", $locations_id);
       $items     = $this->getItems('Printer', $param, "printers_otherserial", $date, 0, "", $locations_id);
       $master_total += $total;
@@ -502,7 +508,7 @@ class PluginFinancialreportsFinancialreport extends CommonDBTM {
       if ($total != 0 && $output_type == Search::PDF_OUTPUT_LANDSCAPE) $PDF->AddPage();
 
       //////////////////////NETWORK///////////////
-      $itemtable = getTableForItemType('NetworkEquipment');
+      $itemtable = $dbu->getTableForItemType('NetworkEquipment');
       $total     = $this->getItemsTotal('NetworkEquipment', $param, "networkequipments_otherserial", $date, 0, "", $locations_id);
       $items     = $this->getItems('NetworkEquipment', $param, "networkequipments_otherserial", $date, 0, "", $locations_id);
       $master_total += $total;
@@ -514,7 +520,7 @@ class PluginFinancialreportsFinancialreport extends CommonDBTM {
       if ($total != 0 && $output_type == Search::PDF_OUTPUT_LANDSCAPE) $PDF->AddPage();
 
       //////////////////////PERIPHERIQUES///////////////
-      $itemtable = getTableForItemType('Peripheral');
+      $itemtable = $dbu->getTableForItemType('Peripheral');
       $total     = $this->getItemsTotal('Peripheral', $param, "peripherals_otherserial", $date, 0, "", $locations_id);
       $items     = $this->getItems('Peripheral', $param, "peripherals_otherserial", $date, 0, "", $locations_id);
       $master_total += $total;
@@ -526,7 +532,7 @@ class PluginFinancialreportsFinancialreport extends CommonDBTM {
       if ($total != 0 && $output_type == Search::PDF_OUTPUT_LANDSCAPE) $PDF->AddPage();
 
       //////////////////////PHONES///////////////
-      $itemtable = getTableForItemType('Phone');
+      $itemtable = $dbu->getTableForItemType('Phone');
       $total     = $this->getItemsTotal('Phone', $param, "phones_otherserial", $date, 0, "", $locations_id);
       $items     = $this->getItems('Phone', $param, "phones_otherserial", $date, 0, "", $locations_id);
       $master_total += $total;
@@ -690,8 +696,9 @@ class PluginFinancialreportsFinancialreport extends CommonDBTM {
                echo Search::showItem($output_type, Html::convDate($data["ITEM_3"]), $item_num, $row_num);
 
                if ($itemtable != 'disposal') {
+                  $dbu = new DbUtils();
                   //user
-                  $username_computer = formatUserName($data["ITEM_4_3"], $data["ITEM_4"], $data["ITEM_4_2"], $data["ITEM_4_4"]);
+                  $username_computer = $dbu->formatUserName($data["ITEM_4_3"], $data["ITEM_4"], $data["ITEM_4_2"], $data["ITEM_4_4"]);
                   $output_iduser     = "<a href='" . $CFG_GLPI["root_doc"] . "/front/user.form.php?id=" . $data["ITEM_4_3"] . "'>" . $username_computer . "</a>";
                   if ($data["ITEM_4_3"] && $data["ITEM_5"]) {
                      $output_iduser .= " / <a href='" . $CFG_GLPI["root_doc"] . "/front/group.form.php?id=" . $data["ITEM_5_1"] . "'>" . $data["ITEM_5"] . ($_SESSION["glpiis_ids_visible"] ? " (" . $data["ITEM_5_1"] . ")" : "") . "</a>";
