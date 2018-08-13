@@ -85,11 +85,11 @@ class PluginFinancialreportsProfile extends CommonDBTM {
       $profileRight = new ProfileRight();
       foreach ($rights as $right => $value) {
          if ($dbu->countElementsInTable('glpi_profilerights',
-                                  "`profiles_id`='$profiles_id' AND `name`='$right'") && $drop_existing) {
+                                  ["profiles_id" => $profiles_id, "name" => $right]) && $drop_existing) {
             $profileRight->deleteByCriteria(array('profiles_id' => $profiles_id, 'name' => $right));
          }
          if (!$dbu->countElementsInTable('glpi_profilerights',
-                                   "`profiles_id`='$profiles_id' AND `name`='$right'")) {
+                                   ["profiles_id" => $profiles_id, "name" => $right])) {
             $myright['profiles_id'] = $profiles_id;
             $myright['name']        = $right;
             $myright['rights']      = $value;
@@ -223,7 +223,7 @@ class PluginFinancialreportsProfile extends CommonDBTM {
       //Add new rights in glpi_profilerights table
       foreach ($profile->getAllRights(true) as $data) {
          if ($dbu->countElementsInTable("glpi_profilerights",
-                                  "`name` = '" . $data['field'] . "'") == 0) {
+                                  ["name" => $data['field']]) == 0) {
             ProfileRight::addProfileRights(array($data['field']));
          }
       }
