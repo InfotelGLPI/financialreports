@@ -5,15 +5,15 @@
     <state>stable</state>
     <logo>https://raw.githubusercontent.com/InfotelGLPI/financialreports/master/financialreports.png</logo>
     <description>
-        <short>
+        <short>            
             <cs><![CDATA[Finanční hlášení: Majektová situace. Tento zásuvný modul umožňuje vytvořit finanční výkaz (majektovou situaci) pro dané datum.<br />- Export do CSV, PDF]]></cs>
-            <fr><![CDATA[Rapport financier : Arrété du parc. Ce plugin vous permet de générer un arrété du parc à une date donnée.<br />- Export Csv, Pdf]]></fr>
             <en><![CDATA[Financial report : Asset situation. This plugin allows you to generate a financial report (asset situation) for a given date.<br />- Export Csv, Pdf]]></en>
+            <fr><![CDATA[Rapport financier : Arrété du parc. Ce plugin vous permet de générer un arrété du parc à une date donnée.<br />- Export Csv, Pdf]]></fr>
         </short>
         <long>
-            <cs><![CDATA[Finanční hlášení: Majektová situace. Tento zásuvný modul umožňuje vytvořit finanční výkaz (majektovou situaci) pro dané datum.<br /> - V nastavení zásuvného modulu přidáte identifikátor pro každý typ inventáře vybavení související s inventárním číslem (příklad: vaše notebooky mají neopakující se inventární číslo začínající na „NTB“ takže vyplníte nastavení modulu s NTB, servery: SE, Počítače: PC atd.).<br />- Vytvořit výkaz.<br />- Export do CSV, PDF.]]></cs>
-            <fr><![CDATA[Ce plugin vous permet de générer un arrété du parc à une date donnée.<br />- Dans la configuration, renseignez l'identifiant pour chaque type de matériel de l'inventaire correspondant au numéro d'inventaire. (exemple : Vos pcs portables ont un numéro d'inventaire commençant par PO renseignez donc le plugin avec PO, Serveurs : SE, PC Fixes : PC etc).<br />- Générez le rapport.<br />- Export Csv, Pdf]]></fr>
+            <cs><![CDATA[Tento zásuvný modul umožňuje vytvořit finanční výkaz (majektovou situaci) pro dané datum.<br /> - V nastavení modulu přidáte identifikátor pro každý typ inventáře vybavení související s inventárním číslem (příklad: vaše notebooky mají neopakující se inventární číslo začínající na „NTB“ takže vyplníte nastavení modulu s NTB, servery: SE, Počítače: PC atd.).<br />- Vytvořit výkaz.<br />- Export do CSV, PDF.]]></cs>
             <en><![CDATA[This plugin allows you to generate a financial report (asset situation) for a given date.<br />- In plugin setup, add identifier for each type of equipment inventory related to the inventory number (example : your notebooks have un inventory number beginnning with 'PO' so fill the setup plugin with PO, Servers : SE, Computers : PC etc).<br />- Generate the report.<br />- Export Csv, Pdf.]]></en>
+            <fr><![CDATA[Ce plugin vous permet de générer un arrété du parc à une date donnée.<br />- Dans la configuration, renseignez l'identifiant pour chaque type de matériel de l'inventaire correspondant au numéro d'inventaire. (exemple : Vos pcs portables ont un numéro d'inventaire commençant par PO renseignez donc le plugin avec PO, Serveurs : SE, PC Fixes : PC etc).<br />- Générez le rapport.<br />- Export Csv, Pdf]]></fr>
         </long>
     </description>
     <homepage>https://github.com/InfotelGLPI/financialreports</homepage>
@@ -99,7 +99,6 @@
         <lang>en_GB</lang>
         <lang>fi_FI</lang>
         <lang>fr_FR</lang>
-        <lang>pl_PL</lang>
         <lang>pt_BR</lang>
         <lang>ro_RO</lang>
         <lang>ru_RU</lang>
@@ -107,17 +106,17 @@
     </langs>
     <license><![CDATA[GPL v2+]]></license>
     <tags>
-        <en>
+        <cs>
             <tag>Výkazy</tag>
             <tag>Finanční</tag>
+        </cs>
+        <en>
+            <tag>Reports</tag>
+            <tag>Financial</tag>
         </en>
         <fr>
             <tag>Rapports</tag>
             <tag>Financier</tag>
         </fr>
-        <en>
-            <tag>Reports</tag>
-            <tag>Financial</tag>
-        </en>
     </tags>
 </root>
