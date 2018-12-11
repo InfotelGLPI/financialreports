@@ -27,6 +27,8 @@
  --------------------------------------------------------------------------
  */
 
+define('PLUGIN_FINANCIALREPORTS_VERSION', '2.6.0');
+
 // Init the hooks of the plugins -Needed
 function plugin_init_financialreports() {
    global $PLUGIN_HOOKS;
@@ -63,12 +65,17 @@ function plugin_version_financialreports() {
 
    return array(
       'name'           => __('Asset situation', 'financialreports'),
-      'version'        => '2.5.1',
+      'version'        => PLUGIN_FINANCIALREPORTS_VERSION,
       'oldname'        => 'state',
       'license'        => 'GPLv2+',
       'author'         => "<a href='http://infotel.com/services/expertise-technique/glpi/'>Infotel</a>",
       'homepage'       => 'https://github.com/InfotelGLPI/financialreports',
-      'minGlpiVersion' => '9.3',// For compatibility
+      'requirements'   => [
+         'glpi' => [
+            'min' => '9.3',
+            'dev' => false
+         ]
+      ]
    );
 }
 
@@ -78,8 +85,10 @@ function plugin_version_financialreports() {
  */
 function plugin_financialreports_check_prerequisites() {
    if (version_compare(GLPI_VERSION, '9.3', 'lt')
-         || version_compare(GLPI_VERSION, '9.4', 'ge')) {
-      echo __('This plugin requires GLPI >= 9.3');
+         || version_compare(GLPI_VERSION, '9.5', 'ge')) {
+      if (method_exists('Plugin', 'messageIncompatible')) {
+         echo Plugin::messageIncompatible('core', '9.3');
+      }
       return false;
    }
    return true;
