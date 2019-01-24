@@ -207,7 +207,7 @@ class PluginFinancialreportsPdf extends TCPDF {
       $this->Cell($logo_width, $this->line_height * 4, '', 1, 0, 'C');
       /* Title. */
       $this->SetFont($this->pol_def, 'B', $this->tail_titre);
-      $this->Cell($title_width, $this->line_height * 2, __('Asset situation ended on', 'financialreports'),
+      $this->Cell($title_width, $this->line_height * 2, __('Financial report ended on', 'financialreports'),
                   'LTR', 0, 'C');
       $this->SetY($this->GetY() + $this->line_height * 2);
       $this->SetX($logo_width + 10);

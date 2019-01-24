@@ -5,13 +5,14 @@
 # Translators:
 # Doru  DEACONU <dumitrudeaconu@yahoo.com>, 2013
 # Doru  DEACONU <dumitrudeaconu@yahoo.com>, 2012
+# Kevin HAINRY <kevin.hainry@infotel.com>, 2019
 msgid ""
 msgstr ""
 "Project-Id-Version: GLPI Project - financialreports plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-10 09:25+0200\n"
-"PO-Revision-Date: 2018-05-29 13:32+0000\n"
-"Last-Translator: Amandine Manceau\n"
+"POT-Creation-Date: 2019-01-23 17:10+0100\n"
+"PO-Revision-Date: 2019-01-23 16:14+0000\n"
+"Last-Translator: Kevin HAINRY <kevin.hainry@infotel.com>\n"
 "Language-Team: Romanian (Romania) (http://www.transifex.com/tsmr/GLPI_financialreports/language/ro_RO/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,9 +20,9 @@ msgstr ""
 "Language: ro_RO\n"
 "Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?2:1));\n"
 
-#: setup.php:65 inc/financialreport.class.php:49 inc/profile.class.php:152
-msgid "Asset situation"
-msgid_plural "Asset situations"
+#: setup.php:67 inc/financialreport.class.php:49 inc/profile.class.php:152
+msgid "Financial report"
+msgid_plural "Financial reports"
 msgstr[0] "Situaţia activului"
 msgstr[1] "Situaţia activelor"
 msgstr[2] "Situaţia activelor"
@@ -38,11 +39,11 @@ msgstr "Dată raport"
 msgid "Disposal status"
 msgstr "Statut dezimobilizări"
 
-#: inc/financialreport.class.php:413 inc/pdf.class.php:210
-msgid "Asset situation ended on"
+#: inc/financialreport.class.php:419
+msgid "Financial report ended on"
 msgstr "Situaţia activelor la data"
 
-#: inc/financialreport.class.php:448 inc/financialreport.class.php:450
+#: inc/financialreport.class.php:454 inc/financialreport.class.php:456
 #: inc/parameter.class.php:54
 msgid "Notebook"
 msgid_plural "Notebooks"
@@ -50,7 +51,7 @@ msgstr[0] "Laptop"
 msgstr[1] "Laptop - uri"
 msgstr[2] "Laptop - uri"
 
-#: inc/financialreport.class.php:458 inc/financialreport.class.php:460
+#: inc/financialreport.class.php:464 inc/financialreport.class.php:466
 #: inc/parameter.class.php:58
 msgid "Server"
 msgid_plural "Servers"
@@ -58,48 +59,52 @@ msgstr[0] "Server"
 msgstr[1] "Server"
 msgstr[2] "Servere"
 
-#: inc/financialreport.class.php:545 inc/financialreport.class.php:547
+#: inc/financialreport.class.php:551 inc/financialreport.class.php:553
 msgid "Element out"
 msgid_plural "Elements out"
 msgstr[0] "Element ieşit"
 msgstr[1] "Elemente ieşite"
 msgstr[2] "Elemente ieşite"
 
-#: inc/financialreport.class.php:569 inc/pdf.class.php:318
+#: inc/financialreport.class.php:575 inc/pdf.class.php:321
 msgid "General Total"
 msgstr "Total general"
 
-#: inc/financialreport.class.php:570 inc/financialreport.class.php:620
-#: inc/financialreport.class.php:646 inc/financialreport.class.php:670
+#: inc/financialreport.class.php:576 inc/financialreport.class.php:626
+#: inc/financialreport.class.php:652 inc/financialreport.class.php:676
 msgid "Euro"
 msgid_plural "Euros"
 msgstr[0] "Euro"
 msgstr[1] "Euro"
 msgstr[2] "Euro"
 
-#: inc/financialreport.class.php:632
+#: inc/financialreport.class.php:638
 msgid "Hide"
 msgstr "Ascunde"
 
-#: inc/financialreport.class.php:634
+#: inc/financialreport.class.php:640
 msgid "Display"
 msgstr " Afişează"
 
-#: inc/financialreport.class.php:660 inc/pdf.class.php:252
+#: inc/financialreport.class.php:666 inc/pdf.class.php:252
 msgid "User / Group"
 msgstr "Utilizator / Grup"
 
-#: inc/financialreport.class.php:670
+#: inc/financialreport.class.php:676
 msgid "Purchase Price HT in"
 msgstr "Preţ cumpărare FT în "
 
-#: inc/financialreport.class.php:701
+#: inc/financialreport.class.php:708
 msgid "In stock / available"
 msgstr "În stoc / disponibil"
 
 #: inc/parameter.class.php:46
 msgid "Identification parameters of inventory number"
 msgstr "Parametri identificare a numărului de inventar"
+
+#: inc/pdf.class.php:210
+msgid "Asset situation ended on"
+msgstr "Situaţia activelor la data"
 
 #: inc/pdf.class.php:259 inc/pdf.class.php:263
 msgid "HT"

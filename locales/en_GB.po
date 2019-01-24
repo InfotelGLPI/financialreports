@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GLPI Project - financialreports plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-10 09:25+0200\n"
-"PO-Revision-Date: 2018-05-29 13:32+0000\n"
-"Last-Translator: Amandine Manceau\n"
+"POT-Creation-Date: 2019-01-23 17:10+0100\n"
+"PO-Revision-Date: 2019-01-23 16:11+0000\n"
+"Last-Translator: Kevin HAINRY <kevin.hainry@infotel.com>\n"
 "Language-Team: English (United Kingdom) (http://www.transifex.com/tsmr/GLPI_financialreports/language/en_GB/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -17,11 +17,11 @@ msgstr ""
 "Language: en_GB\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: setup.php:65 inc/financialreport.class.php:49 inc/profile.class.php:152
-msgid "Asset situation"
-msgid_plural "Asset situations"
-msgstr[0] "Asset situation"
-msgstr[1] "Asset situations"
+#: setup.php:67 inc/financialreport.class.php:49 inc/profile.class.php:152
+msgid "Financial report"
+msgid_plural "Financial reports"
+msgstr[0] "Financial report"
+msgstr[1] "Financial reports"
 
 #: front/config.form.php:71
 msgid "Please activate the plugin"
@@ -35,64 +35,68 @@ msgstr "Report date"
 msgid "Disposal status"
 msgstr "Disposal status"
 
-#: inc/financialreport.class.php:413 inc/pdf.class.php:210
-msgid "Asset situation ended on"
-msgstr "Asset situation ended on"
+#: inc/financialreport.class.php:419
+msgid "Financial report ended on"
+msgstr "Financial report ended on"
 
-#: inc/financialreport.class.php:448 inc/financialreport.class.php:450
+#: inc/financialreport.class.php:454 inc/financialreport.class.php:456
 #: inc/parameter.class.php:54
 msgid "Notebook"
 msgid_plural "Notebooks"
 msgstr[0] "Notebook"
 msgstr[1] "Notebooks"
 
-#: inc/financialreport.class.php:458 inc/financialreport.class.php:460
+#: inc/financialreport.class.php:464 inc/financialreport.class.php:466
 #: inc/parameter.class.php:58
 msgid "Server"
 msgid_plural "Servers"
 msgstr[0] "Server"
 msgstr[1] "Servers"
 
-#: inc/financialreport.class.php:545 inc/financialreport.class.php:547
+#: inc/financialreport.class.php:551 inc/financialreport.class.php:553
 msgid "Element out"
 msgid_plural "Elements out"
 msgstr[0] "Element out"
 msgstr[1] "Elements out"
 
-#: inc/financialreport.class.php:569 inc/pdf.class.php:318
+#: inc/financialreport.class.php:575 inc/pdf.class.php:321
 msgid "General Total"
 msgstr "General Total"
 
-#: inc/financialreport.class.php:570 inc/financialreport.class.php:620
-#: inc/financialreport.class.php:646 inc/financialreport.class.php:670
+#: inc/financialreport.class.php:576 inc/financialreport.class.php:626
+#: inc/financialreport.class.php:652 inc/financialreport.class.php:676
 msgid "Euro"
 msgid_plural "Euros"
 msgstr[0] "Euro"
 msgstr[1] "Euros"
 
-#: inc/financialreport.class.php:632
+#: inc/financialreport.class.php:638
 msgid "Hide"
 msgstr "Hide"
 
-#: inc/financialreport.class.php:634
+#: inc/financialreport.class.php:640
 msgid "Display"
 msgstr "Display"
 
-#: inc/financialreport.class.php:660 inc/pdf.class.php:252
+#: inc/financialreport.class.php:666 inc/pdf.class.php:252
 msgid "User / Group"
 msgstr "User / Group"
 
-#: inc/financialreport.class.php:670
+#: inc/financialreport.class.php:676
 msgid "Purchase Price HT in"
 msgstr "Purchase Price HT in"
 
-#: inc/financialreport.class.php:701
+#: inc/financialreport.class.php:708
 msgid "In stock / available"
 msgstr "In stock / available"
 
 #: inc/parameter.class.php:46
 msgid "Identification parameters of inventory number"
 msgstr "Identification parameters of inventory number"
+
+#: inc/pdf.class.php:210
+msgid "Asset situation ended on"
+msgstr "Asset situation ended on"
 
 #: inc/pdf.class.php:259 inc/pdf.class.php:263
 msgid "HT"

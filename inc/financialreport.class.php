@@ -46,7 +46,7 @@ class PluginFinancialreportsFinancialreport extends CommonDBTM {
     */
    static function getTypeName($nb = 0) {
 
-      return _n('Asset situation', 'Asset situations', $nb, 'financialreports');
+      return _n('Financial report', 'Financial reports', $nb, 'financialreports');
    }
 
 
@@ -416,7 +416,7 @@ class PluginFinancialreportsFinancialreport extends CommonDBTM {
       $first        = false;
       $deleted      = 0;
       $master_total = 0;
-      $title_report = __('Asset situation ended on', 'financialreports') . " " . Html::convDate($date);
+      $title_report = __('Financial report ended on', 'financialreports') . " " . Html::convDate($date);
       $start        = 0;
       $numrows      = 0;
       $end_display  = $start + $_SESSION["glpilist_limit"];

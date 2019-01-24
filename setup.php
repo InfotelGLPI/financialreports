@@ -64,7 +64,7 @@ function plugin_init_financialreports() {
 function plugin_version_financialreports() {
 
    return array(
-      'name'           => __('Asset situation', 'financialreports'),
+      'name'           => _n('Financial report','Financial reports',2, 'financialreports'),
       'version'        => PLUGIN_FINANCIALREPORTS_VERSION,
       'oldname'        => 'state',
       'license'        => 'GPLv2+',
