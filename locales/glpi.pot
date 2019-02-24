@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GLPI - Financialreports plugin 2.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-23 17:17+0100\n"
+"POT-Creation-Date: 2019-02-24 15:03+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -36,7 +36,7 @@ msgstr ""
 msgid "Disposal status"
 msgstr ""
 
-#: inc/financialreport.class.php:419
+#: inc/financialreport.class.php:419 inc/pdf.class.php:210
 msgid "Financial report ended on"
 msgstr ""
 
@@ -93,10 +93,6 @@ msgstr ""
 
 #: inc/parameter.class.php:46
 msgid "Identification parameters of inventory number"
-msgstr ""
-
-#: inc/pdf.class.php:210
-msgid "Asset situation ended on"
 msgstr ""
 
 #: inc/pdf.class.php:259 inc/pdf.class.php:263
