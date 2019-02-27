@@ -2,10 +2,10 @@
 Plugin financialreports pour GLPI
 
 Ce plugin est sur Transifex - Aidez-nous à le traduire :
-https://www.transifex.com/tsmr/GLPI_financialreports/
+https://www.transifex.com/infotelGLPI/GLPI_financialreports/
 
 This plugin is on Transifex - Help us to translate :
-https://www.transifex.com/tsmr/GLPI_financialreports/
+https://www.transifex.com/infotelGLPI/GLPI_financialreports/
 
 Ce plugin vous permet de générer un arrété du parc à une date donnée.
 > * Dans la configuration, renseignez l'identifiant pour chaque type de matériel de l'inventaire correspondant au numéro d'inventaire. (exemple : Vos pcs portables ont un numéro d'inventaire commençant par PO renseignez donc le plugin avec PO, Serveurs : SE, PC Fixes : PC etc).
