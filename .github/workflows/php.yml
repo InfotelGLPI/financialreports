@@ -1,0 +1,21 @@
+name: PHP Composer
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Generate mo
+      run: for file in `find . -name "*.po"` ; do msgfmt -o ${file/.po/.mo} $file ; done
+
+    # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
+    # Docs: https://getcomposer.org/doc/articles/scripts.md
+
+    # - name: Run test suite
+    #   run: composer run-script test
