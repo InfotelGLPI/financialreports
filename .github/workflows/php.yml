@@ -1,21 +1,23 @@
-name: PHP Composer
 
+name: PHP Composer
 on:
   push:
     branches: [ master ]
 
-jobs:
-  build:
-
+jobs: 
+  run:
+    name: Generate mo
     runs-on: ubuntu-latest
-
-    steps:
-
+    steps: 
     - name: Generate mo
       run: for file in `find . -name "*.po"` ; do msgfmt -o ${file/.po/.mo} $file ; done
 
-    # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
-    # Docs: https://getcomposer.org/doc/articles/scripts.md
-
-    # - name: Run test suite
-    #   run: composer run-script test
+    - name: Commit changes
+      uses: EndBug/add-and-commit@v5
+      with:
+        author_name: ales-infotel
+        author_email: alban.lesellier@infotel.com
+        message: "Generate mo"
+        add: "*"
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
