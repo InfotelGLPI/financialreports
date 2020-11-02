@@ -6,18 +6,20 @@ on:
 
 jobs: 
   run:
+    
     name: Generate mo
     runs-on: ubuntu-latest
     steps: 
+    - name: Checkout repo
+      uses: actions/checkout@v2 
     - name: Generate mo
       run: for file in `find . -name "*.po"` ; do msgfmt -o ${file/.po/.mo} $file ; done
 
     - name: Commit changes
-      uses: EndBug/add-and-commit@v5
+      uses: EndBug/add-and-commit@v5.1.0
       with:
         author_name: ales-infotel
         author_email: alban.lesellier@infotel.com
         message: "Generate mo"
-        add: "*"
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
