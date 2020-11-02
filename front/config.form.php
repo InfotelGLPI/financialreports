@@ -8,7 +8,7 @@
  https://github.com/InfotelGLPI/financialreports
  -------------------------------------------------------------------------
 
- LICENSE
+ LICENSE 
       
  This file is part of financialreports.
 
