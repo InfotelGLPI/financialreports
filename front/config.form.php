@@ -5,7 +5,7 @@
  financialreports plugin for GLPI
  Copyright (C) 2009-2016 by the financialreports Development Team.
 
- https://github.com/InfotelGLPI/financialreports
+ https://github.com/InfotelGLPI/financialreports 
  -------------------------------------------------------------------------
 
  LICENSE 
