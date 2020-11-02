@@ -3,7 +3,8 @@ name: PHP Composer
 on:
   push:
     branches: [ master ]
-
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 jobs: 
   run:
     
@@ -31,5 +32,4 @@ jobs:
  
       uses: actions-go/push@v1
   
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
