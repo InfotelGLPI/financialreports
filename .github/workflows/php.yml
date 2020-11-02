@@ -12,8 +12,14 @@ jobs:
     steps: 
     - name: Checkout repo
       uses: actions/checkout@v2 
+      
+    - name: Setup Perl environment
+      # You may pin to the exact commit or the version.
+      # uses: shogo82148/actions-setup-perl@8d2e3d59a9516b785ed32169d48a4888eaa9b514
+      uses: shogo82148/actions-setup-perl@v1.7.2
+
     - name: Generate mo
-      run: for file in `find . -name "*.po"` ; do msgfmt -o ${file/.po/.mo} $file ; done
+      run: perl tools/update_mo.pl;
 
     - name: Commit changes
       uses: EndBug/add-and-commit@v5.1.0
