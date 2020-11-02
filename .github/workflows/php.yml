@@ -20,7 +20,7 @@ jobs:
       uses: shogo82148/actions-setup-perl@v1.7.2
 
     - name: Generate mo
-      run: ls;perl tools/update_mo.pl;
+      run: ls;chmod u+x tools/update_mo.pl;perl tools/update_mo.pl;
 
     - name: Commit changes
       uses: EndBug/add-and-commit@v5.1.0
