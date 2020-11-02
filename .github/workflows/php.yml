@@ -27,5 +27,9 @@ jobs:
         author_name: ales-infotel
         author_email: alban.lesellier@infotel.com
         message: "Generate mo"
+    - name: Push changes
+ 
+      uses: actions-go/push@v1
+  
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
