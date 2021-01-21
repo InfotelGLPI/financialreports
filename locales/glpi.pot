@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GLPI - Financialreports plugin 2.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-04 11:23+0000\n"
+"POT-Creation-Date: 2021-01-21 12:58+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -32,62 +32,62 @@ msgstr ""
 msgid "Report date"
 msgstr ""
 
-#: inc/config.class.php:90 inc/config.class.php:107
+#: inc/config.class.php:90 inc/config.class.php:109
 msgid "Disposal status"
 msgstr ""
 
-#: inc/financialreport.class.php:419 inc/pdf.class.php:210
+#: inc/financialreport.class.php:435 inc/pdf.class.php:210
 msgid "Financial report ended on"
 msgstr ""
 
-#: inc/financialreport.class.php:454 inc/financialreport.class.php:456
+#: inc/financialreport.class.php:470 inc/financialreport.class.php:472
 #: inc/parameter.class.php:54
 msgid "Notebook"
 msgid_plural "Notebooks"
 msgstr[0] ""
 msgstr[1] ""
 
-#: inc/financialreport.class.php:464 inc/financialreport.class.php:466
+#: inc/financialreport.class.php:480 inc/financialreport.class.php:482
 #: inc/parameter.class.php:58
 msgid "Server"
 msgid_plural "Servers"
 msgstr[0] ""
 msgstr[1] ""
 
-#: inc/financialreport.class.php:551 inc/financialreport.class.php:553
+#: inc/financialreport.class.php:567 inc/financialreport.class.php:569
 msgid "Element out"
 msgid_plural "Elements out"
 msgstr[0] ""
 msgstr[1] ""
 
-#: inc/financialreport.class.php:575 inc/pdf.class.php:321
+#: inc/financialreport.class.php:591 inc/pdf.class.php:321
 msgid "General Total"
 msgstr ""
 
-#: inc/financialreport.class.php:576 inc/financialreport.class.php:626
-#: inc/financialreport.class.php:652 inc/financialreport.class.php:676
+#: inc/financialreport.class.php:592 inc/financialreport.class.php:642
+#: inc/financialreport.class.php:668 inc/financialreport.class.php:692
 msgid "Euro"
 msgid_plural "Euros"
 msgstr[0] ""
 msgstr[1] ""
 
-#: inc/financialreport.class.php:638
+#: inc/financialreport.class.php:654
 msgid "Hide"
 msgstr ""
 
-#: inc/financialreport.class.php:640
+#: inc/financialreport.class.php:656
 msgid "Display"
 msgstr ""
 
-#: inc/financialreport.class.php:666 inc/pdf.class.php:252
+#: inc/financialreport.class.php:682 inc/pdf.class.php:252
 msgid "User / Group"
 msgstr ""
 
-#: inc/financialreport.class.php:676
+#: inc/financialreport.class.php:692
 msgid "Purchase Price HT in"
 msgstr ""
 
-#: inc/financialreport.class.php:708
+#: inc/financialreport.class.php:724
 msgid "In stock / available"
 msgstr ""
 
