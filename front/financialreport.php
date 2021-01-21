@@ -160,9 +160,9 @@ if ($report->canView() || Session::haveRight("config", UPDATE)) {
    Html::showDateField("date", ['value' => $_POST["date"]]);
    echo "</td>";
    echo "<td width='60%'>";
-   Dropdown::show('Location', array('name' => "locations_id",
+   Dropdown::show('Location', ['name' => "locations_id",
       'value' => $_POST["locations_id"],
-      'entity' => $_SESSION["glpiactive_entity"]));
+      'entity' => $_SESSION["glpiactive_entity"]]);
    echo "</td>";
    echo "<td rowspan='2' class='center'>";
    echo "<input type=\"submit\" class='submit' name=\"choice_date\" value='" . _sx('button', 'Post') . "' />";
@@ -171,7 +171,7 @@ if ($report->canView() || Session::haveRight("config", UPDATE)) {
    Html::closeForm();
    echo "</div>";
    echo "<div align='center'>";
-   $display = array('displaypc' => $_SESSION["displaypc"],
+   $display = ['displaypc' => $_SESSION["displaypc"],
       'displaynotebook' => $_SESSION["displaynotebook"],
       'displayserver' => $_SESSION["displayserver"],
       'displaymonitor' => $_SESSION["displaymonitor"],
@@ -179,7 +179,7 @@ if ($report->canView() || Session::haveRight("config", UPDATE)) {
       'displaynetworking' => $_SESSION["displaynetworking"],
       'displayperipheral' => $_SESSION["displayperipheral"],
       'displayphone' => $_SESSION["displayphone"],
-      'displaydisposal' => $_SESSION["displaydisposal"]);
+      'displaydisposal' => $_SESSION["displaydisposal"]];
 
    $report->displayReport($_POST, $display);
    echo "</div>";

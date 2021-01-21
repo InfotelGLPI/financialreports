@@ -50,7 +50,7 @@ class PluginFinancialreportsConfig extends CommonDBTM {
                `" . $this->getTable() . "`
                ORDER BY `states_id` ASC";
 
-      $used = array();
+      $used = [];
 
       if ($result = $DB->query($query)) {
          $number = $DB->numrows($result);
@@ -69,7 +69,7 @@ class PluginFinancialreportsConfig extends CommonDBTM {
             echo "<th>" . Html::getCheckAllAsCheckbox('mass' . __CLASS__ . $rand) . "</th>";
             echo "<th>" . __('Status') . "</th>";
             echo "</tr>";
-            while ($ligne = $DB->fetch_array($result)) {
+            while ($ligne = $DB->fetchArray($result)) {
                $used[$ligne["states_id"]] = $ligne["states_id"];
 
                echo "<tr class='tab_bg_1'>";
@@ -87,11 +87,13 @@ class PluginFinancialreportsConfig extends CommonDBTM {
 
             echo "<div align='center'><form method='post' action='" . $this->getFormURL() . "'>";
             echo "<table class='tab_cadre_fixe' cellpadding='5'><tr ><th colspan='2'>";
-            echo __('Disposal status', 'financialreports') . " : </th></tr>";
+            echo __('Disposal status', 'financialreports') . "</th></tr>";
             echo "<tr class='tab_bg_1'><td>";
-            Dropdown::show('State', array('name'  => "states_id",
+            Dropdown::show('State', ['name'  => "states_id",
                                           'used'  => $used,
-                                          'value' => $ligne["states_id"]));
+//                                          'value' => $ligne["states_id"]
+            ]
+            );
             echo "</td>";
             echo "<td>";
             echo "<div align='center'>";
@@ -106,7 +108,7 @@ class PluginFinancialreportsConfig extends CommonDBTM {
             echo "<table class='tab_cadre' cellpadding='5'><tr ><th colspan='2'>";
             echo __('Disposal status', 'financialreports') . " : </th></tr>";
             echo "<tr class='tab_bg_1'><td>";
-            Dropdown::show('State', array('name' => "states_id"));
+            Dropdown::show('State', ['name' => "states_id"]);
             echo "</td>";
             echo "<td>";
             echo "<div align='center'>";

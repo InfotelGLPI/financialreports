@@ -67,7 +67,7 @@ class PluginFinancialreportsProfile extends CommonDBTM {
          $prof = new self();
 
          self::addDefaultProfileInfos($ID,
-                                      array('plugin_financialreports' => 0));
+                                      ['plugin_financialreports' => 0]);
          $prof->showForm($ID);
       }
       return true;
@@ -86,7 +86,7 @@ class PluginFinancialreportsProfile extends CommonDBTM {
       foreach ($rights as $right => $value) {
          if ($dbu->countElementsInTable('glpi_profilerights',
                                   ["profiles_id" => $profiles_id, "name" => $right]) && $drop_existing) {
-            $profileRight->deleteByCriteria(array('profiles_id' => $profiles_id, 'name' => $right));
+            $profileRight->deleteByCriteria(['profiles_id' => $profiles_id, 'name' => $right]);
          }
          if (!$dbu->countElementsInTable('glpi_profilerights',
                                    ["profiles_id" => $profiles_id, "name" => $right])) {
@@ -115,7 +115,7 @@ class PluginFinancialreportsProfile extends CommonDBTM {
    function showForm($profiles_id = 0, $openform = TRUE, $closeform = TRUE) {
 
       echo "<div class='firstbloc'>";
-      if (($canedit = Session::haveRightsOr(self::$rightname, array(CREATE, UPDATE, PURGE)))
+      if (($canedit = Session::haveRightsOr(self::$rightname, [CREATE, UPDATE, PURGE]))
           && $openform) {
          $profile = new Profile();
          echo "<form method='post' action='" . $profile->getFormURL() . "'>";
@@ -125,16 +125,16 @@ class PluginFinancialreportsProfile extends CommonDBTM {
       $profile->getFromDB($profiles_id);
       if ($profile->getField('interface') == 'central') {
          $rights = $this->getAllRights();
-         $profile->displayRightsChoiceMatrix($rights, array('canedit'       => $canedit,
+         $profile->displayRightsChoiceMatrix($rights, ['canedit'       => $canedit,
                                                             'default_class' => 'tab_bg_2',
-                                                            'title'         => __('General')));
+                                                            'title'         => __('General')]);
       }
 
       if ($canedit
           && $closeform) {
          echo "<div class='center'>";
-         echo Html::hidden('id', array('value' => $profiles_id));
-         echo Html::submit(_sx('button', 'Save'), array('name' => 'update'));
+         echo Html::hidden('id', ['value' => $profiles_id]);
+         echo Html::submit(_sx('button', 'Save'), ['name' => 'update']);
          echo "</div>\n";
          Html::closeForm();
       }
@@ -147,12 +147,12 @@ class PluginFinancialreportsProfile extends CommonDBTM {
     * @return array
     */
    static function getAllRights($all = false) {
-      $rights = array(
-         array('rights' => array(READ => __('Read')),
+      $rights = [
+         ['rights' => [READ => __('Read')],
                'label'  => _n('Financial report', 'Financial reports', 1, 'financialreports'),
                'field'  => 'plugin_financialreports'
-         ),
-      );
+         ],
+      ];
 
       return $rights;
    }
@@ -200,7 +200,7 @@ class PluginFinancialreportsProfile extends CommonDBTM {
       foreach ($DB->request('glpi_plugin_financialreports_profiles',
                             "`profiles_id`='$profiles_id'") as $profile_data) {
 
-         $matching       = array('financialreports' => 'plugin_financialreports');
+         $matching       = ['financialreports' => 'plugin_financialreports'];
          $current_rights = ProfileRight::getProfileRights($profiles_id, array_values($matching));
          foreach ($matching as $old => $new) {
             if (!isset($current_rights[$old])) {
@@ -224,7 +224,7 @@ class PluginFinancialreportsProfile extends CommonDBTM {
       foreach ($profile->getAllRights(true) as $data) {
          if ($dbu->countElementsInTable("glpi_profilerights",
                                   ["name" => $data['field']]) == 0) {
-            ProfileRight::addProfileRights(array($data['field']));
+            ProfileRight::addProfileRights([$data['field']]);
          }
       }
 
@@ -235,7 +235,7 @@ class PluginFinancialreportsProfile extends CommonDBTM {
       foreach ($DB->request("SELECT *
                            FROM `glpi_profilerights` 
                            WHERE `profiles_id`='" . $_SESSION['glpiactiveprofile']['id'] . "' 
-                              AND `name` LIKE '%plugin_financialreportss%'") as $prof) {
+                              AND `name` LIKE '%plugin_financialreports%'") as $prof) {
          $_SESSION['glpiactiveprofile'][$prof['name']] = $prof['rights'];
       }
    }
@@ -245,7 +245,7 @@ class PluginFinancialreportsProfile extends CommonDBTM {
     */
    static function createFirstAccess($profiles_id) {
       self::addDefaultProfileInfos($profiles_id,
-                                   array('plugin_financialreports' => READ), true);
+                                   ['plugin_financialreports' => READ], true);
 
    }
 

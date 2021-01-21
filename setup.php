@@ -35,17 +35,17 @@ function plugin_init_financialreports() {
 
    $PLUGIN_HOOKS['csrf_compliant']['financialreports'] = true;
    $PLUGIN_HOOKS['change_profile']['financialreports'] =
-      array('PluginFinancialreportsProfile', 'initProfile');
+      ['PluginFinancialreportsProfile', 'initProfile'];
 
    if (Session::getLoginUserID()) {
 
       Plugin::registerClass('PluginFinancialreportsProfile',
-                            array('addtabon' => 'Profile'));
+                            ['addtabon' => 'Profile']);
 
       if (Session::haveRight("plugin_financialreports", READ)) {
 
          $PLUGIN_HOOKS['reports']['financialreports']            =
-            array('front/financialreport.php' => __('Report'));
+            ['front/financialreport.php' => __('Report')];
          $PLUGIN_HOOKS['use_massive_action']['financialreports'] = 1;
 
       }
@@ -63,7 +63,7 @@ function plugin_init_financialreports() {
  */
 function plugin_version_financialreports() {
 
-   return array(
+   return [
       'name'           => _n('Financial report','Financial reports',2, 'financialreports'),
       'version'        => PLUGIN_FINANCIALREPORTS_VERSION,
       'oldname'        => 'state',
@@ -72,11 +72,11 @@ function plugin_version_financialreports() {
       'homepage'       => 'https://github.com/InfotelGLPI/financialreports',
       'requirements'   => [
          'glpi' => [
-            'min' => '9.3',
+            'min' => '9.5',
             'dev' => false
          ]
       ]
-   );
+   ];
 }
 
 // Optional : check prerequisites before install : may print errors or add to message after redirect
@@ -84,10 +84,10 @@ function plugin_version_financialreports() {
  * @return bool
  */
 function plugin_financialreports_check_prerequisites() {
-   if (version_compare(GLPI_VERSION, '9.3', 'lt')
-         || version_compare(GLPI_VERSION, '9.5', 'ge')) {
+   if (version_compare(GLPI_VERSION, '9.5', 'lt')
+         || version_compare(GLPI_VERSION, '9.6', 'ge')) {
       if (method_exists('Plugin', 'messageIncompatible')) {
-         echo Plugin::messageIncompatible('core', '9.3');
+         echo Plugin::messageIncompatible('core', '9.5');
       }
       return false;
    }

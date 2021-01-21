@@ -46,7 +46,7 @@ if ($plugin->isActivated("financialreports")) {
    } else if (isset($_POST["delete_state"])) {
 
       foreach ($_POST["item"] as $ID => $value) {
-         $config->delete(array("id" => $ID), 1);
+         $config->delete(["id" => $ID], 1);
       }
 
       Html::back();

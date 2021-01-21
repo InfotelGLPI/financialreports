@@ -41,7 +41,7 @@ if (isset($_POST["display_type"])) {
       $_POST["export_all"] = 1;
    }
 
-   $display = array('displaypc' => $_SESSION["displaypc"],
+   $display = ['displaypc' => $_SESSION["displaypc"],
       'displaynotebook' => $_SESSION["displaynotebook"],
       'displayserver' => $_SESSION["displayserver"],
       'displaymonitor' => $_SESSION["displaymonitor"],
@@ -49,7 +49,7 @@ if (isset($_POST["display_type"])) {
       'displaynetworking' => $_SESSION["displaynetworking"],
       'displayperipheral' => $_SESSION["displayperipheral"],
       'displayphone' => $_SESSION["displayphone"],
-      'displaydisposal' => $_SESSION["displaydisposal"]);
+      'displaydisposal' => $_SESSION["displaydisposal"]];
 
    $report = new PluginFinancialreportsFinancialreport();
    $report->displayReport($_POST, $display);

@@ -71,7 +71,7 @@ function plugin_financialreports_install() {
       $result_ = $DB->query($query_);
       if ($DB->numrows($result_) > 0) {
 
-         while ($data = $DB->fetch_array($result_)) {
+         while ($data = $DB->fetchArray($result_)) {
             $query = "UPDATE `glpi_plugin_financialreports_profiles`
                   SET `profiles_id` = '" . $data["id"] . "'
                   WHERE `id` = '" . $data["id"] . "';";
@@ -85,10 +85,10 @@ function plugin_financialreports_install() {
       $DB->query($query);
 
       Plugin::migrateItemType(
-         array(3450 => 'PluginFinancialreportsDisposalItem'),
-         array("glpi_savedsearches", "glpi_savedsearches_users", "glpi_displaypreferences",
-               "glpi_documents_items", "glpi_infocoms", "glpi_logs", "glpi_tickets"),
-         array("glpi_plugin_financialreports_disposalitems"));
+         [3450 => 'PluginFinancialreportsDisposalItem'],
+         ["glpi_savedsearches", "glpi_savedsearches_users", "glpi_displaypreferences",
+               "glpi_documents_items", "glpi_infocoms", "glpi_logs", "glpi_tickets"],
+         ["glpi_plugin_financialreports_disposalitems"]);
    }
 
    //Migrate profiles to the new system
@@ -105,7 +105,7 @@ function plugin_financialreports_install() {
       $result_ = $DB->query($query_);
       if ($DB->numrows($result_) > 0) {
 
-         while ($data = $DB->fetch_array($result_)) {
+         while ($data = $DB->fetchArray($result_)) {
             $query = "UPDATE `glpi_infocoms`
                   SET `decommission_date` = '" . $data["date_disposal"] . "'
                   WHERE `items_id` = '" . $data["items_id"] . "'
@@ -125,18 +125,18 @@ function plugin_financialreports_install() {
 function plugin_financialreports_uninstall() {
    global $DB;
 
-   $tables = array("glpi_plugin_financialreports_configs",
-                   "glpi_plugin_financialreports_parameters");
+   $tables = ["glpi_plugin_financialreports_configs",
+                   "glpi_plugin_financialreports_parameters"];
 
    foreach ($tables as $table)
       $DB->query("DROP TABLE IF EXISTS `$table`;");
 
    //old versions	
-   $tables = array("glpi_plugin_financialreports_profiles",
+   $tables = ["glpi_plugin_financialreports_profiles",
                    "glpi_plugin_state_profiles",
                    "glpi_plugin_state_config",
                    "glpi_plugin_state_parameters",
-                   "glpi_plugin_state_repelled");
+                   "glpi_plugin_state_repelled"];
 
    foreach ($tables as $table)
       $DB->query("DROP TABLE IF EXISTS `$table`;");
@@ -144,7 +144,7 @@ function plugin_financialreports_uninstall() {
    //Delete rights associated with the plugin
    $profileRight = new ProfileRight();
    foreach (PluginFinancialreportsProfile::getAllRights() as $right) {
-      $profileRight->deleteByCriteria(array('name' => $right['field']));
+      $profileRight->deleteByCriteria(['name' => $right['field']]);
    }
 
    PluginFinancialreportsProfile::removeRightsFromSession();
@@ -162,9 +162,9 @@ function plugin_financialreports_getDatabaseRelations() {
    $plugin = new Plugin();
 
    if ($plugin->isActivated("financialreports"))
-      return array(
-         "glpi_states" => array("glpi_plugin_financialreports_configs" => "states_id")
-      );
+      return [
+         "glpi_states" => ["glpi_plugin_financialreports_configs" => "states_id"]
+      ];
    else
-      return array();
+      return [];
 }

@@ -163,7 +163,7 @@ class PluginFinancialreportsFinancialreport extends CommonDBTM {
       $result_state = $DB->query($query_state);
       if ($DB->numrows($result_state) > 0) {
          $query .= "AND (`$itemtable`.`states_id` = 999999 ";
-         while ($data_state = $DB->fetch_array($result_state)) {
+         while ($data_state = $DB->fetchArray($result_state)) {
             $type_where = "OR `$itemtable`.`states_id` != '" . $data_state["states_id"] . "' ";
             $query .= " $type_where ";
          }
@@ -175,14 +175,14 @@ class PluginFinancialreportsFinancialreport extends CommonDBTM {
       $query .= " AND (`glpi_infocoms`.`buy_date` < '" . $date . "') ";
 
       if (!empty($locations_id)) {
-         $query .= " AND " . $dbu->getRealQueryForTreeItem('glpi_locations', $locations_id, "`$itemtable`.`locations_id`");
+         $query .= " AND " . self::getRealQueryForTreeItem('glpi_locations', $locations_id, "`$itemtable`.`locations_id`");
       }
 
       $query .= "ORDER BY ITEM_3,ITEM_0 ASC";
 
       $result = $DB->query($query);
 
-      while ($data = $DB->fetch_array($result)) {
+      while ($data = $DB->fetchArray($result)) {
          $items[] = $data;
       }
 
@@ -246,7 +246,7 @@ class PluginFinancialreportsFinancialreport extends CommonDBTM {
       $result_state = $DB->query($query_state);
       if ($DB->numrows($result_state) > 0) {
          $query_value .= "AND (`$itemtable`.`states_id` = 999999 ";
-         while ($data_state = $DB->fetch_array($result_state)) {
+         while ($data_state = $DB->fetchArray($result_state)) {
             $type_where = "OR `$itemtable`.`states_id` != '" . $data_state["states_id"] . "' ";
             $query_value .= " $type_where ";
          }
@@ -258,14 +258,30 @@ class PluginFinancialreportsFinancialreport extends CommonDBTM {
       $query_value .= " AND (`glpi_infocoms`.`buy_date` < '" . $date . "') ";
 
       if (!empty($locations_id)) {
-         $query_value .= " AND " . $dbu->getRealQueryForTreeItem('glpi_locations', $locations_id, "`$itemtable`.`locations_id`");
+         $query_value .= " AND " . self::getRealQueryForTreeItem('glpi_locations', $locations_id, "`$itemtable`.`locations_id`");
       }
 
       $result_value = $DB->query($query_value);
-      if ($data_value = $DB->fetch_array($result_value)) {
+      if ($data_value = $DB->fetchArray($result_value)) {
          $somme = $data_value["Total_value"];
       }
       return $somme;
+   }
+
+   static public function getRealQueryForTreeItem($table, $IDf, $reallink = "") {
+
+      if (empty($IDf)) {
+         return "";
+      }
+
+      if (empty($reallink)) {
+         $reallink = "`".$table."`.`id`";
+      }
+      $dbu = new DbUtils();
+      $id_found = $dbu->getSonsOf($table, $IDf);
+
+      // Construct the final request
+      return $reallink." IN ('".implode("','", $id_found)."')";
    }
 
    /**
@@ -276,7 +292,7 @@ class PluginFinancialreportsFinancialreport extends CommonDBTM {
    function selectItemsForDisposalQuery($locations_id) {
       global $DB;
 
-      $items = array();
+      $items = [];
       $type1 = 'Computer';
       $type2 = 'Printer';
       $type3 = 'NetworkEquipment';
@@ -295,7 +311,7 @@ class PluginFinancialreportsFinancialreport extends CommonDBTM {
 
       $result = $DB->query($query);
 
-      while ($data = $DB->fetch_array($result)) {
+      while ($data = $DB->fetchArray($result)) {
          $items[] = $data;
       }
       return $items;
@@ -367,14 +383,14 @@ class PluginFinancialreportsFinancialreport extends CommonDBTM {
       $result_state = $DB->query($query_state);
       if ($DB->numrows($result_state) > 0) {
          $query .= "AND (`" . $itemtable . "`.`states_id` IS NULL ";
-         while ($data_state = $DB->fetch_array($result_state)) {
+         while ($data_state = $DB->fetchArray($result_state)) {
             $type_where = "OR `" . $itemtable . "`.`states_id` = '" . $data_state["states_id"] . "' ";
             $query .= " $type_where ";
          }
          $query .= ") ";
       }
       if (!empty($locations_id)) {
-         $query .= " AND " . $dbu->getRealQueryForTreeItem('glpi_locations', $locations_id, "`$itemtable`.`locations_id`");
+         $query .= " AND " . self::getRealQueryForTreeItem('glpi_locations', $locations_id, "`$itemtable`.`locations_id`");
       }
 
       return $query;
@@ -622,7 +638,7 @@ class PluginFinancialreportsFinancialreport extends CommonDBTM {
 
          if ($output_type == Search::HTML_OUTPUT) {
             if ($total != -1) {
-               echo "<th>" . $titre . "</th><th><span class='red'>"
+               echo "<th>" . $titre . "</th><th><span style='color:red'>"
                     . Html::formatNumber($total) . " " . _n('Euro', 'Euros', 2, 'financialreports') . "</span></th><th>";
             } else {
                echo "<th>" . $titre . "</th><th></th><th>";
@@ -724,7 +740,7 @@ class PluginFinancialreportsFinancialreport extends CommonDBTM {
                } else {
                   //value
                   if ($output_type == Search::HTML_OUTPUT) {
-                     $ouput_value = "<span class='red'>" . Html::formatNumber($data["ITEM_8"]) . "</span>";
+                     $ouput_value = "<span style='color:red'>" . Html::formatNumber($data["ITEM_8"]) . "</span>";
                   } else {
                      $ouput_value = Html::formatNumber($data["ITEM_8"]);
                   }
