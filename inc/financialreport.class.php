@@ -801,16 +801,14 @@ class PluginFinancialreportsFinancialreport extends CommonDBTM {
           && $_SESSION["glpiactiveprofile"]["interface"] == "central"
       ) {
          echo "<td class='tab_bg_2' width='30%'>";
-
-         echo "<input type='hidden' name='item_type' value='$item_type_output'>";
-         if ($item_type_output_param != 0)
-            echo "<input type='hidden' name='item_type_param' value='" .
-                 serialize($item_type_output_param) . "'>";
+         echo Html::hidden('item_type', ['value' => $item_type_output]);
+         if ($item_type_output_param != 0) {
+            echo Html::hidden('item_type_param', ['value' => serialize($item_type_output_param)]);
+         }
          $explode = explode("&amp;", $parameters);
          for ($i = 0; $i < count($explode); $i++) {
             $pos = strpos($explode[$i], '=');
-            echo "<input type='hidden' name=\"" . substr($explode[$i], 0, $pos) . "\" value=\"" .
-                 substr($explode[$i], $pos + 1) . "\">";
+            echo Html::hidden(substr($explode[$i], 0, $pos), ['value' => substr($explode[$i], $pos + 1)]);
          }
          echo "<select name='display_type'>";
          echo "<option value='" . Search::CSV_OUTPUT . "'>" . __('All pages in CSV') . "</option>";

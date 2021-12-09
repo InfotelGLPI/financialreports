@@ -39,7 +39,7 @@ function plugin_financialreports_install() {
    if (!$DB->tableExists("glpi_plugin_state_profiles")
        && !$DB->tableExists("glpi_plugin_financialreports_configs")) {
 
-      $DB->runFile(GLPI_ROOT . "/plugins/financialreports/sql/empty-2.5.0.sql");
+      $DB->runFile(GLPI_ROOT . "/plugins/financialreports/sql/empty-3.0.0.sql");
 
    } else if ($DB->tableExists("glpi_plugin_state_parameters")
               && !$DB->fieldExists("glpi_plugin_state_parameters", "monitor")) {

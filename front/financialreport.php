@@ -165,7 +165,7 @@ if ($report->canView() || Session::haveRight("config", UPDATE)) {
       'entity' => $_SESSION["glpiactive_entity"]]);
    echo "</td>";
    echo "<td rowspan='2' class='center'>";
-   echo "<input type=\"submit\" class='submit' name=\"choice_date\" value='" . _sx('button', 'Post') . "' />";
+   echo Html::submit(_sx('button', 'Post'), ['name' => 'choice_date', 'class' => 'btn btn-primary']);
    echo "</td></tr>";
    echo "</table>";
    Html::closeForm();

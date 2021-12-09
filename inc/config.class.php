@@ -43,7 +43,7 @@ class PluginFinancialreportsConfig extends CommonDBTM {
       return Session::haveRight(self::$rightname, READ);
    }
 
-   function showForm() {
+   function showConfigForm() {
       global $DB;
 
       $query = "SELECT * FROM
@@ -57,7 +57,7 @@ class PluginFinancialreportsConfig extends CommonDBTM {
          if ($number != 0) {
 
             $rand = mt_rand();
-            echo "<div align='center'>";
+            echo "<div align='left'>";
             Html::openMassiveActionsForm('mass' . __CLASS__ . $rand);
             $massiveactionparams = ['item'             => __CLASS__,
                                     'specific_actions' => ['purge' => _x('button', 'Delete permanently')],
@@ -97,7 +97,7 @@ class PluginFinancialreportsConfig extends CommonDBTM {
             echo "</td>";
             echo "<td>";
             echo "<div align='center'>";
-            echo "<input type='submit' name='add_state' value='" . _sx('button', 'Post') . "' class='submit' >";
+            echo Html::submit(_sx('button', 'Post'), ['name' => 'add_state', 'class' => 'btn btn-primary']);
             echo "</div></td></tr>";
             echo "</table>";
             Html::closeForm();
@@ -112,7 +112,7 @@ class PluginFinancialreportsConfig extends CommonDBTM {
             echo "</td>";
             echo "<td>";
             echo "<div align='center'>";
-            echo "<input type='submit' name='add_state' value='" . _sx('button', 'Post') . "' class='submit' >";
+            echo Html::submit(_sx('button', 'Post'), ['name' => 'add_state', 'class' => 'btn btn-primary']);
             echo "</div></td></tr>";
             echo "</table>";
             Html::closeForm();

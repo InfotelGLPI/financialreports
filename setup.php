@@ -72,33 +72,10 @@ function plugin_version_financialreports() {
       'homepage'       => 'https://github.com/InfotelGLPI/financialreports',
       'requirements'   => [
          'glpi' => [
-            'min' => '9.5',
+            'min' => '10.0',
+            'max' => '11.0',
             'dev' => false
          ]
       ]
    ];
-}
-
-// Optional : check prerequisites before install : may print errors or add to message after redirect
-/**
- * @return bool
- */
-function plugin_financialreports_check_prerequisites() {
-   if (version_compare(GLPI_VERSION, '9.5', 'lt')
-         || version_compare(GLPI_VERSION, '9.6', 'ge')) {
-      if (method_exists('Plugin', 'messageIncompatible')) {
-         echo Plugin::messageIncompatible('core', '9.5');
-      }
-      return false;
-   }
-   return true;
-}
-
-// Uninstall process for plugin
-//need to return true if succeeded : may display messages or add to message after redirect
-/**
- * @return bool
- */
-function plugin_financialreports_check_config() {
-   return true;
 }

@@ -59,8 +59,8 @@ if ($plugin->isActivated("financialreports")) {
    } else {
 
       Html::header(__('Setup'), '', "config", "plugins");
-      $param->showForm();
-      $config->showForm();
+      $param->showParameterForm();
+      $config->showConfigForm();
 
    }
 
