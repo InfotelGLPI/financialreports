@@ -33,33 +33,33 @@
 function plugin_financialreports_install() {
    global $DB;
 
-   include_once(GLPI_ROOT . "/plugins/financialreports/inc/profile.class.php");
+   include_once(PLUGIN_FINANCIALREPORTS_DIR . "/inc/profile.class.php");
 
    $update = false;
    if (!$DB->tableExists("glpi_plugin_state_profiles")
        && !$DB->tableExists("glpi_plugin_financialreports_configs")) {
 
-      $DB->runFile(GLPI_ROOT . "/plugins/financialreports/sql/empty-3.0.0.sql");
+      $DB->runFile(PLUGIN_FINANCIALREPORTS_DIR . "/sql/empty-3.0.0.sql");
 
    } else if ($DB->tableExists("glpi_plugin_state_parameters")
               && !$DB->fieldExists("glpi_plugin_state_parameters", "monitor")) {
 
       $update = true;
-      $DB->runFile(GLPI_ROOT . "/plugins/financialreports/sql/update-1.5.sql");
-      $DB->runFile(GLPI_ROOT . "/plugins/financialreports/sql/update-1.6.0.sql");
-      $DB->runFile(GLPI_ROOT . "/plugins/financialreports/sql/update-1.7.0.sql");
+      $DB->runFile(PLUGIN_FINANCIALREPORTS_DIR . "/sql/update-1.5.sql");
+      $DB->runFile(PLUGIN_FINANCIALREPORTS_DIR . "/sql/update-1.6.0.sql");
+      $DB->runFile(PLUGIN_FINANCIALREPORTS_DIR . "/sql/update-1.7.0.sql");
 
    } else if ($DB->tableExists("glpi_plugin_state_profiles")
               && $DB->fieldExists("glpi_plugin_state_profiles", "interface")) {
 
       $update = true;
-      $DB->runFile(GLPI_ROOT . "/plugins/financialreports/sql/update-1.6.0.sql");
-      $DB->runFile(GLPI_ROOT . "/plugins/financialreports/sql/update-1.7.0.sql");
+      $DB->runFile(PLUGIN_FINANCIALREPORTS_DIR . "/sql/update-1.6.0.sql");
+      $DB->runFile(PLUGIN_FINANCIALREPORTS_DIR . "/sql/update-1.7.0.sql");
 
    } else if (!$DB->tableExists("glpi_plugin_financialreports_configs")) {
 
       $update = true;
-      $DB->runFile(GLPI_ROOT . "/plugins/financialreports/sql/update-1.7.0.sql");
+      $DB->runFile(PLUGIN_FINANCIALREPORTS_DIR . "/sql/update-1.7.0.sql");
 
    }
 

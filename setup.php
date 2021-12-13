@@ -29,6 +29,12 @@
 
 define('PLUGIN_FINANCIALREPORTS_VERSION', '2.6.0');
 
+if (!defined("PLUGIN_FINANCIALREPORTS_DIR")) {
+   define("PLUGIN_FINANCIALREPORTS_DIR", Plugin::getPhpDir("financialreports"));
+   define("PLUGIN_FINANCIALREPORTS_NOTFULL_DIR", Plugin::getPhpDir("financialreports",false));
+   define("PLUGIN_FINANCIALREPORTS_WEBDIR", Plugin::getWebDir("financialreports"));
+}
+
 // Init the hooks of the plugins -Needed
 function plugin_init_financialreports() {
    global $PLUGIN_HOOKS;
@@ -50,7 +56,8 @@ function plugin_init_financialreports() {
 
       }
 
-      if (Session::haveRight("plugin_financialreports", READ) || Session::haveRight("config", UPDATE)) {
+      if (Session::haveRight("plugin_financialreports", READ)
+          || Session::haveRight("config", UPDATE)) {
          $PLUGIN_HOOKS['config_page']['financialreports'] = 'front/config.form.php';
       }
    }

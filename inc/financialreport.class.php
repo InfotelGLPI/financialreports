@@ -648,7 +648,7 @@ class PluginFinancialreportsFinancialreport extends CommonDBTM {
             else
                $status = "true";
 
-            echo "<a href='" . $CFG_GLPI["root_doc"] . "/plugins/financialreports/front/financialreport.php?"
+            echo "<a href='" . PLUGIN_FINANCIALREPORTS_WEBDIR . "/front/financialreport.php?"
                  . $display . "=" . $status . "&date=" . $date . "&locations_id=" . $locations_id . "'>";
             if ($_SESSION[$display])
                echo __('Hide', 'financialreports');
@@ -791,8 +791,8 @@ class PluginFinancialreportsFinancialreport extends CommonDBTM {
 
       // Print it
 
-      echo "<form method='POST' action=\"" . $CFG_GLPI["root_doc"] .
-           "/plugins/financialreports/front/report.dynamic.php\" target='_blank'>\n";
+      echo "<form method='POST' action=\"" . PLUGIN_FINANCIALREPORTS_WEBDIR .
+           "front/report.dynamic.php\" target='_blank'>\n";
 
       echo "<table class='tab_cadre_pager'>\n";
       echo "<tr>\n";

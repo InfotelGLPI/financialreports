@@ -66,8 +66,7 @@ if ($plugin->isActivated("financialreports")) {
 
 } else {
    Html::header(__('Setup'), '', "config", "plugins");
-   echo "<div align='center'><br><br>";
-   echo "<i class='fas fa-exclamation-triangle fa-4x' style='color:orange'></i><br><br>";
+   echo "<div class='alert alert-important alert-warning d-flex'>";
    echo "<b>" . __('Please activate the plugin', 'financialreports') . "</b></div>";
 }
 
