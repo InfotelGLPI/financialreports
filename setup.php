@@ -27,7 +27,7 @@
  --------------------------------------------------------------------------
  */
 
-define('PLUGIN_FINANCIALREPORTS_VERSION', '2.6.0');
+define('PLUGIN_FINANCIALREPORTS_VERSION', '3.0.0-rc1');
 
 if (!defined("PLUGIN_FINANCIALREPORTS_DIR")) {
    define("PLUGIN_FINANCIALREPORTS_DIR", Plugin::getPhpDir("financialreports"));
