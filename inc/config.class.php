@@ -3,7 +3,7 @@
  * @version $Id: HEADER 15930 2011-10-30 15:47:55Z tsmr $
  -------------------------------------------------------------------------
  financialreports plugin for GLPI
- Copyright (C) 2009-2016 by the financialreports Development Team.
+ Copyright (C) 2009-2022 by the financialreports Development Team.
 
  https://github.com/InfotelGLPI/financialreports 
  -------------------------------------------------------------------------

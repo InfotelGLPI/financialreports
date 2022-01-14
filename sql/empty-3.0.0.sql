@@ -1,14 +1,14 @@
 DROP TABLE IF EXISTS `glpi_plugin_financialreports_configs`;
 CREATE TABLE `glpi_plugin_financialreports_configs` (
-  `id`        INT(11) NOT NULL AUTO_INCREMENT,
-  `states_id` INT(11) NOT NULL DEFAULT '0'
+  `id`        int unsigned NOT NULL AUTO_INCREMENT,
+  `states_id` int unsigned NOT NULL DEFAULT '0'
   COMMENT 'RELATION to glpi_states (id)',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 DROP TABLE IF EXISTS `glpi_plugin_financialreports_parameters`;
 CREATE TABLE `glpi_plugin_financialreports_parameters` (
-  `id`                            INT(11) NOT NULL        AUTO_INCREMENT,
+  `id`                            int unsigned NOT NULL        AUTO_INCREMENT,
   `computers_otherserial`         VARCHAR(255)
                                   COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `notebooks_otherserial`         VARCHAR(255)
