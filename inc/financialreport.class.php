@@ -792,7 +792,7 @@ class PluginFinancialreportsFinancialreport extends CommonDBTM {
       // Print it
 
       echo "<form method='POST' action=\"" . PLUGIN_FINANCIALREPORTS_WEBDIR .
-           "front/report.dynamic.php\" target='_blank'>\n";
+           "/front/report.dynamic.php\" target='_blank'>\n";
 
       echo "<table class='tab_cadre_pager'>\n";
       echo "<tr>\n";

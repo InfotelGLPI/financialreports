@@ -35,6 +35,8 @@ if (!defined("PLUGIN_FINANCIALREPORTS_DIR")) {
    define("PLUGIN_FINANCIALREPORTS_WEBDIR", Plugin::getWebDir("financialreports"));
 }
 
+include_once PLUGIN_FINANCIALREPORTS_DIR . "/vendor/autoload.php";
+
 // Init the hooks of the plugins -Needed
 function plugin_init_financialreports() {
    global $PLUGIN_HOOKS;
@@ -85,4 +87,14 @@ function plugin_version_financialreports() {
          ]
       ]
    ];
+}
+
+function plugin_financialreports_check_prerequisites() {
+
+   if (!is_readable(__DIR__ . '/vendor/autoload.php') || !is_file(__DIR__ . '/vendor/autoload.php')) {
+      echo "Run composer install --no-dev in the plugin directory<br>";
+      return false;
+   }
+
+   return true;
 }

@@ -276,7 +276,7 @@ class PluginFinancialreportsPdf extends TCPDF {
             $this->CellLineTable(false, 35, $data["ITEM_2"]);
             $this->CellLineTable(false, 20, Html::convDate($data["ITEM_3"]), 1, 'C', 1);
             $this->SetTextBlue();
-            $this->CellLineTable(false, 40,$dbu->formatUserName($data["ITEM_4_3"], $data["ITEM_4"], $data["ITEM_4_2"], $data["ITEM_4_4"]));
+            $this->CellLineTable(false, 40,$dbu->formatUserName($data["ITEM_4_3"], $data["ITEM_4"], $data["ITEM_4_2"], $data["ITEM_4_4"], 0));
             $this->SetTextBlack();
             if ($disposal != 1) {
                $this->CellLineTable(false, 40, $data["ITEM_9"]);
@@ -287,13 +287,13 @@ class PluginFinancialreportsPdf extends TCPDF {
 
             if ($disposal == 1) {
                $this->SetTextRed();
-               $this->CellLineTable(false, 20, Html::clean(Html::formatNumber($data["ITEM_8"])), 1, 'R', 1);
+               $this->CellLineTable(false, 20, Glpi\RichText\RichText::getTextFromHtml(Html::formatNumber($data["ITEM_8"])), 1, 'R', 1);
                $this->SetTextBlack();
                $this->CellLineTable(false, 25, Html::convDate($data["ITEM_10"]), 1, 'C', 1);
                $this->CellLineTable(false, 55, $data["ITEM_9"]);
             } else {
                $this->SetTextRed();
-               $this->CellLineTable(false, 20, Html::clean(Html::formatNumber($data["ITEM_8"])), 1, 'R', 1);
+               $this->CellLineTable(false, 20, Glpi\RichText\RichText::getTextFromHtml(Html::formatNumber($data["ITEM_8"])), 1, 'R', 1);
                $this->SetTextBlack();
             }
             $this->SetY($this->GetY() + $this->line_height);
@@ -302,7 +302,7 @@ class PluginFinancialreportsPdf extends TCPDF {
          if ($total != -1) {
             $this->CellHeadTable(true, $this->large_cell_width - 20, __('Total'), 1, 'R', 1);
             $this->SetTextRed();
-            $this->CellHeadTable(false, 20, Html::clean(Html::formatNumber($total)), 1, 'R', 1);
+            $this->CellHeadTable(false, 20, Glpi\RichText\RichText::getTextFromHtml(Html::formatNumber($total)), 1, 'R', 1);
             $this->SetTextBlack();
             $this->SetY($this->GetY() + $this->line_height);
          }
@@ -323,7 +323,7 @@ class PluginFinancialreportsPdf extends TCPDF {
 
       $this->CellHeadTable(true, $this->large_cell_width - 25, __('Total'), 1, 'R', 1);
       $this->SetTextRed();
-      $this->CellHeadTable(false, 25, Html::clean(Html::formatNumber($total)), 1, 'R', 1);
+      $this->CellHeadTable(false, 25, Glpi\RichText\RichText::getTextFromHtml(Html::formatNumber($total)), 1, 'R', 1);
       $this->SetTextBlack();
       $this->SetY($this->GetY() + $this->line_height);
    }
