@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GLPI - Financialreports plugin 2.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-14 08:21+0000\n"
+"POT-Creation-Date: 2022-01-24 13:37+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: setup.php:74 inc/financialreport.class.php:49 inc/profile.class.php:152
+#: setup.php:76 inc/financialreport.class.php:49 inc/profile.class.php:152
 msgid "Financial report"
 msgid_plural "Financial reports"
 msgstr[0] ""
