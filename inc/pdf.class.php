@@ -239,7 +239,7 @@ class PluginFinancialreportsPdf extends TCPDF {
     */
    function display_table($total, $items, $deviceType, $disposal = 0) {
 
-      if ($total != 0) {
+      // if ($total != 0) {
          /* en-tete */
          $this->CellLabel(false, $this->large_cell_width, $deviceType);
          $this->SetY($this->GetY() + $this->line_height);
@@ -247,7 +247,7 @@ class PluginFinancialreportsPdf extends TCPDF {
          /* En tete tableau. */
          $this->CellHeadTable(false, 45, __('Name'), 1, 'C', 1);
          $this->CellHeadTable(false, 35, __('Inventory number'), 1, 'C', 1);
-         $this->CellHeadTable(false, 20, __('Decommission date'), 1, 'C', 1);
+         $this->CellHeadTable(false, 20, __('Date of purchase'), 1, 'C', 1);
          if ($disposal != 1) {
             $this->CellHeadTable(false, 40, __('User / Group', 'financialreports'), 1, 'C', 1);
             $this->CellHeadTable(false, 40, __('Location'), 1, 'C', 1);
@@ -306,7 +306,7 @@ class PluginFinancialreportsPdf extends TCPDF {
             $this->SetTextBlack();
             $this->SetY($this->GetY() + $this->line_height);
          }
-      }
+      // }
    }
 
    /**

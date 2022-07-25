@@ -172,9 +172,9 @@ class PluginFinancialreportsFinancialreport extends CommonDBTM {
       if (!empty($PluginFinancialreportsParameter->fields[$type]))
          $query .= " AND (`$itemtable`.`otherserial` LIKE '%" . $PluginFinancialreportsParameter->fields[$type] . "%%') ";
 
-      $query .= " AND (`glpi_infocoms`.`buy_date` < '" . $date . "') ";
+      $query .= " AND (`glpi_infocoms`.`buy_date` < '" . $date . "' || `glpi_infocoms`.`buy_date` IS NULL) ";
 
-      if (!empty($locations_id)) {
+      if ($locations_id > 0) {
          $query .= " AND " . self::getRealQueryForTreeItem('glpi_locations', $locations_id, "`$itemtable`.`locations_id`");
       }
 
@@ -215,7 +215,7 @@ class PluginFinancialreportsFinancialreport extends CommonDBTM {
       // Add deleted if item have it
       if ($item->maybeDeleted()) {
          $LINK = " AND ";
-         $query_value .= $LINK . "`" . $itemtable . "`.`is_deleted` = '$deleted' ";
+         $query_value .= $LINK . "`" . $itemtable . "`.`is_deleted` = '0' ";
          if ($first) {
             $LINK  = " ";
             $first = false;
@@ -255,7 +255,7 @@ class PluginFinancialreportsFinancialreport extends CommonDBTM {
       if (!empty($type) && !empty($PluginFinancialreportsParameter->fields[$type]))
          $query_value .= " AND (`$itemtable`.`otherserial` LIKE '%" . $PluginFinancialreportsParameter->fields[$type] . "%%') ";
 
-      $query_value .= " AND (`glpi_infocoms`.`buy_date` < '" . $date . "') ";
+      $query_value .= " AND (`glpi_infocoms`.`buy_date` < '" . $date . "' || `glpi_infocoms`.`buy_date` IS NULL) ";
 
       if (!empty($locations_id)) {
          $query_value .= " AND " . self::getRealQueryForTreeItem('glpi_locations', $locations_id, "`$itemtable`.`locations_id`");
@@ -389,7 +389,7 @@ class PluginFinancialreportsFinancialreport extends CommonDBTM {
          }
          $query .= ") ";
       }
-      if (!empty($locations_id)) {
+      if ($locations_id > 0) {
          $query .= " AND " . self::getRealQueryForTreeItem('glpi_locations', $locations_id, "`$itemtable`.`locations_id`");
       }
 
@@ -489,13 +489,13 @@ class PluginFinancialreportsFinancialreport extends CommonDBTM {
          $total = $this->getItemsTotal('Computer', $param, "no_value", $date, 0, "", $locations_id);
          $items = $this->getItems('Computer', $param, "no_value", $date, 0, "", $locations_id);
          $master_total += $total;
-         if ($total > 1) {
+         // if ($total > 0) {
             if ($output_type == Search::PDF_OUTPUT_LANDSCAPE) {
                $PDF->display_table($total, $items, _n('Computer', 'Computers', 2));
             } else {
                $this->displayTable($date, $displaypc, $output_type, $itemtable, $end_display, $start, $nbcols, _n('Computer', 'Computers', 2), $total, $items, $locations_id);
             }
-         }
+         // }
          if ($total != 0 && $output_type == Search::PDF_OUTPUT_LANDSCAPE) $PDF->AddPage();
       }
 
@@ -626,7 +626,7 @@ class PluginFinancialreportsFinancialreport extends CommonDBTM {
       $master_total = 0;
 
       $master_total += $total;
-      if ($total != 0) {
+      // if ($total != 0) {
          if ($output_type == Search::HTML_OUTPUT) {
             echo "<br>";
             echo Search::showHeader($output_type, $end_display - $start + 1, $nbcols, 1);
@@ -750,7 +750,7 @@ class PluginFinancialreportsFinancialreport extends CommonDBTM {
             }
          }
          echo Search::showFooter($output_type);
-      }
+      // }
 
       return $master_total;
    }
