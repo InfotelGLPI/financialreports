@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GLPI - Financialreports plugin 2.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-25 08:34+0000\n"
+"POT-Creation-Date: 2022-07-26 13:55+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,7 +24,7 @@ msgid_plural "Financial reports"
 msgstr[0] ""
 msgstr[1] ""
 
-#: front/config.form.php:70
+#: front/config.form.php:69
 msgid "Please activate the plugin"
 msgstr ""
 
