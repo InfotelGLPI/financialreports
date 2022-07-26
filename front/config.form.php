@@ -30,8 +30,7 @@
 
 include('../../../inc/includes.php');
 
-$plugin = new Plugin();
-if ($plugin->isActivated("financialreports")) {
+if (Plugin::isPluginActive("financialreports")) {
 
    Session::checkRight("config", UPDATE);
 

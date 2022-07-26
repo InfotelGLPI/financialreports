@@ -159,9 +159,7 @@ function plugin_financialreports_uninstall() {
  */
 function plugin_financialreports_getDatabaseRelations() {
 
-   $plugin = new Plugin();
-
-   if ($plugin->isActivated("financialreports"))
+   if (Plugin::isPluginActive("financialreports"))
       return [
          "glpi_states" => ["glpi_plugin_financialreports_configs" => "states_id"]
       ];
