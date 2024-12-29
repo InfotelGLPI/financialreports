@@ -5,92 +5,93 @@
 # 
 # Translators:
 # Xavier CAILLAUD <thetsmr@gmail.com>, 2020
+# Kaya Zeren <kayazeren@gmail.com>, 2024
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: GLPI - Financialreports plugin 2.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-24 15:03+0100\n"
+"POT-Creation-Date: 2022-07-26 13:55+0000\n"
 "PO-Revision-Date: 2020-11-02 16:05+0000\n"
-"Last-Translator: Xavier CAILLAUD <thetsmr@gmail.com>, 2020\n"
-"Language-Team: Turkish (Turkey) (https://www.transifex.com/infotelGLPI/teams/12361/tr_TR/)\n"
+"Last-Translator: Kaya Zeren <kayazeren@gmail.com>, 2024\n"
+"Language-Team: Turkish (Turkey) (https://app.transifex.com/infotelGLPI/teams/12361/tr_TR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: tr_TR\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: setup.php:67 inc/financialreport.class.php:49 inc/profile.class.php:152
+#: setup.php:76 inc/financialreport.class.php:49 inc/profile.class.php:152
 msgid "Financial report"
 msgid_plural "Financial reports"
 msgstr[0] "Mali rapor"
-msgstr[1] "Mali rapor"
+msgstr[1] "Mali raporlar"
 
-#: front/config.form.php:71
+#: front/config.form.php:69
 msgid "Please activate the plugin"
-msgstr "Lütfen uygulama ekini etkinleştirin"
+msgstr "Lütfen eklentiyi etkinleştirin"
 
 #: front/financialreport.php:158
 msgid "Report date"
 msgstr "Rapor tarihi"
 
-#: inc/config.class.php:90 inc/config.class.php:107
+#: inc/config.class.php:90 inc/config.class.php:109
 msgid "Disposal status"
 msgstr "Düşme durumu"
 
-#: inc/financialreport.class.php:419 inc/pdf.class.php:210
+#: inc/financialreport.class.php:435 inc/pdf.class.php:210
 msgid "Financial report ended on"
 msgstr "Mali rapor bitiş tarihi"
 
-#: inc/financialreport.class.php:454 inc/financialreport.class.php:456
-#: inc/parameter.class.php:54
+#: inc/financialreport.class.php:470 inc/financialreport.class.php:472
+#: inc/parameter.class.php:55
 msgid "Notebook"
 msgid_plural "Notebooks"
-msgstr[0] "Notdefteri"
-msgstr[1] "Notdefteri"
+msgstr[0] "Not defteri"
+msgstr[1] "Not defterleri"
 
-#: inc/financialreport.class.php:464 inc/financialreport.class.php:466
-#: inc/parameter.class.php:58
+#: inc/financialreport.class.php:480 inc/financialreport.class.php:482
+#: inc/parameter.class.php:60
 msgid "Server"
 msgid_plural "Servers"
 msgstr[0] "Sunucu"
-msgstr[1] "Sunucu"
+msgstr[1] "Sunucular"
 
-#: inc/financialreport.class.php:551 inc/financialreport.class.php:553
+#: inc/financialreport.class.php:567 inc/financialreport.class.php:569
 msgid "Element out"
 msgid_plural "Elements out"
-msgstr[0] "Bileşenler çıkarıldı"
-msgstr[1] "Bileşenler çıkarıldı"
+msgstr[0] "Bileşen düşüldü"
+msgstr[1] "Bileşen düşüldü"
 
-#: inc/financialreport.class.php:575 inc/pdf.class.php:321
+#: inc/financialreport.class.php:591 inc/pdf.class.php:321
 msgid "General Total"
-msgstr "Genel Toplam"
+msgstr "Genel toplam"
 
-#: inc/financialreport.class.php:576 inc/financialreport.class.php:626
-#: inc/financialreport.class.php:652 inc/financialreport.class.php:676
+#: inc/financialreport.class.php:592 inc/financialreport.class.php:642
+#: inc/financialreport.class.php:668 inc/financialreport.class.php:692
 msgid "Euro"
 msgid_plural "Euros"
 msgstr[0] "Eur"
 msgstr[1] "Eur"
 
-#: inc/financialreport.class.php:638
+#: inc/financialreport.class.php:654
 msgid "Hide"
-msgstr "Gizlensin"
+msgstr "Gizle"
 
-#: inc/financialreport.class.php:640
+#: inc/financialreport.class.php:656
 msgid "Display"
-msgstr "Görüntülensin"
+msgstr "Görüntüle"
 
-#: inc/financialreport.class.php:666 inc/pdf.class.php:252
+#: inc/financialreport.class.php:682 inc/pdf.class.php:252
 msgid "User / Group"
-msgstr "Kullanıcı / Grup"
+msgstr "Kullanıcı / grup"
 
-#: inc/financialreport.class.php:676
+#: inc/financialreport.class.php:692
 msgid "Purchase Price HT in"
-msgstr "Satın Alma Fiyatı HT "
+msgstr "Satın alma fiyatı HT "
 
-#: inc/financialreport.class.php:708
+#: inc/financialreport.class.php:724
 msgid "In stock / available"
 msgstr "Stokta / kullanılabilir"
 
