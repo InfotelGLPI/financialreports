@@ -72,7 +72,7 @@ msgstr "Genel toplam"
 #: inc/financialreport.class.php:668 inc/financialreport.class.php:692
 msgid "Euro"
 msgid_plural "Euros"
-msgstr[0] "Eur"
+msgstr[0] "EUR"
 msgstr[1] "EUR"
 
 #: inc/financialreport.class.php:654
